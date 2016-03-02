@@ -6,10 +6,10 @@ RSpec.describe Game, type: :model do
 
   describe "#deal" do
     subject(:game) { Game.new }
+
+    before { game.deal }
     
     specify "each hand has 10 cards" do
-      game.deal
-
       expect(game.hands[:north]).to have_exactly(HAND_SIZE).items
       expect(game.hands[:west]).to have_exactly(HAND_SIZE).items
       expect(game.hands[:east]).to have_exactly(HAND_SIZE).items
@@ -17,14 +17,10 @@ RSpec.describe Game, type: :model do
     end
 
     specify "the kitty has 3 cards" do
-      game.deal
-
       expect(game.kitty).to have_exactly(KITTY_SIZE).items
     end
 
     specify "the dealt cards are unique" do
-      game.deal
-
       dealt_cards = game.kitty + %i{north west east south}.inject([]) do |hands, seat|
         hands + game.hands[seat]
       end
