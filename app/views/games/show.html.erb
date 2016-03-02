@@ -1,6 +1,29 @@
 <p>Let's play 500!</p>
+<p>First, we will deal the cards.</p>
+<p>Your cards:</p>
 <ul>
   <% @game.hands[:south].each do |card| %>
     <li><%= card.to_s %></li>
   <% end %>
 </ul>
+<p>Now is the bidding phase.</p>
+<p>West passes.</p>
+<p>North passes.</p>
+<p>East passes.</p>
+<p>It is now your chance to make a bid.</p>
+<p>For now, let's ignore trump suits.</p>
+<p>For now, you must make a bid. You cannot pass.</p>
+<select>
+  <option>6</option>
+  <option>7</option>
+  <option>8</option>
+  <option>9</option>
+  <option>10</option>
+</select>
+<select>
+  <option disabled>Spades</option>
+  <option disabled>Hearts</option>
+  <option disabled>Clubs</option>
+  <option disabled>Diamonds</option>
+  <option>No Trumps</option>
+</select>
