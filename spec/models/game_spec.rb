@@ -1,5 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#deal" do
+    subject(:game) { Game.new }
+    
+    specify do
+      HAND_SIZE = 10
+
+      game.deal
+
+      expect(game.south_hand).to have_exactly(HAND_SIZE).items
+    end
+  end
 end
