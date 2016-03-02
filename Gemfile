@@ -37,6 +37,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-collection_matchers'
 end
 
 group :development do
