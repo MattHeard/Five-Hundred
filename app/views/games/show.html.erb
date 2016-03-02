@@ -1,6 +1,5 @@
 <p>Let's play 500!</p>
 <ul>
-  <% @game.deal %>
   <% @game.hands[:south].each do |card| %>
     <li><%= card.to_s %></li>
   <% end %>
