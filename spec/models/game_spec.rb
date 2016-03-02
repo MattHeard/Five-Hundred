@@ -6,7 +6,7 @@ RSpec.describe Game, type: :model do
   describe "#deal" do
     subject(:game) { Game.new }
     
-    specify do
+    specify "each hand has 10 cards" do
       game.deal
 
       expect(game.north_hand).to have_exactly(HAND_SIZE).items
