@@ -3,7 +3,7 @@
 <p>Your cards:</p>
 <ul>
   <% @game.hands[:south].each do |card| %>
-    <li><%= card.to_s %></li>
+    <li><%= unicode_card(card.to_s) %></li>
   <% end %>
 </ul>
 <p>Now is the bidding phase.</p>
