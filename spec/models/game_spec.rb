@@ -9,6 +9,9 @@ RSpec.describe Game, type: :model do
     specify do
       game.deal
 
+      expect(game.north_hand).to have_exactly(HAND_SIZE).items
+      expect(game.west_hand).to have_exactly(HAND_SIZE).items
+      expect(game.east_hand).to have_exactly(HAND_SIZE).items
       expect(game.south_hand).to have_exactly(HAND_SIZE).items
     end
   end
