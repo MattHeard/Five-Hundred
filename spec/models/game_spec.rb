@@ -9,10 +9,10 @@ RSpec.describe Game, type: :model do
     specify "each hand has 10 cards" do
       game.deal
 
-      expect(game.north_hand).to have_exactly(HAND_SIZE).items
-      expect(game.west_hand).to have_exactly(HAND_SIZE).items
-      expect(game.east_hand).to have_exactly(HAND_SIZE).items
-      expect(game.south_hand).to have_exactly(HAND_SIZE).items
+      expect(game.hand(:north)).to have_exactly(HAND_SIZE).items
+      expect(game.hand(:west)).to have_exactly(HAND_SIZE).items
+      expect(game.hand(:east)).to have_exactly(HAND_SIZE).items
+      expect(game.hand(:south)).to have_exactly(HAND_SIZE).items
     end
   end
 end
