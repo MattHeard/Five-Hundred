@@ -7,6 +7,12 @@ RSpec.describe Game, type: :model do
   describe "#deal" do
     subject(:game) { Game.new }
 
+    let(:dealt_cards) do
+      game.kitty + %i{north west east south}.inject([]) do |hands, seat|
+        hands + game.hands[seat]
+      end
+    end
+
     before { game.deal }
     
     specify "each hand has 10 cards" do
@@ -21,10 +27,6 @@ RSpec.describe Game, type: :model do
     end
 
     specify "the dealt cards are unique" do
-      dealt_cards = game.kitty + %i{north west east south}.inject([]) do |hands, seat|
-        hands + game.hands[seat]
-      end
-
       expect(dealt_cards.uniq).to eq dealt_cards
     end
   end
