@@ -4,10 +4,11 @@ class Game < ActiveRecord::Base
   SPADES_CHARACTER = "♠"
   CLUBS_CHARACTER = "♣"
 
+  attr_reader :deck
   attr_reader :hands
 
   def deal
-    deck = unshuffled_deck.shuffle
+    @deck = @deck.shuffle
     @hands = { :north => [ ], :west => [ ], :east => [ ], :south => [ ] }
     @kitty = [ ]
 
