@@ -44,4 +44,28 @@ RSpec.describe DeckShuffled, type: :model do
       expect(event.value.join).not_to eq Game::UNSHUFFLED_DECK.join
     end
   end
+
+  context "applied to a newly created game" do
+    subject(:event) { DeckShuffled.build }
+
+    it "shuffles the deck when applied to a game" do
+      game = Game.create
+      expect(game.deck.join).to eq Game::UNSHUFFLED_DECK.join
+      game.events << event
+      game.apply_events
+      expect(game.deck.join).not_to eq Game::UNSHUFFLED_DECK.join
+    end
+
+    it "keeps same shuffled order when re-applied after database retrieval" do
+      original_game = Game.create
+      original_game.events << event
+      original_game.apply_events
+      shuffled_deck = original_game.deck
+
+      id = original_game.id
+      retrieved_game = Game.find(id)
+      retrieved_game.apply_events
+      expect(retrieved_game.deck.join).to eq shuffled_deck.join
+    end
+  end
 end
