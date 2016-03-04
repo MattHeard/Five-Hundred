@@ -12,6 +12,10 @@ RSpec.describe DeckShuffled, type: :model do
       expect(event.state_attribute).to be nil
     end
 
+    it "should have no encoded value" do
+      expect(event.encoded_value).to be nil
+    end
+
     it "should have an empty array for a value" do
       expect(event.value).to be_empty
     end
