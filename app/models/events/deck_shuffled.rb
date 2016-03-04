@@ -1,0 +1,2 @@
+class DeckShuffled < Event
+end
