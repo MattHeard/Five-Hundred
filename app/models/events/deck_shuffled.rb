@@ -4,7 +4,7 @@ class DeckShuffled < Event
   end
 
   def value
-    encoded_value.split
+    (encoded_value || "").split
   end
 
   private
