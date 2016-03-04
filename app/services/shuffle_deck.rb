@@ -6,7 +6,7 @@ class ShuffleDeck
   def call
     @game.events = @game.events << DeckShuffled.build
 
-    @game.update
+    @game.apply_events
 
     true
   end

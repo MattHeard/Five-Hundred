@@ -15,7 +15,7 @@ class Game < ActiveRecord::Base
     @deck || UNSHUFFLED_DECK
   end
 
-  def update
+  def apply_events
     events.each { |event| send(event.state_attribute, event.value) }
   end
 end
