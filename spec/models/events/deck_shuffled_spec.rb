@@ -48,9 +48,14 @@ RSpec.describe DeckShuffled, type: :model do
   context "applied to a newly created game" do
     subject(:event) { DeckShuffled.build }
 
+    it "does not shuffle the deck when added but not applied" do
+      game = Game.create
+      game.events << event
+      expect(game.deck.join).to eq Game::UNSHUFFLED_DECK.join
+    end
+
     it "shuffles the deck when applied to a game" do
       game = Game.create
-      expect(game.deck.join).to eq Game::UNSHUFFLED_DECK.join
       game.events << event
       game.apply_events
       expect(game.deck.join).not_to eq Game::UNSHUFFLED_DECK.join

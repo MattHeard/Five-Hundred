@@ -7,6 +7,10 @@ class DeckShuffled < Event
     (encoded_value || "").split
   end
 
+  def apply
+    game.deck = value
+  end
+
   private
 
   def self.shuffled_deck
