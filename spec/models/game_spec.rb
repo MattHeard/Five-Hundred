@@ -4,7 +4,7 @@ RSpec.describe Game, type: :model do
   describe "#deck" do
     subject(:game) { Game.create }
 
-    it "should respond to #deck" do
+    it "should be defined" do
       expect(game).to respond_to(:deck)
     end
 
