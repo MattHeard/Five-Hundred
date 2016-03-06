@@ -2,8 +2,8 @@ Given(/^I start a new game$/) do
   @game = Game.create
 end
 
-Then(/^the deck will have (\d+) cards$/) do |arg1|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^the deck will have (\d+) cards$/) do |number_of_cards|
+  expect(@game.deck.size).to eq number_of_cards.to_i
 end
 
 Then(/^the deck will be shuffled$/) do
