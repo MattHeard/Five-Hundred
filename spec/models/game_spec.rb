@@ -11,5 +11,9 @@ RSpec.describe Game, type: :model do
     it "not to be nil" do
       expect(game.deck).not_to be nil
     end
+
+    it "should respond to :join" do
+      expect(game.deck).to respond_to(:join)
+    end
   end
 end
