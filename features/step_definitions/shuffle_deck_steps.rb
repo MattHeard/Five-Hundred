@@ -1,7 +1,7 @@
 Given(/^I start a new game$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  @game = Game.create
 end
 
 Then(/^the deck will be shuffled$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@game.deck.join).not_to eq Game::UNSHUFFLED_DECK.join
 end
