@@ -15,5 +15,9 @@ RSpec.describe Game, type: :model do
     it "should respond to :join" do
       expect(game.deck).to respond_to(:join)
     end
+
+    it "should have 43 cards" do
+      expect(game.deck).to have_exactly(43).items
+    end
   end
 end

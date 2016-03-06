@@ -8,6 +8,6 @@ class Game < ActiveRecord::Base
   }
 
   def deck
-    []
+    UNSHUFFLED_DECK.shuffle
   end
 end
