@@ -1,13 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe DealCardToTheSouthernPlayer do
+  let(:game) { instance_double("Game") }
+
+  subject(:service) { DealCardToTheSouthernPlayer.new(game) }
+
   describe "#initialize" do
-    let(:game) { instance_double("Game") }
-
-    subject(:service) { DealCardToTheSouthernPlayer.new(game) }
-
     it "should take a game and to be present" do
-      expect(:service).to be_present
+      expect(service).to be_present
+    end
+  end
+
+  describe "#call" do
+    it "should return nil" do
+      expect(service.call).to be nil
     end
   end
 end
