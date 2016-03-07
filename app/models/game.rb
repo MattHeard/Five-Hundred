@@ -8,6 +8,10 @@ class Game < ActiveRecord::Base
   }
 
   def deck
-    UNSHUFFLED_DECK.shuffle
+    encoded_deck.split
+  end
+
+  def shuffle_deck
+    self.encoded_deck = UNSHUFFLED_DECK.shuffle.join(" ")
   end
 end

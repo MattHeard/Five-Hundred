@@ -1,5 +1,5 @@
 Given(/^I start a new game$/) do
-  @game = Game.create
+  @game = CreateGame.new.call
   @deck = @game.deck
 end
 
