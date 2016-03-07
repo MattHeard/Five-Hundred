@@ -1,4 +1,4 @@
 require 'rails_helper'
 
-RSpec.describe Event, type: :model do
+RSpec.describe CardDealtToTheSouthernPlayer, type: :model do
 end
