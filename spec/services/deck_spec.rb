@@ -10,4 +10,10 @@ RSpec.describe Deck do
       expect(service).to be_present
     end
   end
+
+  describe "#call" do
+    it "should return nil" do
+      expect(service.call).to be nil
+    end
+  end
 end
