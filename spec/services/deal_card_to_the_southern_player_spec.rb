@@ -6,7 +6,7 @@ RSpec.describe DealCardToTheSouthernPlayer do
   subject(:service) { DealCardToTheSouthernPlayer.new(game) }
 
   describe "#initialize" do
-    it "should take a game and to be present" do
+    it "should take a game and be present" do
       expect(service).to be_present
     end
   end
