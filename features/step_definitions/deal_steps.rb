@@ -19,3 +19,9 @@ Then(/^the southern player's hand has (\d+) cards?$/) do |number_of_cards|
   southern_hand = SouthernHand.new(game).call
   expect(southern_hand).to have_exactly(number_of_cards.to_i).items
 end
+
+Then(/^the western player's hand has (\d+) cards?$/) do |number_of_cards|
+  game = Game.find(@id)
+  western_hand = WesternHand.new(game).call
+  expect(western_hand).to have_exactly(number_of_cards.to_i).items
+end
