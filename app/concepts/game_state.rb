@@ -11,7 +11,7 @@ class GameState
   attr_reader :southern_hand
 
   def initialize
-    @deck = COMPLETE_DECK
+    @deck = COMPLETE_DECK.dup
     @southern_hand = [ ]
   end
 

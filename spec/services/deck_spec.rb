@@ -22,7 +22,7 @@ RSpec.describe Deck do
     end
   end
 
-  xcontext "with no cards dealt" do
+  context "with no cards dealt" do
     it "should have 43 cards" do
       expect(service.call).to have_exactly(43).items
     end
