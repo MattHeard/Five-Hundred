@@ -4,5 +4,6 @@ class SouthernHand
   end
 
   def call
+    [ ]
   end
 end
