@@ -3,7 +3,7 @@ Given(/^a new game has been started$/) do
   @id = game.id
 end
 
-When(/^a card is dealt to the southern player$/) do
+When(/^a(?:nother)? card is dealt to the southern player$/) do
   game = Game.find(@id)
   DealCardToTheSouthernPlayer.new(game).call
 end
