@@ -16,7 +16,7 @@ RSpec.describe WesternHand do
     end
   end
 
-  xdescribe "#call" do
+  describe "#call" do
     it "should return something with a size" do
       expect(service.call).to respond_to(:size)
     end
