@@ -10,7 +10,7 @@ RSpec.describe WesternHand do
 
   subject(:service) { WesternHand.new(game) }
 
-  xdescribe "#initialize" do
+  describe "#initialize" do
     it "should take a game and be present" do
       expect(service).to be_present
     end
