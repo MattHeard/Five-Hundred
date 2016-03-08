@@ -1,0 +1,24 @@
+require 'rails_helper'
+
+RSpec.describe WesternHand do
+  let(:game) do
+    game = instance_double("Game")
+    allow(game).to receive(:events) { [ ] }
+
+    game
+  end
+
+  subject(:service) { WesternHand.new(game) }
+
+  xdescribe "#initialize" do
+    it "should take a game and be present" do
+      expect(service).to be_present
+    end
+  end
+
+  xdescribe "#call" do
+    it "should return something with a size" do
+      expect(service.call).to respond_to(:size)
+    end
+  end
+end
