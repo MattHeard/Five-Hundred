@@ -8,4 +8,12 @@ RSpec.describe CardDealtToTheSouthernPlayer, type: :model do
   it "should be present" do
     expect(event).to be_present
   end
+
+  describe "#apply" do
+    let(:game_state) { GameState.new }
+
+    it "should return true" do
+      expect(event.apply(game_state)).to be true
+    end
+  end
 end
