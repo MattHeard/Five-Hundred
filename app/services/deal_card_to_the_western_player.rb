@@ -1,0 +1,2 @@
+class DealCardToTheWesternPlayer
+end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe DealCardToTheSouthernPlayer do
+RSpec.describe DealCardToTheWesternPlayer do
   let(:game) do
     game = instance_double("Game")
     allow(game).to receive(:add_event)
@@ -9,7 +9,7 @@ RSpec.describe DealCardToTheSouthernPlayer do
     game
   end
 
-  subject(:service) { DealCardToTheSouthernPlayer.new(game) }
+  subject(:service) { DealCardToTheWesternPlayer.new(game) }
 
   xdescribe "#initialize" do
     it "should take a game and be present" do
