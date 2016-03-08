@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Deck do
-  let(:game) { instance_double("Game") }
+  let(:game) do
+    game = instance_double("Game")
+    allow(game).to receive(:events) { [ ] }
+
+    game
+  end
 
   subject(:service) { Deck.new(game) }
 

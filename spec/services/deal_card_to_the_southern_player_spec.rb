@@ -4,6 +4,7 @@ RSpec.describe DealCardToTheSouthernPlayer do
   let(:game) do
     game = instance_double("Game")
     allow(game).to receive(:add_event)
+    allow(game).to receive(:events) { [ ] }
 
     game
   end
