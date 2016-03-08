@@ -16,4 +16,10 @@ RSpec.describe Deck do
       expect(service.call).to respond_to(:size)
     end
   end
+
+  context "with no cards dealt" do
+    it "should have 43 cards" do
+      expect(service.call).to have_exactly(43).items
+    end
+  end
 end
