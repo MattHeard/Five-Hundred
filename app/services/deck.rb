@@ -4,5 +4,6 @@ class Deck
   end
 
   def call
+    [ ]
   end
 end

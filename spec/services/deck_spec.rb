@@ -12,8 +12,8 @@ RSpec.describe Deck do
   end
 
   describe "#call" do
-    it "should return nil" do
-      expect(service.call).to be nil
+    it "should return something with a size" do
+      expect(service.call).to respond_to(:size)
     end
   end
 end
