@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe DealCardToTheSouthernPlayer do
-  let(:game) { instance_double("Game") }
+  let(:game) do
+    game = instance_double("Game")
+    allow(game).to receive(:add_event)
+
+    game
+  end
 
   subject(:service) { DealCardToTheSouthernPlayer.new(game) }
 
