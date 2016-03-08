@@ -1,5 +1,10 @@
 class CardDealtToTheSouthernPlayer < Event
-  def initialize(card)
-    @card = card
+  attr_writer :card
+
+  def self.build(card)
+    event = CardDealtToTheSouthernPlayer.new
+    event.card = card
+
+    event
   end
 end
