@@ -8,4 +8,14 @@ RSpec.describe GameState do
       expect(game_state.deck).to respond_to(:size)
     end
   end
+
+  describe "#remove_from_deck" do
+    let(:card) { "JOKER" }
+
+    it "should reduce the size of the deck to 42" do
+      game_state.remove_from_deck(card)
+
+      expect(game_state.deck).to have_exactly(42).items
+    end
+  end
 end

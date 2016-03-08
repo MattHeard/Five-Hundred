@@ -10,7 +10,12 @@ RSpec.describe CardDealtToTheSouthernPlayer, type: :model do
   end
 
   describe "#apply" do
-    let(:game_state) { GameState.new }
+    let(:game_state) do
+      game_state = instance_double("GameState")
+      allow(game_state).to receive(:remove_from_deck)
+      
+      game_state
+    end
 
     it "should return true" do
       expect(event.apply(game_state)).to be true

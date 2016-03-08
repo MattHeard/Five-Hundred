@@ -12,4 +12,8 @@ class GameState
   def initialize
     @deck = COMPLETE_DECK
   end
+
+  def remove_from_deck(card)
+    @deck.delete(card)
+  end
 end
