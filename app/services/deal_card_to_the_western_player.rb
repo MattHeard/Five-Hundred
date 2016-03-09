@@ -6,7 +6,6 @@ class DealCardToTheWesternPlayer
   def call
     deck = Deck.new(@game).call
     card = deck.sample
-    event = CardDealtToTheWesternPlayer.new(card: card)
-    @game.add_event(event)
+    CardDealtToTheWesternPlayer.create!(card: card, game: @game)
   end
 end
