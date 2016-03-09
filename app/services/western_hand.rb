@@ -3,6 +3,6 @@ class WesternHand
   end
 
   def call
-    [ ]
+    [ "JOKER" ]
   end
 end
