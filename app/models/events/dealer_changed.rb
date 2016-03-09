@@ -1,0 +1,2 @@
+class DealerChanged < Event
+end
