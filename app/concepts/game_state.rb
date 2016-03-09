@@ -8,8 +8,6 @@ class GameState
   }
 
   attr_reader :deck
-  attr_reader :southern_hand
-  attr_reader :western_hand
 
   def self.for(game)
     game.events.inject(GameState.new) do |state, event|
@@ -20,8 +18,9 @@ class GameState
 
   def initialize
     @deck = COMPLETE_DECK.dup
-    @southern_hand = [ ]
-    @western_hand = [ ]
+    @hands = { }
+    @hands[:south] = [ ]
+    @hands[:west] = [ ]
   end
 
   def remove_from_deck(card)
@@ -29,10 +28,18 @@ class GameState
   end
 
   def add_to_the_southern_hand(card)
-    @southern_hand << card
+    @hands[:south] << card
   end
 
   def add_to_the_western_hand(card)
-    @western_hand << card
+    @hands[:west] << card
+  end
+
+  def southern_hand
+    @hands[:south]
+  end
+
+  def western_hand
+    @hands[:west]
   end
 end
