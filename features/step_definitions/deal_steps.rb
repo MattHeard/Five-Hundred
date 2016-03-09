@@ -21,12 +21,12 @@ end
 
 Then(/^the southern player's hand has (\d+) cards?$/) do |number_of_cards|
   game = Game.find(@id)
-  southern_hand = SouthernHand.new(game).call
+  southern_hand = GameState.for(game).southern_hand
   expect(southern_hand).to have_exactly(number_of_cards.to_i).items
 end
 
 Then(/^the western player's hand has (\d+) cards?$/) do |number_of_cards|
   game = Game.find(@id)
-  western_hand = WesternHand.new(game).call
+  western_hand = GameState.for(game).western_hand
   expect(western_hand).to have_exactly(number_of_cards.to_i).items
 end
