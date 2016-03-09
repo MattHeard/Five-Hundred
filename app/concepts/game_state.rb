@@ -18,9 +18,7 @@ class GameState
 
   def initialize
     @deck = COMPLETE_DECK.dup
-    @hands = { }
-    @hands[:south] = [ ]
-    @hands[:west] = [ ]
+    @hands = { :south => [ ], :west => [ ] }
   end
 
   def remove_from_deck(card)
