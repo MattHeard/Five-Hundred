@@ -36,8 +36,7 @@ end
 Given(/^the players each have (\d+) cards$/) do |number_of_cards|
   game = Game.find(@id)
   hands = GameState.for(game).hands
-  expect(hands[:south]).to have_exactly(number_of_cards.to_i).items
-  expect(hands[:west]).to have_exactly(number_of_cards.to_i).items
-  expect(hands[:north]).to have_exactly(number_of_cards.to_i).items
-  expect(hands[:east]).to have_exactly(number_of_cards.to_i).items
+  %i{north south east west}.each do |player|
+    expect(hands[player]).to have_exactly(number_of_cards.to_i).items
+  end
 end
