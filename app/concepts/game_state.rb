@@ -10,6 +10,7 @@ class GameState
   attr_accessor :deck
   attr_accessor :hands
   attr_accessor :kitty
+  attr_accessor :dealer
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
