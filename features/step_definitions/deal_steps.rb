@@ -46,3 +46,8 @@ Given(/^the kitty has (\d+) cards$/) do |number_of_cards|
   kitty = GameState.for(game).kitty
   expect(kitty).to have_exactly(number_of_cards.to_i).items
 end
+
+When(/^all the cards are dealt$/) do
+  game = Game.find(@id)
+  DealAllCards.new(game).call
+end
