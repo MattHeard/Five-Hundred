@@ -32,3 +32,12 @@ Then(/^the western player's hand has (\d+) cards?$/) do |number_of_cards|
   western_hand = GameState.for(game).hands[:west]
   expect(western_hand).to have_exactly(number_of_cards.to_i).items
 end
+
+Given(/^the players each have (\d+) cards$/) do |number_of_cards|
+  game = Game.find(@id)
+  hands = GameState.for(game).hands
+  expect(hands[:south]).to have_exactly(number_of_cards.to_i).items
+  expect(hands[:west]).to have_exactly(number_of_cards.to_i).items
+  expect(hands[:north]).to have_exactly(number_of_cards.to_i).items
+  expect(hands[:east]).to have_exactly(number_of_cards.to_i).items
+end
