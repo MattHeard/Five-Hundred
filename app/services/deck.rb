@@ -4,11 +4,6 @@ class Deck
   end
 
   def call
-    game_state = @game.events.inject(GameState.new) do |state, event|
-      event.apply(state)
-      state
-    end
-
-    game_state.deck
+    GameState.for(@game).deck
   end
 end

@@ -11,6 +11,13 @@ class GameState
   attr_reader :southern_hand
   attr_reader :western_hand
 
+  def self.for(game)
+    game.events.inject(GameState.new) do |state, event|
+      event.apply(state)
+      state
+    end
+  end
+
   def initialize
     @deck = COMPLETE_DECK.dup
     @southern_hand = [ ]
