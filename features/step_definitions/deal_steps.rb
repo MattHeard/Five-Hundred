@@ -5,7 +5,8 @@ end
 
 When(/^a(?:nother)? card is dealt to the southern player$/) do
   game = Game.find(@id)
-  DealCardToTheSouthernPlayer.new(game).call
+  player = :south
+  DealCard.new(game, player).call
 end
 
 When(/^a card is dealt to the western player$/) do
