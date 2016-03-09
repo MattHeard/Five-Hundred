@@ -8,6 +8,10 @@ RSpec.describe GameState do
       it "should have 43 cards" do
         expect(game_state.deck).to have_exactly(43).items
       end
+
+      it "should be a complete deck" do
+        expect(game_state.deck).to match_array(GameState::COMPLETE_DECK)
+      end
     end
 
     describe "#kitty" do
