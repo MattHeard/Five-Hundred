@@ -16,24 +16,10 @@ RSpec.describe WesternHand do
     end
   end
 
-  describe "#call" do
-    it "should return something with a size" do
-      expect(service.call).to respond_to(:size)
-    end
-  end
-
-  context "of a game with one CardDealtToTheWesternHand event" do
-    let(:event) { instance_double("CardDealtToTheWesternHand") }
-    let(:game) do
-      game = instance_double("Game")
-      allow(game).to receive(:events) { [ event ] }
-
-      game
-    end
-
+  context "of a new game" do
     describe "#call" do
-      it "should return a list with a single card" do
-        expect(service.call).to have_exactly(1).item
+      it "should return an empty list" do
+        expect(service.call).to be_empty
       end
     end
   end
