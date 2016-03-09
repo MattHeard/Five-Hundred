@@ -5,6 +5,6 @@ class DealCardToTheWesternPlayer
 
   def call
     deck = GameState.for(@game).deck
-    CardDealtToTheWesternPlayer.create!(card: deck.sample, game: @game)
+    CardDealt.create!(card: deck.sample, target_player: :west, game: @game)
   end
 end
