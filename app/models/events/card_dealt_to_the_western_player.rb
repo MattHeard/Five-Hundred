@@ -1,8 +1,5 @@
 class CardDealtToTheWesternPlayer < CardDealt
-  def apply(game_state)
-    game_state.deck.delete(card)
-    game_state.hands[:west] << card
-
-    true
+  def player
+    :west
   end
 end
