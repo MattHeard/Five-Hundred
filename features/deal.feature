@@ -23,3 +23,13 @@ Feature: Deal a card
     When a card is dealt to the western player
     Then the deck has 42 cards
     And the western player's hand has 1 card
+
+  Scenario: All the cards are dealt
+    Given a new game has been started
+    And the deck has 43 cards
+    And the players each have 0 cards
+    And the kitty has 0 cards
+    When all the cards are dealt
+    Then the deck has 0 cards
+    And the players each have 10 cards
+    And the kitty has 3 cards

@@ -9,6 +9,7 @@ class GameState
 
   attr_accessor :deck
   attr_accessor :hands
+  attr_accessor :kitty
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
@@ -25,6 +26,7 @@ class GameState
 
   def initialize
     @deck = COMPLETE_DECK.dup
-    @hands = { :south => [ ], :west => [ ] }
+    @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
+    @kitty = [ ]
   end
 end

@@ -32,3 +32,22 @@ Then(/^the western player's hand has (\d+) cards?$/) do |number_of_cards|
   western_hand = GameState.for(game).hands[:west]
   expect(western_hand).to have_exactly(number_of_cards.to_i).items
 end
+
+Given(/^the players each have (\d+) cards$/) do |number_of_cards|
+  game = Game.find(@id)
+  hands = GameState.for(game).hands
+  %i{north south east west}.each do |player|
+    expect(hands[player]).to have_exactly(number_of_cards.to_i).items
+  end
+end
+
+Given(/^the kitty has (\d+) cards$/) do |number_of_cards|
+  game = Game.find(@id)
+  kitty = GameState.for(game).kitty
+  expect(kitty).to have_exactly(number_of_cards.to_i).items
+end
+
+When(/^all the cards are dealt$/) do
+  game = Game.find(@id)
+  DealAllCards.new(game).call
+end
