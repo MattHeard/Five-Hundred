@@ -13,7 +13,7 @@ RSpec.describe CardDealtToTheSouthernPlayer, type: :model do
     let(:game_state) do
       game_state = instance_double("GameState")
       allow(game_state).to receive(:remove_from_deck)
-      allow(game_state).to receive(:add_to_the_southern_hand)
+      allow(game_state).to receive(:add_card_to_hand)
       
       game_state
     end

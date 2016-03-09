@@ -8,6 +8,7 @@ class GameState
   }
 
   attr_reader :deck
+  attr_reader :hands
 
   def self.for(game)
     game.events.inject(GameState.new) do |state, event|
@@ -25,19 +26,7 @@ class GameState
     @deck.delete(card)
   end
 
-  def add_to_the_southern_hand(card)
-    @hands[:south] << card
-  end
-
-  def add_to_the_western_hand(card)
-    @hands[:west] << card
-  end
-
-  def southern_hand
-    @hands[:south]
-  end
-
-  def western_hand
-    @hands[:west]
+  def add_card_to_hand(card, hand)
+    @hands[hand] << card
   end
 end
