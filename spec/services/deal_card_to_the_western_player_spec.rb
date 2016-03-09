@@ -17,7 +17,7 @@ RSpec.describe DealCardToTheWesternPlayer do
     end
   end
 
-  xdescribe "#call" do
+  describe "#call" do
     it "should return nil" do
       expect(service.call).to be nil
     end
