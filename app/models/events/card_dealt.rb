@@ -1,0 +1,2 @@
+class CardDealt < Event
+end
