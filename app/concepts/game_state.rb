@@ -10,6 +10,12 @@ class GameState
   attr_accessor :deck
   attr_accessor :hands
 
+  # TODO Investigate using a service
+  # Should this be extracted into a service for the sake of preventing GameState
+  # from knowing anything about Event?
+  # Or is it okay, considering that this is a class method rather than an object
+  # method?
+  # Or should this be collapsed into the #initialize method?
   def self.for(game)
     game.events.inject(GameState.new) do |state, event|
       event.apply(state)
