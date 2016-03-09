@@ -9,5 +9,11 @@ RSpec.describe GameState do
         expect(game_state.deck).to have_exactly(43).items
       end
     end
+
+    describe "#kitty" do
+      it "should be empty" do
+        expect(game_state.kitty).to be_empty
+      end
+    end
   end
 end
