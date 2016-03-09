@@ -40,3 +40,9 @@ Given(/^the players each have (\d+) cards$/) do |number_of_cards|
     expect(hands[player]).to have_exactly(number_of_cards.to_i).items
   end
 end
+
+Given(/^the kitty has (\d+) cards$/) do |number_of_cards|
+  game = Game.find(@id)
+  kitty = GameState.for(game).kitty
+  expect(kitty).to have_exactly(number_of_cards.to_i).items
+end
