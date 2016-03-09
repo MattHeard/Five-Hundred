@@ -18,3 +18,6 @@
 
 # Ignore ctags symbols
 tags
+
+# Ignore Vim swap files
+.*swp
