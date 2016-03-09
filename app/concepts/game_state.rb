@@ -8,7 +8,7 @@ class GameState
   }
 
   attr_reader :deck
-  attr_reader :hands
+  attr_accessor :hands
 
   def self.for(game)
     game.events.inject(GameState.new) do |state, event|
@@ -24,9 +24,5 @@ class GameState
 
   def remove_from_deck(card)
     @deck.delete(card)
-  end
-
-  def add_card_to_hand(card, hand)
-    @hands[hand] << card
   end
 end
