@@ -4,7 +4,9 @@ class DealCard
   end
 
   def call
-    deck = GameState.for(@game).deck
-    CardDealt.create!(card: deck.sample, target_player: @player, game: @game)
+    @game.with_lock do
+      deck = GameState.for(@game).deck
+      CardDealt.create!(card: deck.sample, target_player: @player, game: @game)
+    end
   end
 end
