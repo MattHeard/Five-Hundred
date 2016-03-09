@@ -4,7 +4,7 @@ class DealCardToTheWesternPlayer
   end
 
   def call
-    deck = Deck.new(@game).call
+    deck = GameState.for(@game).deck
     CardDealtToTheWesternPlayer.create!(card: deck.sample, game: @game)
   end
 end
