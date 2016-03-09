@@ -1,2 +1,0 @@
-class CardDealtToTheWesternPlayer < CardDealt
-end
