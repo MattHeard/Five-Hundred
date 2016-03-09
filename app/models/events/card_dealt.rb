@@ -1,5 +1,3 @@
-require 'pp'
-
 class CardDealt < Event
   def apply(game_state)
     game_state.deck.delete(card)
