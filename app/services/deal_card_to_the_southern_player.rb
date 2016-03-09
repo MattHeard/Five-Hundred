@@ -5,7 +5,6 @@ class DealCardToTheSouthernPlayer
 
   def call
     deck = Deck.new(@game).call
-    card = deck.sample
-    CardDealtToTheSouthernPlayer.create!(card: card, game: @game)
+    CardDealtToTheSouthernPlayer.create!(card: deck.sample, game: @game)
   end
 end
