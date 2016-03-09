@@ -11,7 +11,8 @@ end
 
 When(/^a card is dealt to the western player$/) do
   game = Game.find(@id)
-  DealCardToTheWesternPlayer.new(game).call
+  player = :west
+  DealCard.new(game, player).call
 end
 
 Then(/^the deck has (\d+) cards$/) do |number_of_cards|
