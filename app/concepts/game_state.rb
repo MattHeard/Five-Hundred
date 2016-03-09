@@ -25,6 +25,6 @@ class GameState
 
   def initialize
     @deck = COMPLETE_DECK.dup
-    @hands = { :south => [ ], :west => [ ] }
+    @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
   end
 end
