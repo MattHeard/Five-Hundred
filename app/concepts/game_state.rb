@@ -7,25 +7,24 @@ class GameState
     JOKER
   }
 
-  attr_reader :deck
-  attr_reader :southern_hand
-  attr_reader :western_hand
+  attr_accessor :deck
+  attr_accessor :hands
+
+  # TODO Investigate using a service
+  # Should this be extracted into a service for the sake of preventing GameState
+  # from knowing anything about Event?
+  # Or is it okay, considering that this is a class method rather than an object
+  # method?
+  # Or should this be collapsed into the #initialize method?
+  def self.for(game)
+    game.events.inject(GameState.new) do |state, event|
+      event.apply(state)
+      state
+    end
+  end
 
   def initialize
     @deck = COMPLETE_DECK.dup
-    @southern_hand = [ ]
-    @western_hand = [ ]
-  end
-
-  def remove_from_deck(card)
-    @deck.delete(card)
-  end
-
-  def add_to_the_southern_hand(card)
-    @southern_hand << card
-  end
-
-  def add_to_the_western_hand(card)
-    @western_hand << card
+    @hands = { :south => [ ], :west => [ ] }
   end
 end
