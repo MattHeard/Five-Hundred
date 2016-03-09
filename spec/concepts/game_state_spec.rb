@@ -15,5 +15,11 @@ RSpec.describe GameState do
         expect(game_state.kitty).to be_empty
       end
     end
+
+    describe "#dealer" do
+      it "should be nil" do
+        expect(game_state.dealer).to be nil
+      end
+    end
   end
 end
