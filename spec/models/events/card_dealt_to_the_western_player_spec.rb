@@ -12,8 +12,8 @@ RSpec.describe CardDealtToTheWesternPlayer, type: :model do
   describe "#apply" do
     let(:game_state) do
       game_state = instance_double("GameState")
-      allow(game_state).to receive(:remove_from_deck)
       allow(game_state).to receive(:hands) { { :west => [ ] } }
+      allow(game_state).to receive(:deck) { GameState::COMPLETE_DECK.dup }
       
       game_state
     end

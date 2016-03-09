@@ -7,7 +7,7 @@ class GameState
     JOKER
   }
 
-  attr_reader :deck
+  attr_accessor :deck
   attr_accessor :hands
 
   def self.for(game)
@@ -20,9 +20,5 @@ class GameState
   def initialize
     @deck = COMPLETE_DECK.dup
     @hands = { :south => [ ], :west => [ ] }
-  end
-
-  def remove_from_deck(card)
-    @deck.delete(card)
   end
 end
