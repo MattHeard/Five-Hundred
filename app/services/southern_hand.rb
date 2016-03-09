@@ -4,11 +4,6 @@ class SouthernHand
   end
 
   def call
-    game_state = @game.events.inject(GameState.new) do |state, event|
-      event.apply(state)
-      state
-    end
-
-    game_state.southern_hand
+    GameState.for(@game).southern_hand
   end
 end
