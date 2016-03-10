@@ -35,7 +35,8 @@
 <p>The bidder is <%= @game_state.bidder %>.</p>
 <p>It is west's turn to make a bid:</p>
 <%= form_for @game, url: { action: :update } do %>
-  <select>
+  <select name="bid_or_pass">
+    <option disabled>Bid</option>
     <option>Pass</option>
   </select>
   <button type="submit">Submit</button>

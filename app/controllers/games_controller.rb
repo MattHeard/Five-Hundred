@@ -16,8 +16,16 @@ class GamesController < ApplicationController
   end
 
   def update
-    game = Game.find(params[:id])
+    game = Game.find(update_params[:id])
+
+    PassBid.new(game).call if update_params[:bid_or_pass] == "Pass"
 
     redirect_to game
+  end
+
+  private
+
+  def update_params
+    params.permit(:id, :bid_or_pass)
   end
 end
