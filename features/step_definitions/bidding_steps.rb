@@ -12,6 +12,11 @@ Then(/^the bidder is chosen$/) do
   expect(game_state.bidder).not_to be nil
 end
 
+When(/^the bidder passes$/) do
+  game = Game.find(@id)
+  PassBid.new(game).call
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
