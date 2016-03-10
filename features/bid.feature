@@ -3,7 +3,8 @@ Feature: The bidding phase
     Given a new game has been started
     And all the cards are dealt
     And the dealer is chosen
-    Then the bidder is on the dealer's left
+    Then the bidder is chosen
+    And the bidder is on the dealer's left
 
   Scenario: The first bidding player passes
     Given a new game has been started
