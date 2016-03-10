@@ -9,12 +9,20 @@ end
 Then(/^the bidder is chosen$/) do
   game = Game.find(@id)
   game_state = GameState.for(game)
-  expect(game_state.bidder).not_to be nil
+  @bidder = game_state.bidder
+  expect(@bidder).not_to be nil
 end
 
 When(/^the bidder passes$/) do
   game = Game.find(@id)
   PassBid.new(game).call
+end
+
+Then(/^the bidder has changed$/) do
+  game = Game.find(@id)
+  new_bidder = GameState.for(game).bidder
+  old_bidder = @bidder
+  expect(new_bidder).not_to be old_bidder
 end
 
 def left_of(player)
