@@ -15,7 +15,7 @@
 <p>South's hand:</p>
 <ul>
   <% @game_state.hands[:south].each do |card| %>
-    <li><%= unicode_card(card.to_s) %></li>
+    <li><%= unicode_card(card) %></li>
   <% end %>
 </ul>
 <p>East's hand:</p>
@@ -31,4 +31,12 @@
   <% end %>
 </ul>
 <p>It is now the bidding phase.</p>
-<p>The dealer is <%= @game_state.dealer.to_s %>.</p>
+<p>The dealer is <%= @game_state.dealer %>.</p>
+<p>The bidder is <%= @game_state.bidder %>.</p>
+<p>It is west's turn to make a bid:</p>
+<%= form_for @game, url: { action: :update } do %>
+  <select>
+    <option>Pass</option>
+  </select>
+  <button type="submit">Submit</button>
+<% end %>

@@ -11,7 +11,13 @@ class GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find(params[:id])
+    @game_state = GameState.for(@game)
+  end
+
+  def update
     game = Game.find(params[:id])
-    @game_state = GameState.for(game)
+
+    redirect_to game
   end
 end
