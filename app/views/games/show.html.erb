@@ -1,8 +1,34 @@
 <p>Let's play 500!</p>
 <p>First, we will deal the cards.</p>
-<p>Your cards:</p>
+<p>North's hand:</p>
 <ul>
-  <% @game.hands[:south].each do |card| %>
+  <% @game_state.hands[:north].each do |_| %>
+    <li><%= unicode_card("BACK") %></li>
+  <% end %>
+</ul>
+<p>West's hand:</p>
+<ul>
+  <% @game_state.hands[:west].each do |_| %>
+    <li><%= unicode_card("BACK") %></li>
+  <% end %>
+</ul>
+<p>South's hand:</p>
+<ul>
+  <% @game_state.hands[:south].each do |card| %>
     <li><%= unicode_card(card.to_s) %></li>
   <% end %>
 </ul>
+<p>East's hand:</p>
+<ul>
+  <% @game_state.hands[:east].each do |_| %>
+    <li><%= unicode_card("BACK") %></li>
+  <% end %>
+</ul>
+<p>The kitty:</p>
+<ul>
+  <% @game_state.kitty.each do |_| %>
+    <li><%= unicode_card("BACK") %></li>
+  <% end %>
+</ul>
+<p>It is now the bidding phase.</p>
+<p>The dealer is <%= @game_state.dealer.to_s %>.</p>
