@@ -11,7 +11,6 @@ class DealerChanged < Event
   end
 
   def player_left_of(player)
-    puts Game::PLAYERS.join(" ")
     index = Game::PLAYERS.index(player)
     size = Game::PLAYERS.size
     Game::PLAYERS[(index + 1) % size]
