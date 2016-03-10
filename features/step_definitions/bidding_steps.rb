@@ -8,6 +8,7 @@ end
 
 Then(/^the bidder is chosen$/) do
   game = Game.find(@id)
+  game_state = GameState.for(game)
   expect(game_state.bidder).not_to be nil
 end
 
