@@ -25,6 +25,12 @@ Then(/^the bidder has changed$/) do
   expect(new_bidder).not_to be old_bidder
 end
 
+Then(/^there are no bids$/) do
+  game = Game.find(@id)
+  bids = GameState.for(game).bids
+  expect(bids).to be_empty
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
