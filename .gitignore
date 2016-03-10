@@ -21,3 +21,6 @@ tags
 
 # Ignore Vim swap files
 .*swp
+
+# Ignore Cucumber rerun files
+rerun.txt
