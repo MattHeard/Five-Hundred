@@ -25,5 +25,11 @@ RSpec.describe GameState do
         expect(game_state.dealer).to be nil
       end
     end
+
+    describe "hands" do
+      it "are all empty" do
+        expect(game_state.hands.values.flatten).to be_empty
+      end
+    end
   end
 end
