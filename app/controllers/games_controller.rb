@@ -1,5 +1,3 @@
-require 'pp'
-
 class GamesController < ApplicationController
   def index
   end
@@ -15,6 +13,5 @@ class GamesController < ApplicationController
   def show
     game = Game.find(params[:id])
     @game_state = GameState.for(game)
-    pp @game_state
   end
 end
