@@ -7,7 +7,7 @@ class GameState
     JOKER
   }
 
-  attr_accessor :deck, :hands, :kitty, :dealer, :bidder
+  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
@@ -26,5 +26,6 @@ class GameState
     @deck = COMPLETE_DECK.dup
     @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
     @kitty = [ ]
+    @bids = [ ]
   end
 end
