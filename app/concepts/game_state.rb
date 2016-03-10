@@ -7,11 +7,7 @@ class GameState
     JOKER
   }
 
-  attr_accessor :deck
-  attr_accessor :hands
-  attr_accessor :kitty
-  attr_accessor :dealer
-  attr_accessor :bidder
+  attr_accessor :deck, :hands, :kitty, :dealer, :bidder
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
