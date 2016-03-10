@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   end
 
   def create
-    game = Game.create
+    game = Game.create!
 
     redirect_to game
   end
