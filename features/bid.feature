@@ -7,7 +7,7 @@ Feature: The bidding phase
     And the bidder is on the dealer's left
 
   Scenario: The first bidding player passes
-    Given a new game has been started
+    Given a new game has been set up
     And the bidder is chosen
     When the bidder passes
     Then the bidder has changed

@@ -3,6 +3,13 @@ Given(/^a new game has been started$/) do
   @id = game.id
 end
 
+Given(/^a new game has been set up$/) do
+  game = Game.create
+  @id = game.id
+  DealAllCards.new(game).call
+  ChangeDealer.new(game).call
+end
+
 When(/^a(?:nother)? card is dealt to the southern player$/) do
   game = Game.find(@id)
   player = :south
