@@ -1,0 +1,2 @@
+class BidPassed < Event
+end
