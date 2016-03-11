@@ -42,6 +42,12 @@ Then(/^the dealer is the bidder$/) do
   expect(game_state.bidder).to be game_state.dealer
 end
 
+When(/^the bidder bids (\d+) Spades$/) do |number_of_tricks|
+  game = Game.find(@id)
+  trump_suit = "♠"
+  MakeBid.new(game, number_of_tricks, trump_suit).call
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
