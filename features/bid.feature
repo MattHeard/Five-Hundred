@@ -12,3 +12,8 @@ Feature: The bidding phase
     When the bidder passes
     Then the bidder has changed
     And there are no bids
+
+  Scenario: Three bidders pass
+    Given a new game as been set up
+    When three bidders pass
+    Then the dealer is the bidder
