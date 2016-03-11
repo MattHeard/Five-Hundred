@@ -36,6 +36,12 @@ When(/^three bidders pass$/) do
   3.times { PassBid.new(game).call }
 end
 
+Then(/^the dealer is the bidder$/) do
+  game = Game.find(@id)
+  game_state = GameState.for(game)
+  expect(game_state.bidder).to be game_state.dealer
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
