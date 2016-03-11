@@ -31,6 +31,11 @@ Then(/^there are no bids$/) do
   expect(bids).to be_empty
 end
 
+When(/^three bidders pass$/) do
+  game = Game.find(@id)
+  3.times { PassBid.new(game).call }
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
