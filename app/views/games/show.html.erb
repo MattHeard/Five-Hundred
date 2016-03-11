@@ -36,8 +36,14 @@
 <p>It is west's turn to make a bid:</p>
 <%= form_for @game, url: { action: :update } do %>
   <select name="bid_or_pass">
-    <option disabled>Bid</option>
+    <option>Bid</option>
     <option>Pass</option>
+  </select>
+  <select name="number_of_tricks">
+    <option>6</option>
+  </select>
+  <select name="trump_suit">
+    <option>♠</option>
   </select>
   <button type="submit">Submit</button>
 <% end %>
