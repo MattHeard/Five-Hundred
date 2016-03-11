@@ -17,3 +17,9 @@ Feature: The bidding phase
     Given a new game has been set up
     When three bidders pass
     Then the dealer is the bidder
+
+  Scenario: A bid of 6 Spades
+    Given a new game has been set up
+    When the bidder bids 6 Spades
+    Then the bidder has changed
+    And the bid is 6 Spades
