@@ -48,6 +48,13 @@ When(/^the bidder bids (\d+) Spades$/) do |number_of_tricks|
   MakeBid.new(game, number_of_tricks, trump_suit).call
 end
 
+Then(/^the bid is (\d+) Spades$/) do |number_of_tricks|
+  game = Game.find(@id)
+  game_state = GameState.for(game)
+  expected_bid = "#{number_of_tricks}♠"
+  expect(game_state.highest_bid).to eq expected_bid
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size
