@@ -28,4 +28,19 @@ class GameState
     @kitty = [ ]
     @bids = [ ]
   end
+
+  def highest_bid
+    present(@bids.sort { |first, second| compare(first, second) }.first)
+  end
+
+  private
+
+  # TODO Implement me
+  def compare(first, second)
+    0
+  end
+
+  def present(bid)
+    "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
+  end
 end
