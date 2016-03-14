@@ -55,6 +55,13 @@ Then(/^the bid is (\d+) Spades$/) do |number_of_tricks|
   expect(game_state.highest_bid).to eq expected_bid
 end
 
+Then(/^the new bidder cannot bid (\d+) Spades$/) do |number_of_tricks|
+  game = Game.find(@id)
+  trump_suit = "♠"
+  service = MakeBid.new(game, number_of_tricks, trump_suit)
+  expect(service.call).to be false
+end
+
 def left_of(player)
   player_index = Game::PLAYERS.index(player)
   size = Game::PLAYERS.size

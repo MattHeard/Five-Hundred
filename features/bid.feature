@@ -23,3 +23,9 @@ Feature: The bidding phase
     When the bidder bids 6 Spades
     Then the bidder has changed
     And the bid is 6 Spades
+
+  Scenario: A bid must be higher than the previous bid
+    Given a new game has been set up
+    And the bidder bids 6 Spades
+    And the bidder has changed
+    Then the new bidder cannot bid 6 Spades
