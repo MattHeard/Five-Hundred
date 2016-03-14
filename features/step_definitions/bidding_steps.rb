@@ -45,7 +45,7 @@ end
 When(/^the bidder bids (\d+) Spades$/) do |number_of_tricks|
   game = Game.find(@id)
   trump_suit = "♠"
-  MakeBid.new(game, number_of_tricks, trump_suit).call
+  MakeBid.new(game, number_of_tricks.to_i, trump_suit).call
 end
 
 Then(/^the bid is (\d+) Spades$/) do |number_of_tricks|
@@ -58,7 +58,7 @@ end
 Then(/^the new bidder cannot bid (\d+) Spades$/) do |number_of_tricks|
   game = Game.find(@id)
   trump_suit = "♠"
-  service = MakeBid.new(game, number_of_tricks, trump_suit)
+  service = MakeBid.new(game, number_of_tricks.to_i, trump_suit)
   expect(service.call).to be false
 end
 

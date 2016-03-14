@@ -5,14 +5,27 @@ RSpec.describe MakeBid do
   let(:trump_suit) { "♠" }
   let(:game) do
     game = Game.create!
+    ChangeDealer.new(game).call
     MakeBid.new(game, number_of_tricks, trump_suit).call
     game.reload
+
     game
   end
 
-  describe "#call" do
-    it "adds a BidMade event to the game" do
-      expect(game.events.first).to be_instance_of BidMade
+  context "with no previous bids" do
+    describe "#call" do
+      it "adds a BidMade event to the game" do
+        expect(game.events.second).to be_instance_of BidMade
+      end
+    end
+  end
+
+  context "with a previous bid of 6 Spades" do
+    describe "#call" do
+      it "returns false when a second bid of 6 Spades is made" do
+        service = MakeBid.new(game, number_of_tricks, trump_suit)
+        expect(service.call).to be false
+      end
     end
   end
 end

@@ -30,7 +30,12 @@ class GameState
   end
 
   def highest_bid
-    present(@bids.sort { |first, second| compare(first, second) }.first)
+    present(unpresented_highest_bid)
+  end
+
+  # TODO Refactor
+  def unpresented_highest_bid
+    @bids.max { |first, second| compare(first, second) }
   end
 
   private
