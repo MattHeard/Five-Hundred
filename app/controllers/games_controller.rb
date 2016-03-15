@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     @game_state = GameState.for(@game)
   end
 
+  # TODO Create a Bid resource and use BidController#create
   def update
     game = Game.find(update_params[:id])
 
