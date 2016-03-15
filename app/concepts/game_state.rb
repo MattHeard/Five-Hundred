@@ -30,7 +30,7 @@ class GameState
   end
 
   # TODO Refactor
-  def unpresented_highest_bid
+  def highest_bid
     @bids.values.reject { |bid| bid.nil? }.max { |first, second| compare(first, second) }
   end
 

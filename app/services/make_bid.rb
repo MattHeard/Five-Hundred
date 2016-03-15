@@ -37,7 +37,7 @@ class MakeBid
   end
 
   def highest_bid
-    GameState.for(@game).unpresented_highest_bid
+    GameState.for(@game).highest_bid
   end
 
   def bidder_has_previously_passed?

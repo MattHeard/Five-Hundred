@@ -52,7 +52,7 @@ Then(/^the bid is (\d+) Spades$/) do |number_of_tricks|
   game = Game.find(@id)
   game_state = GameState.for(game)
   expected_bid = "#{number_of_tricks}♠"
-  expect(present(game_state.unpresented_highest_bid)).to eq expected_bid
+  expect(present(game_state.highest_bid)).to eq expected_bid
 end
 
 Then(/^the new bidder cannot bid (\d+) Spades$/) do |number_of_tricks|
