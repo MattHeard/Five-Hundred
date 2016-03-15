@@ -45,8 +45,4 @@ class GameState
   def bid_count
     @bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
   end
-
-  def present(bid)
-    "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
-  end
 end
