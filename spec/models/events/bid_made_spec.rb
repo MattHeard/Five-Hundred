@@ -1,3 +1,4 @@
+require 'pp'
 require 'rails_helper'
 
 RSpec.describe BidMade do
@@ -33,7 +34,8 @@ RSpec.describe BidMade do
       end
 
       it "sets the bid to 6 Spades" do
-        expect(game_state.highest_bid).to eq "6♠"
+        expect(game_state.unpresented_highest_bid[:number_of_tricks]).to eq 6
+        expect(game_state.unpresented_highest_bid[:trump_suit]).to eq "♠"
       end
     end
   end

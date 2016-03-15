@@ -29,10 +29,6 @@ class GameState
     @bids = { }
   end
 
-  def highest_bid
-    present(unpresented_highest_bid)
-  end
-
   # TODO Refactor
   def unpresented_highest_bid
     @bids.values.reject { |bid| bid.nil? }.max { |first, second| compare(first, second) }
