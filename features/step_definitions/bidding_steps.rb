@@ -3,7 +3,7 @@ Then(/^the bidder is on the dealer's left$/) do
   game_state = GameState.for(game)
   dealer = game_state.dealer
   bidder = game_state.bidder
-  expect(bidder).to be left_of(dealer)
+  expect(bidder).to be NextPlayer.new(dealer).call
 end
 
 Then(/^the bidder is chosen$/) do
@@ -60,12 +60,6 @@ Then(/^the new bidder cannot bid (\d+) Spades$/) do |number_of_tricks|
   trump_suit = "♠"
   service = MakeBid.new(game, number_of_tricks.to_i, trump_suit)
   expect(service.call).to be false
-end
-
-def left_of(player)
-  player_index = Game::PLAYERS.index(player)
-  size = Game::PLAYERS.size
-  Game::PLAYERS[(player_index + 1) % size]
 end
 
 def present(bid)
