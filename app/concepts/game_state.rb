@@ -26,7 +26,7 @@ class GameState
     @deck = COMPLETE_DECK.dup
     @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
     @kitty = [ ]
-    @bids = { :south => nil, :west => nil, :north => nil, :east => nil }
+    @bids = { }
   end
 
   def highest_bid
