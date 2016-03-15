@@ -29,9 +29,11 @@ class GameState
     @bids = { }
   end
 
-  # TODO Refactor
+  # NOTE: This currently only works because only bids of 6 Spades are accepted
+  # and all subsequent bids of 6 Spades are rejected for not being high enough.
+  # After other bids are accepted, this will need to actually find the max.
   def highest_bid
-    @bids.values.reject { |bid| bid.nil? }.max { |first, second| compare(first, second) }
+    @bids.values.reject { |bid| bid.nil? }.first
   end
 
   def bidder_has_previously_passed?
@@ -40,13 +42,6 @@ class GameState
 
   def bid_count
     @bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
-  end
-
-  private
-
-  # TODO Implement me
-  def compare(first, second)
-    0
   end
 
   def present(bid)
