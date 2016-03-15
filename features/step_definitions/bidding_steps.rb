@@ -27,8 +27,8 @@ end
 
 Then(/^there are no bids$/) do
   game = Game.find(@id)
-  bids = GameState.for(game).bids
-  expect(bids).to be_empty
+  bid_count = GameState.for(game).bid_count
+  expect(bid_count).to eq 0
 end
 
 When(/^(\d+) bidders pass$/) do |number_of_bidders|
