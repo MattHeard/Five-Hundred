@@ -1,5 +1,3 @@
-<p>Let's play 500!</p>
-<p>First, we will deal the cards.</p>
 <p>North's hand:</p>
 <ul>
   <% @game_state.hands[:north].each do |_| %>
@@ -15,7 +13,7 @@
 <p>South's hand:</p>
 <ul>
   <% @game_state.hands[:south].each do |card| %>
-    <li><%= unicode_card(card.to_s) %></li>
+    <li><%= unicode_card(card) %></li>
   <% end %>
 </ul>
 <p>East's hand:</p>
@@ -30,5 +28,19 @@
     <li><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
-<p>It is now the bidding phase.</p>
-<p>The dealer is <%= @game_state.dealer.to_s %>.</p>
+<p>The dealer is <%= @game_state.dealer %>.</p>
+<p>The bidder is <%= @game_state.bidder %>.</p>
+<p>It is <%= @game_state.bidder %>'s turn to make a bid:</p>
+<%= form_for @game, url: { action: :update } do %>
+  <select name="bid_or_pass">
+    <option>Bid</option>
+    <option>Pass</option>
+  </select>
+  <select name="number_of_tricks">
+    <option>6</option>
+  </select>
+  <select name="trump_suit">
+    <option>♠</option>
+  </select>
+  <button type="submit">Submit</button>
+<% end %>

@@ -14,3 +14,8 @@ Then(/^there will be a dealer$/) do
   dealer = GameState.for(game).dealer
   expect(dealer).not_to be nil
 end
+
+Given(/^the dealer is chosen$/) do
+  game = Game.find(@id)
+  ChangeDealer.new(game).call
+end

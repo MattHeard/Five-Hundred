@@ -12,17 +12,11 @@ class ChangeDealer
   private
 
   def next_dealer
-    case GameState.for(@game).dealer
-    when :north
-      :east
-    when :east
-      :south
-    when :south
-      :west
-    when :west
-      :north
-    else
+    current_dealer = GameState.for(@game).dealer
+    if current_dealer.nil?
       Game::PLAYERS.sample
+    else
+      NextPlayer.new(current_dealer).call
     end
   end
 end
