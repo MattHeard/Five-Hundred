@@ -34,3 +34,9 @@ Feature: The bidding phase
     Given a new game has been set up
     When 4 bidders pass
     Then the new bidder cannot bid 6 Spades
+
+  Scenario: The second bidder bids higher
+    Given a new game has been set up
+    And the bidder bids 6 Spades
+    When the new bidder bids 7 Spades
+    Then the highest bid is 7 Spades
