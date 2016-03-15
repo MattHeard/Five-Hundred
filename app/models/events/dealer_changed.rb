@@ -1,7 +1,7 @@
 class DealerChanged < Event
   def apply(game_state)
     game_state.dealer = player
-    game_state.bidder = player_left_of(game_state.dealer)
+    game_state.bidder = player_on_the_left_of(game_state.dealer)
   end
 
   private
@@ -10,7 +10,7 @@ class DealerChanged < Event
     target_player.to_sym
   end
 
-  def player_left_of(player)
+  def player_on_the_left_of(player)
     index = Game::PLAYERS.index(player)
     size = Game::PLAYERS.size
     Game::PLAYERS[(index + 1) % size]
