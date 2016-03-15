@@ -5,8 +5,6 @@ class NextBidder
 
   def call
     old_bidder = @game_state.bidder
-    index = Game::PLAYERS.index(old_bidder)
-    size = Game::PLAYERS.size
-    Game::PLAYERS[(index + 1) % size]
+    NextPlayer.new(old_bidder).call
   end
 end
