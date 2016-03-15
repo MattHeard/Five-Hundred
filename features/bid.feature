@@ -15,7 +15,7 @@ Feature: The bidding phase
 
   Scenario: Three bidders pass
     Given a new game has been set up
-    When three bidders pass
+    When 3 bidders pass
     Then the dealer is the bidder
 
   Scenario: A bid of 6 Spades
@@ -28,4 +28,9 @@ Feature: The bidding phase
     Given a new game has been set up
     And the bidder bids 6 Spades
     And the bidder has changed
+    Then the new bidder cannot bid 6 Spades
+
+  Scenario: A bidder who has passed cannot bid again
+    Given a new game has been set up
+    When 4 bidders pass
     Then the new bidder cannot bid 6 Spades

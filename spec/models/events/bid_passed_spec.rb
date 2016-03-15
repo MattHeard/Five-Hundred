@@ -20,7 +20,7 @@ RSpec.describe BidPassed do
     end
 
     it "does not add any bids" do
-      expect(game_state.bids).to be_empty
+      expect(game_state.bid_count).to eq 0
     end
   end
 end

@@ -31,9 +31,9 @@ Then(/^there are no bids$/) do
   expect(bids).to be_empty
 end
 
-When(/^three bidders pass$/) do
+When(/^(\d+) bidders pass$/) do |number_of_bidders|
   game = Game.find(@id)
-  3.times { PassBid.new(game).call }
+  number_of_bidders.to_i.times { PassBid.new(game).call }
 end
 
 Then(/^the dealer is the bidder$/) do

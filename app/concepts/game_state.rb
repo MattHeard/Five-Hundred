@@ -26,7 +26,7 @@ class GameState
     @deck = COMPLETE_DECK.dup
     @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
     @kitty = [ ]
-    @bids = [ ]
+    @bids = { :south => nil, :west => nil, :north => nil, :east => nil }
   end
 
   def highest_bid
@@ -35,7 +35,15 @@ class GameState
 
   # TODO Refactor
   def unpresented_highest_bid
-    @bids.max { |first, second| compare(first, second) }
+    @bids.values.reject { |bid| bid.nil? }.max { |first, second| compare(first, second) }
+  end
+
+  def bidder_has_previously_passed?
+    @bidder.present? && @bids[@bidder].present? && @bids[@bidder][:bid_or_pass] == :pass
+  end
+
+  def bid_count
+    @bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
   end
 
   private
