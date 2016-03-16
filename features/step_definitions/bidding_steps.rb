@@ -42,7 +42,7 @@ Then(/^the dealer is the bidder$/) do
   expect(game_state.bidder).to be game_state.dealer
 end
 
-When(/^the bidder bids (\d+) Spades$/) do |number_of_tricks|
+When(/^the (?:new )?bidder bids (\d+) Spades$/) do |number_of_tricks|
   game = Game.find(@id)
   trump_suit = "♠"
   MakeBid.new(game, number_of_tricks.to_i, trump_suit).call
@@ -60,6 +60,13 @@ Then(/^the new bidder cannot bid (\d+) Spades$/) do |number_of_tricks|
   trump_suit = "♠"
   service = MakeBid.new(game, number_of_tricks.to_i, trump_suit)
   expect(service.call).to be false
+end
+
+Then(/^the highest bid is (\d+) Spades$/) do |number_of_tricks|
+  game = Game.find(@id)
+  highest_bid = GameState.for(game).highest_bid
+  expected_bid = "#{number_of_tricks}♠"
+  expect(present(highest_bid)).to eq expected_bid
 end
 
 def present(bid)
