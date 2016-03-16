@@ -7,7 +7,7 @@ class GameState
     JOKER
   }
 
-  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid
+  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid, :players
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
@@ -25,10 +25,17 @@ class GameState
   # TODO Extract hand and bid into a Player object
   def initialize
     @deck = COMPLETE_DECK.dup
-    @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
+    @players = Game::PLAYERS.map { |seat| Player.new(seat) }
     @kitty = [ ]
     @bids = { }
     @last_bid = nil
+  end
+
+  def hands
+    hands = { }
+    players.each { |player| hands[player.seat] = player.hand }
+
+    hands
   end
 
   def highest_bid
