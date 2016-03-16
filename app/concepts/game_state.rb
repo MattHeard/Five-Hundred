@@ -41,12 +41,12 @@ class GameState
   end
 
   def bidder_has_previously_passed?
-    @bidder.present? &&
-      @bids[@bidder].present? &&
-      @bids[@bidder][:bid_or_pass] == :pass
+    bidder.present? &&
+      bids[bidder].present? &&
+      bids[bidder][:bid_or_pass] == :pass
   end
 
   def bid_count
-    @bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
+    bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
   end
 end
