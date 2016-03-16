@@ -5,6 +5,8 @@ class NextPlayer
     @current_player = current_player
   end
 
+  # TODO investigate `succ`
+  # PLAYERS[current].succ || PLAYERS[0]
   def call
     index = Game::PLAYERS.index(current_player)
     size = Game::PLAYERS.size

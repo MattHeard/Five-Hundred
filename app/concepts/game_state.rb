@@ -22,6 +22,7 @@ class GameState
     end
   end
 
+  # TODO Extract hand and bid into a Player object
   def initialize
     @deck = COMPLETE_DECK.dup
     @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
@@ -32,6 +33,8 @@ class GameState
   # NOTE: This currently only works because only bids of 6 Spades are accepted
   # and all subsequent bids of 6 Spades are rejected for not being high enough.
   # After other bids are accepted, this will need to actually find the max.
+  # TODO Remember last bid, that must be the highest
+  # TODO .compact
   def highest_bid
     @bids.values.reject { |bid| bid.nil? }.first
   end

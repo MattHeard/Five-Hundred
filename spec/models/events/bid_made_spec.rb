@@ -1,6 +1,7 @@
 require 'pp'
 require 'rails_helper'
 
+# TODO Investigate time travel
 RSpec.describe BidMade do
   subject(:event) do
     BidMade.create!(target_player: bidder,
