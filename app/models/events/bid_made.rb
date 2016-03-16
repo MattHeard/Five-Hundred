@@ -4,6 +4,7 @@ class BidMade < Event
   def apply(game_state)
     current_bidder = game_state.bidder
     game_state.bids[current_bidder] = bid
+    game_state.last_bid = bid
     game_state.bidder = NextBidder.new(game_state).call
   end
 

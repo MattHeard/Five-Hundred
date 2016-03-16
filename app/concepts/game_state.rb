@@ -7,7 +7,7 @@ class GameState
     JOKER
   }
 
-  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids
+  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
@@ -28,6 +28,7 @@ class GameState
     @hands = { :south => [ ], :west => [ ], :north => [ ], :east => [ ] }
     @kitty = [ ]
     @bids = { }
+    @last_bid = nil
   end
 
   # NOTE: This currently only works because only bids of 6 Spades are accepted
@@ -36,7 +37,7 @@ class GameState
   # TODO Remember last bid, that must be the highest
   # TODO .compact
   def highest_bid
-    @bids.values.reject { |bid| bid.nil? }.first
+    last_bid
   end
 
   def bidder_has_previously_passed?

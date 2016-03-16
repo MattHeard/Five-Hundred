@@ -32,4 +32,24 @@ RSpec.describe GameState do
       end
     end
   end
+
+  context "with two different bids" do
+    let(:game) do
+      game = Game.create!
+      ChangeDealer.new(game).call
+      MakeBid.new(game, 6, "♠").call
+      MakeBid.new(game, 7, "♠").call
+
+      game
+    end
+
+    subject(:game_state) { GameState.for(game) }
+
+    describe "#highest_bid" do
+      it "is the second bid" do
+        expect(game_state.highest_bid[:number_of_tricks]).to eq 7
+        expect(game_state.highest_bid[:trump_suit]).to eq "♠"
+      end
+    end
+  end
 end
