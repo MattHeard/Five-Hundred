@@ -42,6 +42,7 @@ RSpec.describe GameState do
   context "with two different bids" do
     let(:game) do
       game = Game.create!
+      DealAllCards.new(game).call
       ChangeDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       MakeBid.new(game, 7, "♠").call
@@ -55,6 +56,12 @@ RSpec.describe GameState do
       it "is the second bid" do
         expect(game_state.highest_bid[:number_of_tricks]).to eq 7
         expect(game_state.highest_bid[:trump_suit]).to eq "♠"
+      end
+    end
+
+    describe "#in_bidding_phase?" do
+      it "is true" do
+        expect(game_state).to be_in_bidding_phase
       end
     end
   end
