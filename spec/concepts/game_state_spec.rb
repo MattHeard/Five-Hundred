@@ -26,9 +26,15 @@ RSpec.describe GameState do
       end
     end
 
-    describe "hands" do
+    describe "#hands" do
       it "are all empty" do
         expect(game_state.hands.values.flatten).to be_empty
+      end
+    end
+
+    describe "#in_bidding_phase?" do
+      it "is false" do
+        expect(game_state).not_to be_in_bidding_phase
       end
     end
   end
