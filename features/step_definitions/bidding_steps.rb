@@ -74,6 +74,12 @@ Then(/^the deck is redealt$/) do
   RedealAllCards.new(game).call
 end
 
+Then(/^the game is in the bidding phase$/) do
+  game = Game.find(@id)
+  game_state = GameState.for(game)
+  expect(game_state).to be_in_bidding_phase
+end
+
 def present(bid)
   "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
 end

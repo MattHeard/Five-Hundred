@@ -48,3 +48,7 @@ Feature: The bidding phase
     Then the deck is redealt
     And the players each have 10 cards
     And the south player's hand has changed
+
+  Scenario: The bidding phase is still ongoing when no players have bid
+    Given a new game has been set up
+    Then the game is in the bidding phase
