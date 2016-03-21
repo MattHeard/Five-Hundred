@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe RedealAllCards do
-  subject(:service) { RedealAllCards.new(game) }
+RSpec.describe CollectCards do
+  subject(:service) { CollectCards.new(game) }
 
   let(:game) { Game.create! }
 
   describe "#initialize" do
-    it "should be present" do
+    it "is present" do
       expect(service).to be_present
     end
   end

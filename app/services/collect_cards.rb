@@ -1,11 +1,12 @@
-class RedealAllCards
+class CollectCards
   def initialize(game)
     @game = game
   end
 
   def call
-    CollectCards.new(game).call
-    DealAllCards.new(game).call
+    game.with_lock do
+      CardsCollected.create!(game: game)
+    end
   end
 
   private

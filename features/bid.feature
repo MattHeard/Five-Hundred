@@ -46,4 +46,5 @@ Feature: The bidding phase
     And the south player has cards in their hand
     When 4 bidders pass
     Then the deck is redealt
+    And the players each have 10 cards
     And the south player's hand has changed
