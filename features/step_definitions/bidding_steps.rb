@@ -69,6 +69,11 @@ Then(/^the highest bid is (\d+) Spades$/) do |number_of_tricks|
   expect(present(highest_bid)).to eq expected_bid
 end
 
+Then(/^the deck is redealt$/) do
+  game = Game.find(@id)
+  RedealAllCards.new(game).call
+end
+
 def present(bid)
   "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
 end

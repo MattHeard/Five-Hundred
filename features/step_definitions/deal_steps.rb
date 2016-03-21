@@ -58,3 +58,13 @@ When(/^all the cards are dealt$/) do
   game = Game.find(@id)
   DealAllCards.new(game).call
 end
+
+Given(/^the south player has cards in their hand$/) do
+  game = Game.find(@id)
+  @south_hand = GameState.for(game).hands[:south]
+  expect(@south_hand).not_to be_empty
+end
+
+Then(/^the south player's hand has changed$/) do
+    pending # Write code here that turns the phrase above into concrete actions
+end
