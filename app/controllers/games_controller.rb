@@ -15,14 +15,13 @@ class GamesController < ApplicationController
     @game_state = GameState.for(@game)
   end
 
-  # TODO Create a Bid resource and use BidController#create
-  def update
-    game = Game.find(update_params[:id])
-
-    if bidder_has_passed?
+  def bid
+    bid_params = params.permit(:id, :bid_or_pass, :number_of_tricks, :trump_suit)
+    game = Game.find(bid_params[:id])
+    if bidder_has_passed?(bid_params)
       PassBid.new(game).call
-    elsif bidder_has_made_bid?
-      MakeBid.new(game, number_of_tricks, trump_suit).call
+    elsif bidder_has_made_bid?(bid_params)
+      MakeBid.new(game, bid_params[:number_of_tricks], bid_params[:trump_suit]).call
     end
 
     redirect_to game
@@ -30,23 +29,11 @@ class GamesController < ApplicationController
 
   private
 
-  def update_params
-    params.permit(:id, :bid_or_pass, :number_of_tricks, :trump_suit)
+  def bidder_has_passed?(params)
+    params[:bid_or_pass] == "Pass"
   end
 
-  def bidder_has_passed?
-    update_params[:bid_or_pass] == "Pass"
-  end
-
-  def bidder_has_made_bid?
-    update_params[:bid_or_pass] == "Bid"
-  end
-
-  def number_of_tricks
-    update_params[:number_of_tricks]
-  end
-
-  def trump_suit
-    update_params[:trump_suit]
+  def bidder_has_made_bid?(params)
+    params[:bid_or_pass] == "Bid"
   end
 end

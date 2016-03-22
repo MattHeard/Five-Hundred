@@ -33,7 +33,7 @@
 <% if @game_state.in_bidding_phase? %>
   <p>The bidder is <%= @game_state.bidder %>.</p>
   <p>It is <%= @game_state.bidder %>'s turn to make a bid:</p>
-  <%= form_for @game, url: { action: :update } do %>
+  <%= form_for @game, url: { action: :bid } do %>
     <select name="bid_or_pass">
       <option>Bid</option>
       <option>Pass</option>
