@@ -18,4 +18,8 @@ module GamesHelper
       "4♦" => "🃄"
     }[name]
   end
+
+  def pretty_bid(bid)
+    "#{bid[:number_of_tricks]} of #{bid[:trump_suit]}"
+  end
 end
