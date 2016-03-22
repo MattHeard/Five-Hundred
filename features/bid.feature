@@ -52,3 +52,9 @@ Feature: The bidding phase
   Scenario: The bidding phase is still ongoing when no players have bid
     Given a new game has been set up
     Then the game is in the bidding phase
+
+  Scenario: The bidding phase is over when all players have bid
+    Given a new game has been set up
+    When the bidder bids 6 Spades
+    And the next 3 bidders pass
+    Then the game is not in the bidding phase
