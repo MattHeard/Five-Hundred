@@ -58,3 +58,16 @@ When(/^all the cards are dealt$/) do
   game = Game.find(@id)
   DealAllCards.new(game).call
 end
+
+Given(/^the south player has cards in their hand$/) do
+  game = Game.find(@id)
+  @south_hand = GameState.for(game).hands[:south]
+  expect(@south_hand).not_to be_empty
+end
+
+Then(/^the south player's hand has changed$/) do
+  original_south_hand = @south_hand
+  game = Game.find(@id)
+  @south_hand = GameState.for(game).hands[:south]
+  expect(@south_hand.join(" ")).not_to eq original_south_hand.join(" ")
+end

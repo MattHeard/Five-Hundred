@@ -40,3 +40,21 @@ Feature: The bidding phase
     And the bidder bids 6 Spades
     When the new bidder bids 7 Spades
     Then the highest bid is 7 Spades
+
+  Scenario: The cards must be redealt after all players pass
+    Given a new game has been set up
+    And the south player has cards in their hand
+    When 4 bidders pass
+    Then the deck is redealt
+    And the players each have 10 cards
+    And the south player's hand has changed
+
+  Scenario: The bidding phase is still ongoing when no players have bid
+    Given a new game has been set up
+    Then the game is in the bidding phase
+
+  Scenario: The bidding phase is over when all players have bid
+    Given a new game has been set up
+    When the bidder bids 6 Spades
+    And the next 3 bidders pass
+    Then the game is not in the bidding phase

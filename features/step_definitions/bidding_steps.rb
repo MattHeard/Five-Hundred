@@ -31,7 +31,7 @@ Then(/^there are no bids$/) do
   expect(bid_count).to eq 0
 end
 
-When(/^(\d+) bidders pass$/) do |number_of_bidders|
+When(/^(?:the next )?(\d+) bidders pass$/) do |number_of_bidders|
   game = Game.find(@id)
   number_of_bidders.to_i.times { PassBid.new(game).call }
 end
@@ -67,6 +67,23 @@ Then(/^the highest bid is (\d+) Spades$/) do |number_of_tricks|
   highest_bid = GameState.for(game).highest_bid
   expected_bid = "#{number_of_tricks}♠"
   expect(present(highest_bid)).to eq expected_bid
+end
+
+Then(/^the deck is redealt$/) do
+  game = Game.find(@id)
+  RedealAllCards.new(game).call
+end
+
+Then(/^the game is in the bidding phase$/) do
+  game = Game.find(@id)
+  game_state = GameState.for(game)
+  expect(game_state).to be_in_bidding_phase
+end
+
+Then(/^the game is not in the bidding phase$/) do
+  game = Game.find(@id)
+  game_state = GameState.for(game)
+  expect(game_state).not_to be_in_bidding_phase
 end
 
 def present(bid)

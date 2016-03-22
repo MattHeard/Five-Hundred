@@ -51,4 +51,12 @@ class GameState
   def bid_count
     bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
   end
+
+  def in_bidding_phase?
+    deck.empty? && !all_players_have_bid_or_passed? 
+  end
+
+  def all_players_have_bid_or_passed?
+    bids.values.count { |bid| bid.present? } == 4
+  end
 end
