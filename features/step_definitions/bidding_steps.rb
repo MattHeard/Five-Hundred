@@ -86,6 +86,16 @@ Then(/^the game is not in the bidding phase$/) do
   expect(game_state).not_to be_in_bidding_phase
 end
 
+Given(/^the bidding phase has completed$/) do
+  game = Game.find(@id)
+  number_of_tricks = 6
+  trump_suit = "♠"
+  MakeBid.new(game, number_of_tricks, trump_suit).call
+  3.times { PassBid.new(game).call }
+  game_state = GameState.for(game)
+  expect(game_state).not_to be_in_bidding_phase
+end
+
 def present(bid)
   "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
 end
