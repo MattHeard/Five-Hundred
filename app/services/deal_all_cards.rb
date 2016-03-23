@@ -1,4 +1,5 @@
 class DealAllCards
+  NUMBERS_OF_CARDS_DEALT_TO_PLAYERS_IN_EACH_DEALING_ROUND = [3, 4, 3]
   attr_reader :game
 
   def initialize(game)
@@ -11,11 +12,28 @@ class DealAllCards
   #   Query the GameState once and keep the deck in memory, and then create all
   #   of the CardDealt events by sampling cards out of the in-memory deck.
   def call
-    Game::PLAYERS.each { |player| 3.times { DealCard.new(game, player).call } }
-    DealCard.new(game, :kitty).call
-    Game::PLAYERS.each { |player| 4.times { DealCard.new(game, player).call } }
-    DealCard.new(game, :kitty).call
-    Game::PLAYERS.each { |player| 3.times { DealCard.new(game, player).call } }
-    DealCard.new(game, :kitty).call
+    deal_cards if full_deck?
+
+    full_deck?
+  end
+
+  private
+
+  def deal_cards
+    NUMBERS_OF_CARDS_DEALT_TO_PLAYERS_IN_EACH_DEALING_ROUND
+      .each do |number_of_cards_dealt_to_players|
+      deal_cards_to_players(number_of_cards_dealt_to_players)
+      DealCard.new(game, :kitty).call
+    end
+  end
+
+  def deal_cards_to_players(number_of_cards)
+    Game::PLAYERS.each do |player|
+      number_of_cards.times { DealCard.new(game, player).call }
+    end
+  end
+
+  def full_deck?
+    GameState.for(game).deck.size == GameState::COMPLETE_DECK.size
   end
 end
