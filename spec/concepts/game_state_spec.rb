@@ -37,6 +37,12 @@ RSpec.describe GameState do
         expect(game_state).not_to be_in_bidding_phase
       end
     end
+
+    describe "#trick" do
+      it "is empty or has nil values" do
+        expect(game_state.trick).to be_none
+      end
+    end
   end
 
   context "with two different bids" do

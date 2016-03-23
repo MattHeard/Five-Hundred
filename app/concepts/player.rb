@@ -1,6 +1,6 @@
 class Player
   attr_reader :seat
-  attr_accessor :hand
+  attr_accessor :hand, :played_card
 
   def initialize(seat)
     @seat = seat

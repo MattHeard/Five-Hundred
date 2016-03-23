@@ -2,10 +2,20 @@ require 'rails_helper'
 
 RSpec.describe CardPlayed do
   describe "#apply" do
-    subject(:event) { CardPlayed.new }
+    subject(:event) do
+      CardPlayed.create!(target_player: player, game: game, card: card)
+    end
 
-    it "does not raise an error when called" do
-      expect { event.apply(nil) }.to_not raise_error
+    let(:player) { :south }
+    let(:game) { Game.create! }
+    let(:game_state) { GameState.for(game) }
+    let(:card) { game_state.hands[player].first }
+
+    it "removes a card from the player's hand" do
+      DealAllCards.new(game).call
+      game_state = GameState.for(game)
+      event.apply(game_state)
+      expect(game_state.hands[player]).to have_exactly(9).items
     end
   end
 end
