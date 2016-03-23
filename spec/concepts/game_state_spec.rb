@@ -43,6 +43,12 @@ RSpec.describe GameState do
         expect(game_state.trick).to be_none
       end
     end
+
+    describe "#card_played?" do
+      it "is false" do
+        expect(game_state.card_played?(:south)).to be false
+      end
+    end
   end
 
   context "with two different bids" do
