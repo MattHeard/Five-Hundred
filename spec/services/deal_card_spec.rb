@@ -7,10 +7,19 @@ RSpec.describe DealCard do
     let(:game) { Game.create! }
     let(:player) { :south }
 
-    it "adds a CardDealt event to the game" do
-      service.call
-      game.reload
-      expect(game.events.last).to be_instance_of CardDealt
+    context "with a full deck" do
+      it "adds a CardDealt event to the game" do
+        service.call
+        game.reload
+        expect(game.events.last).to be_instance_of CardDealt
+      end
+    end
+
+    context "with an empty deck" do
+      it "fails" do
+        DealAllCards.new(game).call
+        expect(service.call).to be false
+      end
     end
   end
 end
