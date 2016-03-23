@@ -5,7 +5,7 @@
   </p>
   <ul>
     <% @game_state.hands[player].each do |card| %>
-      <li><%= unicode_card(player == :south ? card : "BACK")%></li>
+      <li><%= unicode_card(card)%></li>
     <% end %>
   </ul>
 <% end %>
@@ -15,7 +15,7 @@
     <li><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
-<p>The current bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
+<p>The bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
 <% if @game_state.in_bidding_phase? %>
   <p>The bidder is <%= @game_state.bidder %>.</p>
   <p>It is <%= @game_state.bidder %>'s turn to make a bid:</p>
@@ -34,4 +34,6 @@
     </select>
     <button type="submit">Submit</button>
   <% end %>
+<% else %>
+  <p>Pick a card to play</p>
 <% end %>
