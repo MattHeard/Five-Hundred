@@ -1,17 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe PlayCard do
-  let(:service) { PlayCard.new(nil, nil, nil) }
+  subject(:service) { PlayCard.new(game, player, card) }
 
-  describe "#initialize" do
-    it "takes three args" do
-      expect { service }.not_to raise_error
-    end
-  end
+  let(:game) { Game.create! }
+  let(:player) { :south }
+  let(:card) { GameState.for(game).hands[player].first }
 
   describe "#call" do
-    it "can be called" do
-      expect { service.call }.not_to raise_error
+    before do
+      DealAllCards.new(game).call
+      service.call
+    end
+
+    it "adds a CardPlayed event to the game" do
+      expect(game.events.last).to be_instance_of CardPlayed
     end
   end
 end
