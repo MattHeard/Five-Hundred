@@ -1,34 +1,20 @@
-<p>North's hand:</p>
-<ul>
-  <% @game_state.hands[:north].each do |_| %>
-    <li><%= unicode_card("BACK") %></li>
-  <% end %>
-</ul>
-<p>West's hand:</p>
-<ul>
-  <% @game_state.hands[:west].each do |_| %>
-    <li><%= unicode_card("BACK") %></li>
-  <% end %>
-</ul>
-<p>South's hand:</p>
-<ul>
-  <% @game_state.hands[:south].each do |card| %>
-    <li><%= unicode_card(card) %></li>
-  <% end %>
-</ul>
-<p>East's hand:</p>
-<ul>
-  <% @game_state.hands[:east].each do |_| %>
-    <li><%= unicode_card("BACK") %></li>
-  <% end %>
-</ul>
+<% %i{west north east south}.each do |player| %>
+  <p>
+  <%= player.to_s.upcase %>
+  <%= player == @game_state.dealer ? "Ⓓ" : "" %>
+  </p>
+  <ul>
+    <% @game_state.hands[player].each do |card| %>
+      <li><%= unicode_card(player == :south ? card : "BACK")%></li>
+    <% end %>
+  </ul>
+<% end %>
 <p>The kitty:</p>
 <ul>
   <% @game_state.kitty.each do |_| %>
     <li><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
-<p>The dealer is <%= @game_state.dealer %>.</p>
 <p>The current bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
 <% if @game_state.in_bidding_phase? %>
   <p>The bidder is <%= @game_state.bidder %>.</p>
