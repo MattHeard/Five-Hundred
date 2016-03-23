@@ -6,24 +6,38 @@ RSpec.describe NextBidder do
 
     let(:game_state) { GameState.new }
 
-    it "returns East when the previous bidder was North" do
-      game_state.bidder = :north
-      expect(service.call).to eq :east
+    before { game_state.bidder = current_bidder }
+
+    context "when the current bidder is North" do
+      let(:current_bidder) { :north }
+
+      it "returns East" do
+        expect(service.call).to eq :east
+      end
     end
 
-    it "returns South when the previous bidder was East" do
-      game_state.bidder = :east
-      expect(service.call).to eq :south
+    context "when the current bidder is East" do
+      let(:current_bidder) { :east }
+
+      it "returns South" do
+        expect(service.call).to eq :south
+      end
     end
 
-    it "returns West when the previous bidder was South" do
-      game_state.bidder = :south
-      expect(service.call).to eq :west
+    context "when the current bidder is South" do
+      let(:current_bidder) { :south }
+
+      it "returns West" do
+        expect(service.call).to eq :west
+      end
     end
 
-    it "returns North when the previous bidder was West" do
-      game_state.bidder = :west
-      expect(service.call).to eq :north
+    context "when the current bidder is West" do
+      let(:current_bidder) { :west }
+
+      it "returns North" do
+        expect(service.call).to eq :north
+      end
     end
   end
 end
