@@ -1,4 +1,4 @@
 class CardPlayed < Event
-  def apply
+  def apply(game_state)
   end
 end
