@@ -65,4 +65,8 @@ class GameState
   def card_played?(player)
     trick[player].present?
   end
+
+  def complete_trick?
+    trick.values.any? && trick.values.all?
+  end
 end
