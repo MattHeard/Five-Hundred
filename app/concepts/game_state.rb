@@ -7,7 +7,8 @@ class GameState
     JOKER
   }
 
-  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid, :players
+  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
+    :players, :trick
 
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
@@ -29,6 +30,7 @@ class GameState
     @kitty = [ ]
     @bids = { }
     @last_bid = nil
+    @trick = { }
   end
 
   def hands
@@ -58,5 +60,13 @@ class GameState
 
   def all_players_have_bid_or_passed?
     bids.values.count { |bid| bid.present? } == 4
+  end
+
+  def card_played?(player)
+    trick[player].present?
+  end
+
+  def complete_trick?
+    trick.values.any? && trick.values.all?
   end
 end

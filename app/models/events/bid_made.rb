@@ -1,5 +1,3 @@
-require 'pp'
-
 class BidMade < Event
   def apply(game_state)
     current_bidder = game_state.bidder

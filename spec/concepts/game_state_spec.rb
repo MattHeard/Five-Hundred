@@ -37,6 +37,24 @@ RSpec.describe GameState do
         expect(game_state).not_to be_in_bidding_phase
       end
     end
+
+    describe "#trick" do
+      it "is empty or has nil values" do
+        expect(game_state.trick).to be_none
+      end
+    end
+
+    describe "#card_played?" do
+      it "is false" do
+        expect(game_state.card_played?(:south)).to be false
+      end
+    end
+
+    describe "#complete_trick?" do
+      it "is false" do
+        expect(game_state).not_to be_complete_trick
+      end
+    end
   end
 
   context "with two different bids" do
@@ -62,6 +80,25 @@ RSpec.describe GameState do
     describe "#in_bidding_phase?" do
       it "is true" do
         expect(game_state).to be_in_bidding_phase
+      end
+    end
+  end
+
+  context "when all players have played a card" do
+    describe "#complete_trick?" do
+      let(:game) { Game.create! }
+
+      it "is true" do
+        DealAllCards.new(game).call
+        game_state = GameState.for(game)
+        %i{ north south east west}.each do |player|
+          hand = game_state.hands[player]
+          card = hand.first
+          PlayCard.new(game, player, card).call
+        end
+        game_state = GameState.for(game)
+
+        expect(game_state).to be_complete_trick
       end
     end
   end
