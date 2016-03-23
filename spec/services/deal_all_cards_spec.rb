@@ -1,4 +1,3 @@
-require 'pp'
 require 'rails_helper'
 
 RSpec.describe DealAllCards do
