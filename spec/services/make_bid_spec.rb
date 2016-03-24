@@ -17,8 +17,8 @@ RSpec.describe MakeBid do
       end
     end
 
-    context "with a previous bid of 6 Spades" do
-      it "fails when a second bid of 6 Spades is made" do
+    context "with a previous identical bid" do
+      it "fails" do
         service.call
         game.reload
         expect(service.call).to be false
@@ -26,7 +26,7 @@ RSpec.describe MakeBid do
     end
 
     context "after the bidder has previously passed" do
-      it "fails when a second bid of 6 Spades is made" do
+      it "fails" do
         4.times { PassBid.new(game).call }
         game.reload
         expect(service.call).to be false
