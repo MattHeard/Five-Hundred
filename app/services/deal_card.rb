@@ -18,6 +18,7 @@ class DealCard
     end
   end
 
+  # TODO rename to "remaining_cards?"
   def deck_empty?
     GameState.for(game).deck.empty?
   end

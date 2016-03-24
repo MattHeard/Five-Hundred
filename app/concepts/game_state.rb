@@ -1,3 +1,4 @@
+# TODO Make into a struct
 class GameState
   COMPLETE_DECK = %w{
     A♠ K♠ Q♠ J♠ 10♠ 9♠ 8♠ 7♠ 6♠ 5♠
@@ -7,9 +8,12 @@ class GameState
     JOKER
   }
 
+  # TODO Try this
+  # attr_accessor south_hand: hands[:south]
   attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
     :players, :trick
 
+  # TODO Move into service
   # TODO Investigate using a service
   # Should this be extracted into a service for the sake of preventing GameState
   # from knowing anything about Event?

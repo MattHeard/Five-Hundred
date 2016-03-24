@@ -7,6 +7,7 @@ RSpec.describe DealCard do
     let(:game) { Game.create! }
     let(:player) { :south }
 
+    # TODO Test effects of applying CardDealt to GameState
     context "with a full deck" do
       it "adds a CardDealt event to the game" do
         service.call

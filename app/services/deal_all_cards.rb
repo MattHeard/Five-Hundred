@@ -1,4 +1,5 @@
 class DealAllCards
+  # TODO Rename to use the noun 'batch'
   NUMBERS_OF_CARDS_DEALT_TO_PLAYERS_IN_EACH_DEALING_ROUND = [3, 4, 3]
   attr_reader :game
 
