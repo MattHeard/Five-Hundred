@@ -62,7 +62,7 @@ class GameState
   end
 
   def all_players_have_bid_or_passed?
-    bids.values.count { |bid| bid.present? } == 4
+    bids.values.compact.count == 4
   end
 
   def card_played?(player)
