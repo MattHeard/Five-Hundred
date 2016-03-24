@@ -55,7 +55,7 @@ class GameState
   end
 
   def in_bidding_phase?
-    deck.empty? && !all_players_have_bid_or_passed? 
+    deck.empty? && !all_players_have_bid_or_passed?
   end
 
   def all_players_have_bid_or_passed?
