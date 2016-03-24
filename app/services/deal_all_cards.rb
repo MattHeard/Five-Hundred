@@ -1,6 +1,6 @@
 class DealAllCards
-  # TODO Rename to use the noun 'batch'
-  NUMBERS_OF_CARDS_DEALT_TO_PLAYERS_IN_EACH_DEALING_ROUND = [3, 4, 3]
+  BATCH_SIZES = [3, 4, 3]
+
   attr_reader :game
 
   def initialize(game)
@@ -21,9 +21,8 @@ class DealAllCards
   private
 
   def deal_cards
-    NUMBERS_OF_CARDS_DEALT_TO_PLAYERS_IN_EACH_DEALING_ROUND
-      .each do |number_of_cards_dealt_to_players|
-      deal_cards_to_players(number_of_cards_dealt_to_players)
+    BATCH_SIZES.each do |batch_size|
+      deal_cards_to_players(batch_size)
       DealCard.new(game, :kitty).call
     end
   end
