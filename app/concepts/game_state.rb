@@ -23,6 +23,7 @@ class GameState
   def self.for(game)
     game.events.inject(GameState.new) do |state, event|
       event.apply(state)
+
       state
     end
   end
@@ -49,9 +50,7 @@ class GameState
   end
 
   def bidder_has_previously_passed?
-    bidder.present? &&
-      bids[bidder].present? &&
-      bids[bidder][:bid_or_pass] == :pass
+    bids[bidder].present? && bids[bidder][:bid_or_pass] == :pass
   end
 
   def bid_count
