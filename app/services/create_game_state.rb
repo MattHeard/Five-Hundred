@@ -1,0 +1,2 @@
+class CreateGameState
+end
