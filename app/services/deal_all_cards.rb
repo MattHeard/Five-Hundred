@@ -21,16 +21,28 @@ class DealAllCards
   private
 
   def deal_cards
-    BATCH_SIZES.each do |batch_size|
-      deal_cards_to_players(batch_size)
-      DealCard.new(game, :kitty).call
-    end
+    BATCH_SIZES.each { |batch_size| deal_one_batch_round(batch_size) }
   end
 
-  def deal_cards_to_players(number_of_cards)
-    Game::PLAYERS.each do |player|
-      number_of_cards.times { DealCard.new(game, player).call }
-    end
+  def deal_one_batch_round(batch_size)
+    deal_one_batch_to_players(batch_size)
+    deal_card_to_kitty
+  end
+
+  def deal_card_to_kitty
+    DealCard.new(game, :kitty).call
+  end
+
+  def deal_one_batch_to_players(batch_size)
+    players.each { |player| deal_batch_to_player(batch_size, player) }
+  end
+
+  def players
+    Game::PLAYERS
+  end
+
+  def deal_batch_to_player(batch_size, player)
+    batch_size.times { DealCard.new(game, player).call }
   end
 
   def full_deck?
