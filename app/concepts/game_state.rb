@@ -1,6 +1,4 @@
 class GameState
-  # TODO Try this
-  # attr_accessor south_hand: hands[:south]
   attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
     :players, :trick
 
@@ -19,6 +17,10 @@ class GameState
     players.each { |player| hands[player.seat] = player.hand }
 
     hands
+  end
+
+  def hand(seat)
+    hands[seat]
   end
 
   def highest_bid

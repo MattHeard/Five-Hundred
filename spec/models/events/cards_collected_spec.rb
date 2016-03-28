@@ -15,7 +15,7 @@ RSpec.describe CardsCollected do
       end
 
       it "leaves 0 cards in the south hand" do
-        expect(game_state.hands[:south]).to be_empty
+        expect(game_state.hand(:south)).to be_empty
       end
     end
 

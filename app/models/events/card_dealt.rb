@@ -9,7 +9,7 @@ class CardDealt < Event
   private
 
   def destination(game_state)
-    player == :kitty ? game_state.kitty : game_state.hands[player]
+    player == :kitty ? game_state.kitty : game_state.hand(player)
   end
 
   def player

@@ -4,7 +4,7 @@
   <%= player == @game_state.dealer ? "Ⓓ" : "" %>
   </p>
   <ul>
-    <% @game_state.hands[player].each do |card| %>
+    <% @game_state.hand(player).each do |card| %>
       <li><%= unicode_card(card)%></li>
     <% end %>
   </ul>

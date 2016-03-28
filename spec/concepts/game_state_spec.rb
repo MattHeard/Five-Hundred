@@ -93,7 +93,7 @@ RSpec.describe GameState do
         DealAllCards.new(game).call
         game_state = CreateGameState.new(game).call
         %i{ north south east west}.each do |player|
-          hand = game_state.hands[player]
+          hand = game_state.hand(player)
           card = hand.first
           PlayCard.new(game, player, card).call
         end

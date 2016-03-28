@@ -22,11 +22,11 @@ RSpec.describe CardDealt do
       end
 
       it "puts one card into the southern player's hand" do
-        expect(game_state.hands[player]).to have_exactly(1).item
+        expect(game_state.hand(player)).to have_exactly(1).item
       end
 
       it "puts the Joker into the southern player's hand" do
-        expect(game_state.hands[player]).to contain_exactly "JOKER"
+        expect(game_state.hand(player)).to contain_exactly "JOKER"
       end
     end
 
