@@ -1,0 +1,11 @@
+Given(/^I am on the index page$/) do
+  visit("/")
+end
+
+When(/^I click on "([^"]*)"$/) do |link_text|
+  click_on(link_text)
+end
+
+Then(/^I see a card$/) do
+  expect(page).to have_selector("li.card")
+end
