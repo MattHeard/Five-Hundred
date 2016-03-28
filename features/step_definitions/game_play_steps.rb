@@ -6,6 +6,6 @@ When(/^I click on "([^"]*)"$/) do |link_text|
   click_on(link_text)
 end
 
-Then(/^I see a card$/) do
-  expect(page).to have_selector("li.card")
+Then(/^I see (\d+) cards$/) do |number_of_cards|
+  expect(page).to have_selector("li.card", count: number_of_cards)
 end
