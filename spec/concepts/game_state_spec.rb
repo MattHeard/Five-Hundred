@@ -10,7 +10,7 @@ RSpec.describe GameState do
       end
 
       it "should be a complete deck" do
-        expect(game_state.deck).to match_array(GameState::COMPLETE_DECK)
+        expect(game_state.deck).to match_array(EntireDeck.new.call)
       end
     end
 

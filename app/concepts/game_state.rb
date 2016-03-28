@@ -1,12 +1,4 @@
 class GameState
-  COMPLETE_DECK = %w{
-    A♠ K♠ Q♠ J♠ 10♠ 9♠ 8♠ 7♠ 6♠ 5♠
-    A♣ K♣ Q♣ J♣ 10♣ 9♣ 8♣ 7♣ 6♣ 5♣
-    A♥ K♥ Q♥ J♥ 10♥ 9♥ 8♥ 7♥ 6♥ 5♥ 4♥
-    A♦ K♦ Q♦ J♦ 10♦ 9♦ 8♦ 7♦ 6♦ 5♦ 4♦
-    JOKER
-  }
-
   # TODO Try this
   # attr_accessor south_hand: hands[:south]
   attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
@@ -14,7 +6,7 @@ class GameState
 
   # TODO Extract hand and bid into a Player object
   def initialize
-    @deck = COMPLETE_DECK.dup
+    @deck = EntireDeck.new.call
     @players = new_players
     @kitty = [ ]
     @bids = { }
