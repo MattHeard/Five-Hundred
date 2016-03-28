@@ -16,6 +16,6 @@ class NextPlayer
   end
 
   def players
-    Game::PLAYERS
+    Players.new.call
   end
 end

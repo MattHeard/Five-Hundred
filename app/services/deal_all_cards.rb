@@ -33,7 +33,7 @@ class DealAllCards
   end
 
   def players
-    Game::PLAYERS
+    Players.new.call
   end
 
   def deal_batch_to_player(batch_size, player)

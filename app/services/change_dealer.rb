@@ -18,7 +18,7 @@ class ChangeDealer
   def next_dealer
     current_dealer = CreateGameState.new(game).call.dealer
     if current_dealer.nil?
-      Game::PLAYERS.sample
+      Players.new.call.sample
     else
       NextPlayer.new(current_dealer).call
     end
