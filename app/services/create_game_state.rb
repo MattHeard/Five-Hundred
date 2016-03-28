@@ -4,7 +4,11 @@ class CreateGameState
   end
 
   def call
-    GameState.for(game)
+    game.events.inject(GameState.new) do |state, event|
+      event.apply(state)
+
+      state
+    end
   end
 
   private
