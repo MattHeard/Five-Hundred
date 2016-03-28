@@ -16,7 +16,7 @@ class GameState
   # TODO Extract hand and bid into a Player object
   def initialize
     @deck = COMPLETE_DECK.dup
-    @players = new_players 
+    @players = new_players
     @kitty = [ ]
     @bids = { }
     @last_bid = nil
