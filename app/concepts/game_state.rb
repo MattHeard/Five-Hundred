@@ -1,5 +1,5 @@
 class GameState
-  attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
+  attr_accessor :deck, :kitty, :dealer, :bidder, :bids, :last_bid,
     :players, :trick
 
   # TODO Extract hand and bid into a Player object
