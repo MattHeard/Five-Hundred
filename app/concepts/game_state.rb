@@ -32,7 +32,7 @@ class GameState
   end
 
   def bid_count
-    bids.values.count { |bid| bid.present? && bid[:bid_or_pass] == :bid }
+    bids.values.compact.count { |bid| bid[:bid_or_pass] == :bid }
   end
 
   def in_bidding_phase?
