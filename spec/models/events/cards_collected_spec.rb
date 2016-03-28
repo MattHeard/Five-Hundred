@@ -5,7 +5,7 @@ RSpec.describe CardsCollected do
     subject(:event) { CardsCollected.create!(game: game) }
 
     let(:game) { Game.create! }
-    let(:game_state) { GameState.for(game) }
+    let(:game_state) { CreateGameState.new(game).call }
 
     context "with no previous events" do
       before { event.apply(game_state) }

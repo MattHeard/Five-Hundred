@@ -6,7 +6,7 @@ RSpec.describe PlayCard do
 
     let(:game) { Game.create! }
     let(:player) { :south }
-    let(:card) { GameState.for(game).hands[player].first }
+    let(:card) { CreateGameState.new(game).call.hands[player].first }
 
     it "adds a CardPlayed event to the game" do
       DealAllCards.new(game).call

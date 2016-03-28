@@ -8,6 +8,6 @@ class CreateGameState
   end
 
   private
-  
+
   attr_reader :game
 end

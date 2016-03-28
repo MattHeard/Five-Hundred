@@ -6,15 +6,17 @@ class ChangeDealer
   end
 
   def call
-    game.with_lock do
-      DealerChanged.create!(target_player: next_dealer, game: game)
-    end
+    game.with_lock { create_event }
   end
 
   private
 
+  def create_event
+    DealerChanged.create!(target_player: next_dealer, game: game)
+  end
+
   def next_dealer
-    current_dealer = GameState.for(game).dealer
+    current_dealer = CreateGameState.new(game).call.dealer
     if current_dealer.nil?
       Game::PLAYERS.sample
     else

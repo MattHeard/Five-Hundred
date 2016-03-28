@@ -6,7 +6,12 @@ class NextBidder
   end
 
   def call
-    previous_bidder = game_state.bidder
     NextPlayer.new(previous_bidder).call
+  end
+
+  private
+
+  def previous_bidder
+    game_state.bidder
   end
 end

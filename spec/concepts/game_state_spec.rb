@@ -64,11 +64,12 @@ RSpec.describe GameState do
       ChangeDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       MakeBid.new(game, 7, "♠").call
+      game.reload
 
       game
     end
 
-    subject(:game_state) { GameState.for(game) }
+    subject(:game_state) { CreateGameState.new(game).call }
 
     describe "#highest_bid" do
       it "is the second bid" do
@@ -90,13 +91,13 @@ RSpec.describe GameState do
 
       it "is true" do
         DealAllCards.new(game).call
-        game_state = GameState.for(game)
+        game_state = CreateGameState.new(game).call
         %i{ north south east west}.each do |player|
           hand = game_state.hands[player]
           card = hand.first
           PlayCard.new(game, player, card).call
         end
-        game_state = GameState.for(game)
+        game_state = CreateGameState.new(game).call
 
         expect(game_state).to be_complete_trick
       end

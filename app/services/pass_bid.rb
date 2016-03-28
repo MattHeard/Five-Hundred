@@ -6,9 +6,14 @@ class PassBid
   end
 
   def call
-    bidder = GameState.for(game).bidder
-    game.with_lock do
-      BidPassed.create!(target_player: bidder, game: game)
-    end
+    game.with_lock { create_event }
+  end
+
+  def create_event
+    BidPassed.create!(target_player: game_state.bidder, game: game)
+  end
+
+  def game_state
+    CreateGameState.new(game).call
   end
 end

@@ -7,11 +7,6 @@ class DealAllCards
     @game = game
   end
 
-  # OPTIMIZE: Call CardDealt.create directly to avoid rebuilding GameState
-  #   DealCard queries the GameState for deck, so GameState will be rebuilt each
-  #   time, with one less card in the deck each time.
-  #   Query the GameState once and keep the deck in memory, and then create all
-  #   of the CardDealt events by sampling cards out of the in-memory deck.
   def call
     deal_cards if full_deck?
 
@@ -46,6 +41,6 @@ class DealAllCards
   end
 
   def full_deck?
-    GameState.for(game).deck.size == GameState::COMPLETE_DECK.size
+    CreateGameState.new(game).call.deck.size == GameState::COMPLETE_DECK.size
   end
 end

@@ -8,12 +8,12 @@ RSpec.describe CardPlayed do
 
     let(:player) { :south }
     let(:game) { Game.create! }
-    let(:game_state) { GameState.for(game) }
+    let(:game_state) { CreateGameState.new(game).call }
     let(:card) { game_state.hands[player].first }
 
     it "removes a card from the player's hand" do
       DealAllCards.new(game).call
-      game_state = GameState.for(game)
+      game_state = CreateGameState.new(game).call
       event.apply(game_state)
       expect(game_state.hands[player]).to have_exactly(9).items
     end

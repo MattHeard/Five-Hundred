@@ -6,20 +6,28 @@ class DealCard
   end
 
   def call
-    deal_card unless deck_empty?
+    deal_card if cards_remaining?
 
-    !deck_empty?
+    cards_remaining?
   end
 
   def deal_card
-    game.with_lock do
-      deck = GameState.for(game).deck
-      CardDealt.create!(card: deck.sample, target_player: player, game: game)
-    end
+    game.with_lock { create_event }
   end
 
-  # TODO rename to "remaining_cards?"
-  def deck_empty?
-    GameState.for(game).deck.empty?
+  def create_event
+    CardDealt.create!(card: card, target_player: player, game: game)
+  end
+
+  def card
+    game_state.deck.sample
+  end
+
+  def game_state
+    CreateGameState.new(game).call
+  end
+
+  def cards_remaining?
+    !game_state.deck.empty?
   end
 end

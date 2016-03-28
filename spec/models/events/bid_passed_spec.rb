@@ -8,7 +8,7 @@ RSpec.describe BidPassed do
   let(:game_state) do
     game_state = GameState.new
     game_state.bidder = bidder
-    
+
     game_state
   end
 

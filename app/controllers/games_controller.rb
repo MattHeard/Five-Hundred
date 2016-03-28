@@ -12,7 +12,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @game_state = GameState.for(@game)
+    @game_state = CreateGameState.new(@game).call
   end
 
   def bid

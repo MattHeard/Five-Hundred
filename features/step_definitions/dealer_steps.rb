@@ -1,6 +1,6 @@
 Given(/^there is no dealer$/) do
   game = Game.find(@id)
-  dealer = GameState.for(game).dealer
+  dealer = CreateGameState.new(game).call.dealer
   expect(dealer).to be nil
 end
 
@@ -11,7 +11,7 @@ end
 
 Then(/^there will be a dealer$/) do
   game = Game.find(@id)
-  dealer = GameState.for(game).dealer
+  dealer = CreateGameState.new(game).call.dealer
   expect(dealer).not_to be nil
 end
 

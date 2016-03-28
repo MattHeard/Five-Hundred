@@ -13,21 +13,6 @@ class GameState
   attr_accessor :deck, :hands, :kitty, :dealer, :bidder, :bids, :last_bid,
     :players, :trick
 
-  # TODO Move into service
-  # TODO Investigate using a service
-  # Should this be extracted into a service for the sake of preventing GameState
-  # from knowing anything about Event?
-  # Or is it okay, considering that this is a class method rather than an object
-  # method?
-  # Or should this be collapsed into the #initialize method?
-  def self.for(game)
-    game.events.inject(GameState.new) do |state, event|
-      event.apply(state)
-
-      state
-    end
-  end
-
   # TODO Extract hand and bid into a Player object
   def initialize
     @deck = COMPLETE_DECK.dup

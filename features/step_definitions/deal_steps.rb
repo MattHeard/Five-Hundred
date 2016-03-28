@@ -24,25 +24,25 @@ end
 
 Then(/^the deck has (\d+) cards$/) do |number_of_cards|
   game = Game.find(@id)
-  deck = GameState.for(game).deck
+  deck = CreateGameState.new(game).call.deck
   expect(deck).to have_exactly(number_of_cards.to_i).items
 end
 
 Then(/^the southern player's hand has (\d+) cards?$/) do |number_of_cards|
   game = Game.find(@id)
-  southern_hand = GameState.for(game).hands[:south]
+  southern_hand = CreateGameState.new(game).call.hands[:south]
   expect(southern_hand).to have_exactly(number_of_cards.to_i).items
 end
 
 Then(/^the western player's hand has (\d+) cards?$/) do |number_of_cards|
   game = Game.find(@id)
-  western_hand = GameState.for(game).hands[:west]
+  western_hand = CreateGameState.new(game).call.hands[:west]
   expect(western_hand).to have_exactly(number_of_cards.to_i).items
 end
 
 Given(/^the players each have (\d+) cards$/) do |number_of_cards|
   game = Game.find(@id)
-  hands = GameState.for(game).hands
+  hands = CreateGameState.new(game).call.hands
   %i{north south east west}.each do |player|
     expect(hands[player]).to have_exactly(number_of_cards.to_i).items
   end
@@ -50,7 +50,7 @@ end
 
 Given(/^the kitty has (\d+) cards$/) do |number_of_cards|
   game = Game.find(@id)
-  kitty = GameState.for(game).kitty
+  kitty = CreateGameState.new(game).call.kitty
   expect(kitty).to have_exactly(number_of_cards.to_i).items
 end
 
@@ -61,13 +61,13 @@ end
 
 Given(/^the south player has cards in their hand$/) do
   game = Game.find(@id)
-  @south_hand = GameState.for(game).hands[:south]
+  @south_hand = CreateGameState.new(game).call.hands[:south]
   expect(@south_hand).not_to be_empty
 end
 
 Then(/^the south player's hand has changed$/) do
   original_south_hand = @south_hand
   game = Game.find(@id)
-  @south_hand = GameState.for(game).hands[:south]
+  @south_hand = CreateGameState.new(game).call.hands[:south]
   expect(@south_hand.join(" ")).not_to eq original_south_hand.join(" ")
 end

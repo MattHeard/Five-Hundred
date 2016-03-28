@@ -6,43 +6,29 @@ class MakeBid
   end
 
   def call
-    bidder = GameState.for(game).bidder
-    return false if bidder_has_previously_passed?
+    return false if game_state.bidder_has_previously_passed?
     return false unless bid_heigher_than_previous_heighest_bid?
-    game.with_lock do
-      BidMade.create!(target_player: bidder,
-                      number_of_tricks: number_of_tricks,
-                      trump_suit: trump_suit,
-                      game: game)
-    end
+    game.with_lock { create_event }
 
     true
+  end
+
+  def create_event
+    BidMade.create!(target_player: game_state.bidder,
+                    number_of_tricks: number_of_tricks,
+                    trump_suit: trump_suit,
+                    game: game)
   end
 
   private
 
   def bid_heigher_than_previous_heighest_bid?
-    return true if no_previous_bids?
-
-    bidder = GameState.for(game).bidder
-    current_bid = {
-      bidder: bidder,
-      number_of_tricks: number_of_tricks,
-      trump_suit: trump_suit
-    }
-
-    highest_bid.nil? || current_bid[:number_of_tricks] > highest_bid[:number_of_tricks]
+    game_state.bid_count == 0 ||
+      game_state.highest_bid.nil? ||
+      number_of_tricks > game_state.highest_bid[:number_of_tricks]
   end
 
-  def no_previous_bids?
-    GameState.for(game).bid_count == 0
-  end
-
-  def highest_bid
-    GameState.for(game).highest_bid
-  end
-
-  def bidder_has_previously_passed?
-    GameState.for(game).bidder_has_previously_passed?
+  def game_state
+    CreateGameState.new(game).call
   end
 end

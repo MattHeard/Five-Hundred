@@ -1,15 +1,21 @@
 class NextPlayer
-  attr_reader :current_player
-
   def initialize(current_player)
     @current_player = current_player
   end
 
-  # TODO investigate `succ`
-  # PLAYERS[current].succ || PLAYERS[0]
   def call
-    index = Game::PLAYERS.index(current_player)
-    size = Game::PLAYERS.size
-    Game::PLAYERS[(index + 1) % size]
+    players[index.succ] || players.first
+  end
+
+  private
+
+  attr_reader :current_player
+
+  def index
+    players.index(current_player)
+  end
+
+  def players
+    Game::PLAYERS
   end
 end
