@@ -2,6 +2,8 @@ class CardDealt < Event
   def apply(game_state)
     game_state.deck.delete(card)
     destination(game_state) << card
+
+    game_state
   end
 
   private
