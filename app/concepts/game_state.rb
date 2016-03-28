@@ -16,7 +16,7 @@ class GameState
   # TODO Extract hand and bid into a Player object
   def initialize
     @deck = COMPLETE_DECK.dup
-    @players = Game::PLAYERS.map { |seat| Player.new(seat) }
+    @players = new_players 
     @kitty = [ ]
     @bids = { }
     @last_bid = nil
@@ -56,5 +56,15 @@ class GameState
 
   def complete_trick?
     trick.values.any? && trick.values.all?
+  end
+
+  private
+
+  def seats
+    Game::PLAYERS
+  end
+
+  def new_players
+    seats.map { |seat| Player.new(seat) }
   end
 end
