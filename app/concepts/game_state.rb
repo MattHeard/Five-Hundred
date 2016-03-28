@@ -20,7 +20,7 @@ class GameState
   end
 
   def hand(seat)
-    hands[seat]
+    players.select { |player| player.seat == seat }.first.hand
   end
 
   def highest_bid
