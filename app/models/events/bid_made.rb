@@ -4,7 +4,7 @@ class BidMade < Event
     game_state.players.select { |player| player.seat == current_bidder }.first.bid = bid
     game_state.last_bid = bid
     game_state.bidder_seat = next_player(current_bidder)
-    game_state.current_player = next_player(current_bidder)
+    game_state.current_player_seat = next_player(current_bidder)
 
     game_state
   end

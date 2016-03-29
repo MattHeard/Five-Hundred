@@ -26,9 +26,9 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#current_player" do
+    describe "#current_player_seat" do
       it "should be nil" do
-        expect(game_state.current_player).to be nil
+        expect(game_state.current_player_seat).to be nil
       end
     end
 
@@ -74,9 +74,9 @@ RSpec.describe GameState do
 
     subject(:game_state) { CreateGameState.new(game).call }
 
-    describe "#current_player" do
+    describe "#current_player_seat" do
       it "is present" do
-        expect(game_state.current_player).to be_present
+        expect(game_state.current_player_seat).to be_present
       end
     end
   end
