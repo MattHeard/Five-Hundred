@@ -7,3 +7,9 @@ Feature: Playing a game
     And I see the kitty
     And I see the current player token
     And I see the bid submission form
+
+  Scenario: Only the current player's cards are visible
+    Given I have started a game
+    And there is a current player
+    Then the current player's hand is visible
+    And the hands of non-current players are hidden
