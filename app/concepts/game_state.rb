@@ -1,13 +1,12 @@
 class GameState
-  attr_accessor :deck, :kitty, :dealer, :bidder, :bids, :last_bid,
-    :players, :trick, :current_player
+  attr_accessor :deck, :kitty, :dealer_seat, :last_bid,
+    :players, :trick, :current_player_seat
 
   # TODO Extract hand and bid into a Player object
   def initialize
     @deck = EntireDeck.new.call
     @players = new_players
     @kitty = [ ]
-    @bids = { }
     @last_bid = nil
     @trick = { }
   end
@@ -28,11 +27,19 @@ class GameState
   end
 
   def bidder_has_previously_passed?
-    bids[bidder].present? && bids[bidder][:bid_or_pass] == :pass
+    bidder&.bid&.passed?
+  end
+
+  def bidder
+    player(current_player_seat)
+  end
+
+  def player(seat)
+    players.select { |player| player.seat == seat }.first
   end
 
   def bid_count
-    bids.values.compact.count { |bid| bid[:bid_or_pass] == :bid }
+    players.map(&:bid).compact.count { |bid| !bid.passed? }
   end
 
   def in_bidding_phase?
@@ -40,7 +47,7 @@ class GameState
   end
 
   def all_players_have_bid_or_passed?
-    bids.values.compact.count == 4
+    players.map(&:bid).compact.count == players.size
   end
 
   def card_played?(player)

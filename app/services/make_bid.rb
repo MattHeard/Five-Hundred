@@ -14,7 +14,7 @@ class MakeBid
   end
 
   def create_event
-    BidMade.create!(target_player: game_state.bidder,
+    BidMade.create!(target_player: game_state.current_player_seat,
                     number_of_tricks: number_of_tricks,
                     trump_suit: trump_suit,
                     game: game)
@@ -25,7 +25,7 @@ class MakeBid
   def bid_heigher_than_previous_heighest_bid?
     game_state.bid_count == 0 ||
       game_state.highest_bid.nil? ||
-      number_of_tricks > game_state.highest_bid[:number_of_tricks]
+      number_of_tricks > game_state.highest_bid.number_of_tricks
   end
 
   def game_state

@@ -20,15 +20,15 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#dealer" do
+    describe "#dealer_seat" do
       it "should be nil" do
-        expect(game_state.dealer).to be nil
+        expect(game_state.dealer_seat).to be nil
       end
     end
 
-    describe "#current_player" do
+    describe "#current_player_seat" do
       it "should be nil" do
-        expect(game_state.current_player).to be nil
+        expect(game_state.current_player_seat).to be nil
       end
     end
 
@@ -74,9 +74,9 @@ RSpec.describe GameState do
 
     subject(:game_state) { CreateGameState.new(game).call }
 
-    describe "#current_player" do
+    describe "#current_player_seat" do
       it "is present" do
-        expect(game_state.current_player).to be_present
+        expect(game_state.current_player_seat).to be_present
       end
     end
   end
@@ -97,8 +97,8 @@ RSpec.describe GameState do
 
     describe "#highest_bid" do
       it "is the second bid" do
-        expect(game_state.highest_bid[:number_of_tricks]).to eq 7
-        expect(game_state.highest_bid[:trump_suit]).to eq "♠"
+        expect(game_state.highest_bid.number_of_tricks).to eq 7
+        expect(game_state.highest_bid.trump_suit).to eq "♠"
       end
     end
 

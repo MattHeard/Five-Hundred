@@ -1,10 +1,9 @@
 class BidMade < Event
   def apply(game_state)
-    current_bidder = game_state.bidder
-    game_state.bids[current_bidder] = bid
+    current_bidder = game_state.current_player_seat
+    game_state.players.select { |player| player.seat == current_bidder }.first.bid = bid
     game_state.last_bid = bid
-    game_state.bidder = next_player(current_bidder)
-    game_state.current_player = next_player(current_bidder)
+    game_state.current_player_seat = next_player(current_bidder)
 
     game_state
   end
@@ -16,10 +15,6 @@ class BidMade < Event
   end
 
   def bid
-    {
-      bid_or_pass: :bid,
-      number_of_tricks: number_of_tricks,
-      trump_suit: trump_suit
-    }
+    Bid.new(number_of_tricks: number_of_tricks, trump_suit: trump_suit)
   end
 end
