@@ -24,7 +24,8 @@ end
 
 Then(/^the deck has (\d+) cards$/) do |number_of_cards|
   game = Game.find(@id)
-  deck = CreateGameState.new(game).call.deck
+  game_state = CreateGameState.new(game).call
+  deck = Deck.new(game_state).call
   expect(deck).to have_exactly(number_of_cards.to_i).items
 end
 

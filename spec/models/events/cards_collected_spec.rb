@@ -6,12 +6,13 @@ RSpec.describe CardsCollected do
 
     let(:game) { Game.create! }
     let(:game_state) { CreateGameState.new(game).call }
+    let(:deck) { Deck.new(game_state).call }
 
     context "with no previous events" do
       before { event.apply(game_state) }
 
       it "leaves 43 cards in the deck" do
-        expect(game_state.deck).to have_exactly(43).items
+        expect(deck).to have_exactly(43).items
       end
 
       it "leaves 0 cards in the south hand" do
@@ -23,7 +24,7 @@ RSpec.describe CardsCollected do
       it "leaves 43 cards in the deck" do
         DealAllCards.new(game).call
         event.apply(game_state)
-        expect(game_state.deck).to have_exactly(43).items
+        expect(deck).to have_exactly(43).items
       end
     end
   end

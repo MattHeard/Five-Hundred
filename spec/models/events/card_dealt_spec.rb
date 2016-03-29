@@ -6,6 +6,7 @@ RSpec.describe CardDealt do
   let(:card) { "JOKER" }
   let(:game) { Game.create! }
   let(:game_state) { GameState.new }
+  let(:deck) { Deck.new(game_state).call }
 
   before { event.apply(game_state) }
 
@@ -14,11 +15,11 @@ RSpec.describe CardDealt do
       let(:player) { :south }
 
       it "reduces the deck by one card" do
-        expect(game_state.deck).to have_exactly(42).items
+        expect(deck).to have_exactly(42).items
       end
 
       it "removes the Joker from the deck" do
-        expect(game_state.deck).not_to include "JOKER"
+        expect(deck).not_to include "JOKER"
       end
 
       it "puts one card into the southern player's hand" do
@@ -34,11 +35,11 @@ RSpec.describe CardDealt do
       let(:player) { :kitty }
 
       it "reduces the deck by one card" do
-        expect(game_state.deck).to have_exactly(42).items
+        expect(deck).to have_exactly(42).items
       end
 
       it "removes the Joker from the deck" do
-        expect(game_state.deck).not_to include "JOKER"
+        expect(deck).not_to include "JOKER"
       end
 
       it "puts one card into the kitty" do
