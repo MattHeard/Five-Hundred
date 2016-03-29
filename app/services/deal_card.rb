@@ -34,6 +34,6 @@ class DealCard
   end
 
   def cards_remaining?
-    !game_state.deck.empty?
+    !deck.empty?
   end
 end
