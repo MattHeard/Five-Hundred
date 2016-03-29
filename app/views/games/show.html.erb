@@ -21,16 +21,16 @@
   <p>The bidder is <%= @game_state.bidder %>.</p>
   <p>It is <%= @game_state.bidder %>'s turn to make a bid:</p>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>
-    <select name="bid_or_pass">
+    <select id="bid_or_pass" name="bid_or_pass">
       <option>Bid</option>
       <option>Pass</option>
     </select>
-    <select name="number_of_tricks">
+    <select id="number_of_tricks" name="number_of_tricks">
       <option>6</option>
       <option>7</option>
       <option>8</option>
     </select>
-    <select name="trump_suit">
+    <select id="trump_suit" name="trump_suit">
       <option>♠</option>
     </select>
     <button type="submit">Submit</button>

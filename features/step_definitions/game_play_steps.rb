@@ -47,3 +47,7 @@ Then(/^the hands of non-current players are hidden$/) do
   expect(page).to have_selector(".current_player_hand > .not_hidden")
   expect(page).not_to have_selector(".other_hand > .not_hidden")
 end
+
+Then(/^there is a ([^"]*) select field$/) do |field|
+  expect(page).to have_selector("select##{field}")
+end

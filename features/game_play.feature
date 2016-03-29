@@ -13,3 +13,9 @@ Feature: Playing a game
     And there is a current player
     Then the current player's hand is visible
     And the hands of non-current players are hidden
+
+  Scenario: The bidding form
+    Given I have started a game
+    Then there is a bid_or_pass select field
+    And there is a number_of_tricks select field
+    And there is a trump_suit select field
