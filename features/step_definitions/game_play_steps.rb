@@ -13,3 +13,7 @@ end
 Then(/^I see (\d+) hands$/) do |number_of_hands|
   expect(page).to have_selector(".hand", count: number_of_hands)
 end
+
+Then(/^I see the kitty$/) do
+  expect(page).to have_selector("#kitty", count: 1)
+end
