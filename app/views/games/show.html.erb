@@ -3,7 +3,7 @@
   <%= player.to_s.upcase %>
   <%= player == @game_state.dealer ? "Ⓓ" : "" %>
   </p>
-  <ul>
+  <ul class="hand">
     <% @game_state.hand(player).each do |card| %>
       <li class="card"><%= unicode_card(card)%></li>
     <% end %>
