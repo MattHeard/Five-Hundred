@@ -22,7 +22,11 @@ class DealCard
   end
 
   def card
-    game_state.deck.sample
+    deck.sample
+  end
+
+  def deck
+    game_state.deck
   end
 
   def game_state
