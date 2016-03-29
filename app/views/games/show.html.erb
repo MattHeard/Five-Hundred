@@ -18,8 +18,6 @@
 </ul>
 <p>The bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
 <% if @game_state.in_bidding_phase? %>
-  <p>The bidder is <%= @game_state.bidder %>.</p>
-  <p>It is <%= @game_state.bidder %>'s turn to make a bid:</p>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>
     <select id="bid_or_pass" name="bid_or_pass">
       <option>Bid</option>
