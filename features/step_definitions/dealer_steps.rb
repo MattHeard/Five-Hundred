@@ -1,7 +1,7 @@
 Given(/^there is no dealer$/) do
   game = Game.find(@id)
-  dealer = CreateGameState.new(game).call.dealer
-  expect(dealer).to be nil
+  dealer_seat = CreateGameState.new(game).call.dealer_seat
+  expect(dealer_seat).to be nil
 end
 
 When(/^the dealer is changed$/) do
@@ -11,8 +11,8 @@ end
 
 Then(/^there will be a dealer$/) do
   game = Game.find(@id)
-  dealer = CreateGameState.new(game).call.dealer
-  expect(dealer).not_to be nil
+  dealer_seat = CreateGameState.new(game).call.dealer_seat
+  expect(dealer_seat).not_to be nil
 end
 
 Given(/^the dealer is chosen$/) do

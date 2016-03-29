@@ -20,9 +20,9 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#dealer" do
+    describe "#dealer_seat" do
       it "should be nil" do
-        expect(game_state.dealer).to be nil
+        expect(game_state.dealer_seat).to be nil
       end
     end
 

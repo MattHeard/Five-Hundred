@@ -1,7 +1,7 @@
 <% %i{west north east south}.each do |player| %>
   <p>
   <%= player.to_s.upcase %>
-  <%= player == @game_state.dealer ? "Ⓓ" : "" %>
+  <%= player == @game_state.dealer_seat ? "Ⓓ" : "" %>
   <%= player == @game_state.current_player_seat ? "✪" : "" %>
   </p>
   <ul class="hand<%= player == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">

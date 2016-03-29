@@ -1,7 +1,7 @@
 Then(/^the bidder is on the dealer's left$/) do
-  dealer = game_state.dealer
+  dealer_seat = game_state.dealer_seat
   bidder_seat = game_state.current_player_seat
-  expect(bidder_seat).to be NextPlayer.new(dealer).call
+  expect(bidder_seat).to be NextPlayer.new(dealer_seat).call
 end
 
 Then(/^the bidder is chosen$/) do
@@ -29,7 +29,7 @@ When(/^(?:the next )?(\d+) bidders pass$/) do |number_of_bidders|
 end
 
 Then(/^the dealer is the bidder$/) do
-  expect(game_state.current_player_seat).to be game_state.dealer
+  expect(game_state.current_player_seat).to be game_state.dealer_seat
 end
 
 When(/^the (?:new )?bidder bids (\d+) Spades$/) do |number_of_tricks|

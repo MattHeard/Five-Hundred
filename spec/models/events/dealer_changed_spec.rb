@@ -13,7 +13,7 @@ RSpec.describe DealerChanged do
       let(:player) { :south }
 
       it "makes the southern player the dealer" do
-        expect(game_state.dealer).to eq :south
+        expect(game_state.dealer_seat).to eq :south
       end
     end
   end
