@@ -51,7 +51,7 @@ class GameState
   end
 
   def all_players_have_bid_or_passed?
-    bids.values.compact.count == 4
+    players.map(&:bid).compact.count == players.size
   end
 
   def card_played?(player)
