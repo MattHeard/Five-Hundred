@@ -3,12 +3,17 @@ class BidMade < Event
     current_bidder = game_state.bidder
     game_state.bids[current_bidder] = bid
     game_state.last_bid = bid
-    game_state.bidder = NextPlayer.new(current_bidder).call
+    game_state.bidder = next_bidder(current_bidder)
+    game_state.current_player = next_bidder(current_bidder)
 
     game_state
   end
 
   private
+
+  def next_bidder(current_bidder)
+    NextPlayer.new(current_bidder).call
+  end
 
   def bid
     {
