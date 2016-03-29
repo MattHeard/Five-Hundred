@@ -4,7 +4,7 @@ class GameState
 
   # TODO Extract hand and bid into a Player object
   def initialize
-    @deck = EntireDeck.new.call
+    @deck = entire_deck
     @players = new_players
     @kitty = [ ]
     @last_bid = nil
@@ -59,6 +59,10 @@ class GameState
   end
 
   private
+
+  def entire_deck
+    EntireDeck.new.call
+  end
 
   def seats
     Players.new.call
