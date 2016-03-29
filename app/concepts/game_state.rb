@@ -31,7 +31,15 @@ class GameState
   end
 
   def bidder_has_previously_passed?
-    bids[bidder_seat].present? && bids[bidder_seat].passed?
+    bidder&.bid&.passed?
+  end
+
+  def bidder
+    player(bidder_seat)
+  end
+
+  def player(seat)
+    players.select { |player| player.seat == seat }.first
   end
 
   def bid_count
