@@ -1,12 +1,12 @@
 Then(/^the bidder is on the dealer's left$/) do
   dealer = game_state.dealer
-  bidder = game_state.bidder
-  expect(bidder).to be NextPlayer.new(dealer).call
+  bidder_seat = game_state.bidder_seat
+  expect(bidder_seat).to be NextPlayer.new(dealer).call
 end
 
 Then(/^the bidder is chosen$/) do
-  @bidder = game_state.bidder
-  expect(@bidder).not_to be nil
+  @bidder_seat = game_state.bidder_seat
+  expect(@bidder_seat).not_to be nil
 end
 
 When(/^the bidder passes$/) do
@@ -14,9 +14,9 @@ When(/^the bidder passes$/) do
 end
 
 Then(/^the bidder has changed$/) do
-  new_bidder = game_state.bidder
-  old_bidder = @bidder
-  expect(new_bidder).not_to be old_bidder
+  new_bidder_seat = game_state.bidder_seat
+  old_bidder_seat = @bidder_seat
+  expect(new_bidder_seat).not_to be old_bidder_seat
 end
 
 Then(/^there are no bids$/) do
@@ -29,7 +29,7 @@ When(/^(?:the next )?(\d+) bidders pass$/) do |number_of_bidders|
 end
 
 Then(/^the dealer is the bidder$/) do
-  expect(game_state.bidder).to be game_state.dealer
+  expect(game_state.bidder_seat).to be game_state.dealer
 end
 
 When(/^the (?:new )?bidder bids (\d+) Spades$/) do |number_of_tricks|

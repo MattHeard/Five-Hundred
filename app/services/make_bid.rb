@@ -14,7 +14,7 @@ class MakeBid
   end
 
   def create_event
-    BidMade.create!(target_player: game_state.bidder,
+    BidMade.create!(target_player: game_state.bidder_seat,
                     number_of_tricks: number_of_tricks,
                     trump_suit: trump_suit,
                     game: game)

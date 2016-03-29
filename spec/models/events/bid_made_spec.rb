@@ -4,17 +4,17 @@ require 'rails_helper'
 # TODO Investigate time travel
 RSpec.describe BidMade do
   subject(:event) do
-    BidMade.create!(target_player: bidder,
+    BidMade.create!(target_player: bidder_seat,
                     number_of_tricks: number_of_tricks,
                     trump_suit: trump_suit,
                     game: game)
   end
 
-  let(:bidder) { :south }
+  let(:bidder_seat) { :south }
   let(:game) { Game.create! }
   let(:game_state) do
     game_state = GameState.new
-    game_state.bidder = bidder
+    game_state.bidder_seat = bidder_seat
 
     game_state
   end
@@ -27,7 +27,7 @@ RSpec.describe BidMade do
 
     describe "#apply" do
       it "changes the bidder to :west" do
-        expect(game_state.bidder).to be :west
+        expect(game_state.bidder_seat).to be :west
       end
 
       it "adds a bid" do
