@@ -43,7 +43,7 @@ class GameState
   end
 
   def bid_count
-    bids.values.compact.count { |bid| !bid.passed? }
+    players.map(&:bid).compact.count { |bid| !bid.passed? }
   end
 
   def in_bidding_phase?
