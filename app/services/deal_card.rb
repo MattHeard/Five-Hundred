@@ -11,6 +11,8 @@ class DealCard
     cards_remaining?
   end
 
+  private
+
   def deal_card
     game.with_lock { create_event }
   end
