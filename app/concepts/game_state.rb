@@ -7,9 +7,12 @@ class GameState
     @deck = EntireDeck.new.call
     @players = new_players
     @kitty = [ ]
-    @bids = { }
     @last_bid = nil
     @trick = { }
+  end
+
+  def bids
+    players.map { |player| [player.seat, player.bid] }.to_h
   end
 
   def hands
