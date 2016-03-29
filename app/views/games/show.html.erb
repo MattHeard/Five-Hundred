@@ -10,7 +10,7 @@
   </ul>
 <% end %>
 <p>The kitty:</p>
-<ul>
+<ul id="kitty">
   <% @game_state.kitty.each do |_| %>
     <li class="card"><%= unicode_card("BACK") %></li>
   <% end %>
