@@ -28,11 +28,11 @@ class GameState
   end
 
   def bidder_has_previously_passed?
-    bids[bidder].present? && bids[bidder][:bid_or_pass] == :pass
+    bids[bidder].present? && bids[bidder].passed?
   end
 
   def bid_count
-    bids.values.compact.count { |bid| bid[:bid_or_pass] == :bid }
+    bids.values.compact.count { |bid| !bid.passed? }
   end
 
   def in_bidding_phase?

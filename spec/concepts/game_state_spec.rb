@@ -97,8 +97,8 @@ RSpec.describe GameState do
 
     describe "#highest_bid" do
       it "is the second bid" do
-        expect(game_state.highest_bid[:number_of_tricks]).to eq 7
-        expect(game_state.highest_bid[:trump_suit]).to eq "♠"
+        expect(game_state.highest_bid.number_of_tricks).to eq 7
+        expect(game_state.highest_bid.trump_suit).to eq "♠"
       end
     end
 

@@ -75,7 +75,7 @@ Given(/^the bidding phase has completed$/) do
 end
 
 def present(bid)
-  "#{bid[:number_of_tricks]}#{bid[:trump_suit]}"
+  "#{bid.number_of_tricks}#{bid.trump_suit}"
 end
 
 def game_state

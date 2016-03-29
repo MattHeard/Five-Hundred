@@ -16,10 +16,6 @@ class BidMade < Event
   end
 
   def bid
-    {
-      bid_or_pass: :bid,
-      number_of_tricks: number_of_tricks,
-      trump_suit: trump_suit
-    }
+    Bid.new(number_of_tricks: number_of_tricks, trump_suit: trump_suit)
   end
 end
