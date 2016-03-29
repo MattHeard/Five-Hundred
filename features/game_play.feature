@@ -6,3 +6,4 @@ Feature: Playing a game
     And I see 4 hands
     And I see the kitty
     And I see the current player token
+    And I see the bid submission form

@@ -23,3 +23,7 @@ end
 Then(/^I see the current player token$/) do
   expect(page).to have_content(CURRENT_PLAYER_TOKEN, count: 1)
 end
+
+Then(/^I see the bid submission form$/) do
+  expect(page).to have_selector("#bid_submission_form", count: 1)
+end
