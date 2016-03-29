@@ -41,6 +41,18 @@ class DealAllCards
   end
 
   def full_deck?
-    CreateGameState.new(game).call.deck.size == EntireDeck.new.call.size
+    deck.size == entire_deck.size
+  end
+
+  def entire_deck
+    EntireDeck.new.call
+  end
+
+  def deck
+    Deck.new(game_state).call
+  end
+
+  def game_state
+    CreateGameState.new(game).call
   end
 end
