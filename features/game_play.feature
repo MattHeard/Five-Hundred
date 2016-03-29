@@ -22,5 +22,12 @@ Feature: Playing a game
 
   Scenario: The first bidder is clockwise of the dealer
     Given I have started a game
-    And the dealer is South
+    And the dealer player is South
     Then the current player is West
+
+  Scenario: Only the current player's hand is visible
+    Given I have started a game
+    Then West's hand is visible
+    And North's hand is not visible
+    And South's hand is not visible
+    And East's hand is not visible

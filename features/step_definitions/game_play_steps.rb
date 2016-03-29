@@ -54,12 +54,28 @@ Then(/^there is a ([^"]*) select field$/) do |field|
   expect(page).to have_selector("select##{field}")
 end
 
-Given(/^the dealer is ([^"]*)$/) do |player|
+Given(/^the dealer player is ([^"]*)$/) do |player|
   expect(page).to have_content("#{player.upcase} Ⓓ")
 end
 
 Then(/^the current player is ([^"]*)$/) do |player|
   expect(page).to have_content("#{player.upcase} ✪")
+end
+
+Then(/^West's hand is visible$/) do
+  expect(page).to have_content("WEST ✪ 🂮 🂺 🃇 🂪 🃛 🃍 🂻 🃉 🂨 🃙")
+end
+
+Then(/^North's hand is not visible$/) do
+  expect(page).to have_content("NORTH 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠")
+end
+
+Then(/^East's hand is not visible$/) do
+  expect(page).to have_content("EAST 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠")
+end
+
+Then(/^South's hand is not visible$/) do
+  expect(page).to have_content("SOUTH Ⓓ 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠")
 end
 
 def setup_game
