@@ -54,6 +54,14 @@ Then(/^there is a ([^"]*) select field$/) do |field|
   expect(page).to have_selector("select##{field}")
 end
 
+Given(/^the dealer is ([^"]*)$/) do |player|
+  expect(page).to have_content("#{player.upcase} Ⓓ")
+end
+
+Then(/^the current player is ([^"]*)$/) do |player|
+  expect(page).to have_content("#{player.upcase} ✪")
+end
+
 def setup_game
   game = Game.create!
   deal_cards(game)

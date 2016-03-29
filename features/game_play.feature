@@ -19,3 +19,8 @@ Feature: Playing a game
     Then there is a bid_or_pass select field
     And there is a number_of_tricks select field
     And there is a trump_suit select field
+
+  Scenario: The first bidder is clockwise of the dealer
+    Given I have started a game
+    And the dealer is South
+    Then the current player is West
