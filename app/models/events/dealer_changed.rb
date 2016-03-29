@@ -1,7 +1,6 @@
 class DealerChanged < Event
   def apply(game_state)
     game_state.dealer = dealer
-    game_state.bidder_seat = player_clockwise_from_dealer
     game_state.current_player_seat = player_clockwise_from_dealer
 
     game_state

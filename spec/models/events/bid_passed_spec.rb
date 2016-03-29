@@ -7,7 +7,7 @@ RSpec.describe BidPassed do
   let(:game) { Game.create! }
   let(:game_state) do
     game_state = GameState.new
-    game_state.bidder_seat = bidder_seat
+    game_state.current_player_seat = bidder_seat
 
     game_state
   end
@@ -16,7 +16,7 @@ RSpec.describe BidPassed do
 
   describe "#apply" do
     it "changes the bidder to :west" do
-      expect(game_state.bidder_seat).to be :west
+      expect(game_state.current_player_seat).to be :west
     end
 
     it "does not add any bids" do
