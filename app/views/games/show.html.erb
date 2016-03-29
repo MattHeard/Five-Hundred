@@ -2,6 +2,7 @@
   <p>
   <%= player.to_s.upcase %>
   <%= player == @game_state.dealer ? "Ⓓ" : "" %>
+  <%= player == @game_state.current_player ? "✪" : "" %>
   </p>
   <ul class="hand">
     <% @game_state.hand(player).each do |card| %>

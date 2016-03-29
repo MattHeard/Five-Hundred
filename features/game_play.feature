@@ -5,3 +5,4 @@ Feature: Playing a game
     Then I see 43 cards
     And I see 4 hands
     And I see the kitty
+    And I see the current player token

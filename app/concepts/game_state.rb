@@ -1,6 +1,6 @@
 class GameState
   attr_accessor :deck, :kitty, :dealer, :bidder, :bids, :last_bid,
-    :players, :trick
+    :players, :trick, :current_player
 
   # TODO Extract hand and bid into a Player object
   def initialize

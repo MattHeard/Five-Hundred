@@ -1,3 +1,5 @@
+CURRENT_PLAYER_TOKEN = "✪"
+
 Given(/^I am on the index page$/) do
   visit("/")
 end
@@ -16,4 +18,8 @@ end
 
 Then(/^I see the kitty$/) do
   expect(page).to have_selector("#kitty", count: 1)
+end
+
+Then(/^I see the current player token$/) do
+  expect(page).to have_content(CURRENT_PLAYER_TOKEN, count: 1)
 end

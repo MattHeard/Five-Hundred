@@ -26,6 +26,12 @@ RSpec.describe GameState do
       end
     end
 
+    describe "#current_player" do
+      it "should be nil" do
+        expect(game_state.current_player).to be nil
+      end
+    end
+
     describe "#hands" do
       it "are all empty" do
         expect(game_state.hands.values.flatten).to be_empty
@@ -53,6 +59,24 @@ RSpec.describe GameState do
     describe "#complete_trick?" do
       it "is false" do
         expect(game_state).not_to be_complete_trick
+      end
+    end
+  end
+
+  context "when the dealer has been set" do
+    let(:game) { Game.create! }
+
+    before do
+      [ DealAllCards, ChangeDealer ].each { |service| service.new(game).call }
+
+      game.reload
+    end
+
+    subject(:game_state) { CreateGameState.new(game).call }
+
+    describe "#current_player" do
+      it "is present" do
+        expect(game_state.current_player).to be_present
       end
     end
   end
