@@ -31,7 +31,7 @@ RSpec.describe BidMade do
       end
 
       it "adds a bid" do
-        expect(game_state.bids).not_to be_empty
+        expect(game_state.bid_count).not_to eq 0
       end
 
       it "sets the bid to 6 Spades" do

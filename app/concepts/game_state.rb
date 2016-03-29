@@ -11,10 +11,6 @@ class GameState
     @trick = { }
   end
 
-  def bids
-    players.map { |player| [player.seat, player.bid] }.to_h
-  end
-
   def hands
     hands = { }
     players.each { |player| hands[player.seat] = player.hand }
