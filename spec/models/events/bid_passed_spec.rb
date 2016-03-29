@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe BidPassed do
-  subject(:event) { BidPassed.create!(target_player: bidder_seat, game: game) }
+  subject(:event) { BidPassed.create!(player_seat: bidder_seat, game: game) }
 
   let(:bidder_seat) { :south }
   let(:game) { Game.create! }

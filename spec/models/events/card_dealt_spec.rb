@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CardDealt do
-  subject(:event) { CardDealt.create!(card: card, target_player: player, game: game) }
+  subject(:event) { CardDealt.create!(card: card, player_seat: player, game: game) }
 
   let(:card) { "JOKER" }
   let(:game) { Game.create! }

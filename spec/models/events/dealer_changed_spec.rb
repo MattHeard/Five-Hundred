@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DealerChanged do
-  subject(:event) { DealerChanged.create!(target_player: player, game: game) }
+  subject(:event) { DealerChanged.create!(player_seat: player, game: game) }
 
   let(:game) { Game.create! }
   let(:game_state) { GameState.new }

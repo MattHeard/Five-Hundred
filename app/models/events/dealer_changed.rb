@@ -13,6 +13,6 @@ class DealerChanged < Event
   end
 
   def dealer_seat
-    target_player.to_sym
+    player_seat.to_sym
   end
 end

@@ -4,7 +4,7 @@ require 'rails_helper'
 # TODO Investigate time travel
 RSpec.describe BidMade do
   subject(:event) do
-    BidMade.create!(target_player: bidder_seat,
+    BidMade.create!(player_seat: bidder_seat,
                     number_of_tricks: number_of_tricks,
                     trump_suit: trump_suit,
                     game: game)

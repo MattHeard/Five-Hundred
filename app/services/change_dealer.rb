@@ -12,7 +12,7 @@ class ChangeDealer
   private
 
   def create_event
-    DealerChanged.create!(target_player: next_dealer_seat, game: game)
+    DealerChanged.create!(player_seat: next_dealer_seat, game: game)
   end
 
   def next_dealer_seat

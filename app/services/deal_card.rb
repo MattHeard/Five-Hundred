@@ -18,7 +18,7 @@ class DealCard
   end
 
   def create_event
-    CardDealt.create!(card: card, target_player: player, game: game)
+    CardDealt.create!(card: card, player_seat: player, game: game)
   end
 
   def card

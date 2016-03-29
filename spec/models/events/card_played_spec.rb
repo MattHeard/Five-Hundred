@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CardPlayed do
   describe "#apply" do
     subject(:event) do
-      CardPlayed.create!(target_player: player, game: game, card: card)
+      CardPlayed.create!(player_seat: player, game: game, card: card)
     end
 
     let(:player) { :south }

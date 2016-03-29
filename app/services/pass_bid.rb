@@ -10,7 +10,7 @@ class PassBid
   end
 
   def create_event
-    BidPassed.create!(target_player: game_state.current_player_seat, game: game)
+    BidPassed.create!(player_seat: game_state.current_player_seat, game: game)
   end
 
   def game_state

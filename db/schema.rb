@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160311004157) do
+ActiveRecord::Schema.define(version: 20160329213805) do
 
   create_table "events", force: :cascade do |t|
     t.string   "type"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20160311004157) do
     t.datetime "updated_at",       null: false
     t.integer  "game_id"
     t.string   "card"
-    t.string   "target_player"
+    t.string   "player_seat"
     t.integer  "number_of_tricks"
     t.string   "trump_suit"
   end

@@ -21,6 +21,6 @@ class CardDealt < Event
   end
 
   def player
-    target_player.to_sym
+    player_seat.to_sym
   end
 end
