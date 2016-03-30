@@ -37,9 +37,15 @@ Feature: Playing a game
     And the current player is West
     When West bids 6♠
     Then the current player is North
-    
+
   Scenario: Cards are clickable
     Given I have started a game
     When all players bid or pass
     Then the current player's cards are links
     And the non-current players' cards are not links
+
+  Scenario: Playing the first card
+    Given I have started a game
+    And all players bid or pass
+    When the King of Spades is clicked
+    Then the King of Spades is in the trick

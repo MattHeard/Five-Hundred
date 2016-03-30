@@ -97,6 +97,14 @@ Then(/^the non\-current players' cards are not links$/) do
   expect(page).not_to have_selector(".other_hand > .card > a")
 end
 
+When(/^the King of Spades is clicked$/) do
+  click_link("🂮")
+end
+
+Then(/^the King of Spades is in the trick$/) do
+  expect(page).to have_selector("#trick > #K♠")
+end
+
 def bid
   select("Bid", :from => "bid_or_pass")
   select("6", :from => "number_of_tricks")

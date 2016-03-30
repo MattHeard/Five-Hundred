@@ -1,4 +1,4 @@
-<% %i{west north east south}.each do |player| %>
+<% Players.new.call.each do |player| %>
   <p>
   <%= player.to_s.upcase %>
   <%= player == @game_state.dealer_seat ? "Ⓓ" : "" %>
@@ -6,13 +6,12 @@
   </p>
   <ul class="hand<%= player == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
     <% @game_state.hand(player).each do |card| %>
-      <li class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
+      <li id="<%= card %>"
+        class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
       <% if @game_state.in_play_phase? && player == @game_state.current_player_seat %>
-        <a>
-      <% end %>
-      <%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%>
-      <% if @game_state.in_play_phase? && player == @game_state.current_player_seat %>
-        </a>
+        <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: player, card: card }, method: :put%>
+      <% else %>
+        <%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%>
       <% end %>
       </li>
     <% end %>
@@ -24,6 +23,16 @@
     <li class="card"><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
+<% if @game_state.in_play_phase? %>
+  <p>The trick:<p>
+  <ul id="trick">
+  <% Players.new.call.each do |player| %>
+    <% if @game_state.card_played?(player) %>
+      <li class="card" id="<%= @game_state.trick[player] %>"><%= "#{player.to_s.chars.first.upcase} #{unicode_card(@game_state.trick[player])}" %></li>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>
 <p>The bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
 <% if @game_state.in_bidding_phase? %>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>

@@ -27,6 +27,16 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  def play_card
+    strong_params = params.permit(:id, :card, :player)
+    game = Game.find(strong_params[:id])
+    card = strong_params[:card]
+    player = strong_params[:player].to_sym
+    PlayCard.new(game, player, card).call
+
+    redirect_to game
+  end
+
   private
 
   def bidder_has_passed?(params)

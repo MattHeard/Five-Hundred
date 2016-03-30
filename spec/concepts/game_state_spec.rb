@@ -133,6 +133,7 @@ RSpec.describe GameState do
 
       it "is true" do
         DealAllCards.new(game).call
+        ChangeDealer.new(game).call
         game_state = CreateGameState.new(game).call
         %i{ north south east west}.each do |player|
           hand = game_state.hand(player)
