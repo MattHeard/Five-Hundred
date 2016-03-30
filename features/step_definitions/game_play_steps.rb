@@ -93,6 +93,10 @@ Then(/^the current player's cards are links$/) do
   expect(page).to have_selector(".current_player_hand > .card > a")
 end
 
+Then(/^the non\-current players' cards are not links$/) do
+  expect(page).not_to have_selector(".other_hand > .card > a")
+end
+
 def bid
   select("Bid", :from => "bid_or_pass")
   select("6", :from => "number_of_tricks")

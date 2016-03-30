@@ -42,3 +42,4 @@ Feature: Playing a game
     Given I have started a game
     When all players bid or pass
     Then the current player's cards are links
+    And the non-current players' cards are not links
