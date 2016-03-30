@@ -6,7 +6,9 @@
   </p>
   <ul class="hand<%= player == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
     <% @game_state.hand(player).each do |card| %>
-      <li class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>"><%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%></li>
+      <li class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
+        <%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%>
+      </li>
     <% end %>
   </ul>
 <% end %>
