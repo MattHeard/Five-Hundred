@@ -46,6 +46,10 @@ class GameState
     deck.empty? && !all_players_have_bid_or_passed?
   end
 
+  def in_play_phase?
+    deck.empty? && all_players_have_bid_or_passed?
+  end
+
   def all_players_have_bid_or_passed?
     players.map(&:bid).compact.count == players.size
   end

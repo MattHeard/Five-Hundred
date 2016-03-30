@@ -109,6 +109,24 @@ RSpec.describe GameState do
     end
   end
 
+  context "when all players have bid or passed" do
+    describe "#in_play_phase?" do
+      subject(:game_state) { CreateGameState.new(game).call }
+
+      let(:game) { Game.create! }
+
+      it "is true" do
+        DealAllCards.new(game).call
+        ChangeDealer.new(game).call
+        MakeBid.new(game, 6, "♠").call
+        3.times { PassBid.new(game).call }
+        game.reload
+
+        expect(game_state).to be_in_play_phase
+      end
+    end
+  end
+
   context "when all players have played a card" do
     describe "#complete_trick?" do
       let(:game) { Game.create! }
