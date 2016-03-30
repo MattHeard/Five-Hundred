@@ -25,3 +25,4 @@ tags
 # Ignore Cucumber rerun files
 rerun.txt
 coverage
+.byebug_history
