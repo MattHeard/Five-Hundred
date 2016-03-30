@@ -78,6 +78,33 @@ Then(/^South's hand is not visible$/) do
   expect(page).to have_content("SOUTH Ⓓ 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠")
 end
 
+When(/^West bids 6♠$/) do
+  bid
+end
+
+When(/^all players bid or pass$/) do
+  bid
+  pass_bid
+  pass_bid
+  pass_bid
+end
+
+Then(/^the current player's cards are links$/) do
+  expect(page).to have_selector(".current_player_hand > .card > a")
+end
+
+def bid
+  select("Bid", :from => "bid_or_pass")
+  select("6", :from => "number_of_tricks")
+  select("♠", :from => "trump_suit")
+  click_button("Submit")
+end
+
+def pass_bid
+  select("Pass", :from => "bid_or_pass")
+  click_button("Submit")
+end
+
 def setup_game
   game = Game.create!
   deal_cards(game)

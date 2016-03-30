@@ -31,3 +31,14 @@ Feature: Playing a game
     And North's hand is not visible
     And South's hand is not visible
     And East's hand is not visible
+
+  Scenario: Bidding changes the current player
+    Given I have started a game
+    And the current player is West
+    When West bids 6♠
+    Then the current player is North
+    
+  Scenario: Cards are clickable
+    Given I have started a game
+    When all players bid or pass
+    Then the current player's cards are links
