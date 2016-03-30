@@ -105,6 +105,21 @@ Then(/^the King of Spades is in the trick$/) do
   expect(page).to have_selector("#trick > #K♠")
 end
 
+When(/^all players play a card$/) do
+  click_link("🂮")
+  click_link("🃑")
+  click_link("🂴")
+  click_link("🂡")
+end
+
+Then(/^no cards are links$/) do
+  expect(page).not_to have_selector(".card > a")
+end
+
+Then(/^there is a "([^"]*)" button$/) do |arg1|
+    pending # Write code here that turns the phrase above into concrete actions
+end
+
 def bid
   select("Bid", :from => "bid_or_pass")
   select("6", :from => "number_of_tricks")

@@ -49,3 +49,10 @@ Feature: Playing a game
     And all players bid or pass
     When the King of Spades is clicked
     Then the King of Spades is in the trick
+
+  Scenario: Completing a trick
+    Given I have started a game
+    And all players bid or pass
+    When all players play a card
+    Then no cards are links
+    And there is a "Continue" button
