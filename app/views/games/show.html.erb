@@ -23,7 +23,7 @@
     <li class="card"><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
-<% if @game_state.in_play_phase? %>
+<% if @game_state.in_play_phase? || @game_state.in_scoring_phase? %>
   <p>The trick:<p>
   <ul id="trick">
   <% Players.new.call.each do |player| %>

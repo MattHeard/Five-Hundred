@@ -116,8 +116,8 @@ Then(/^no cards are links$/) do
   expect(page).not_to have_selector(".card > a")
 end
 
-Then(/^there is a "([^"]*)" button$/) do |arg1|
-    pending # Write code here that turns the phrase above into concrete actions
+Then(/^the trick has (\d+) cards$/) do |arg1|
+  expect(page).to have_selector("#trick > .card", count: 4)
 end
 
 def bid

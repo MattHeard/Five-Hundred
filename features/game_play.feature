@@ -55,4 +55,4 @@ Feature: Playing a game
     And all players bid or pass
     When all players play a card
     Then no cards are links
-    And there is a "Continue" button
+    And the trick has 4 cards

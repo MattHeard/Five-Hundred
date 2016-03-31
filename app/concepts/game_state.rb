@@ -43,15 +43,19 @@ class GameState
   end
 
   def in_bidding_phase?
-    deck.empty? && !all_players_have_bid_or_passed?
+    phase == :bidding
   end
 
   def in_play_phase?
-    deck.empty? && all_players_have_bid_or_passed? && !complete_trick?
+    phase == :play
+  end
+
+  def in_scoring_phase?
+    phase == :scoring
   end
 
   def all_players_have_bid_or_passed?
-    players.map(&:bid).compact.count == players.size
+    players.all?(&:bid)
   end
 
   def card_played?(player)
@@ -63,6 +67,18 @@ class GameState
   end
 
   private
+
+  def phase
+    if !deck.empty?
+      return :dealing
+    elsif !all_players_have_bid_or_passed?
+      return :bidding
+    elsif !complete_trick?
+      return :play
+    else
+      return :scoring
+    end
+  end
 
   def entire_deck
     EntireDeck.new.call
