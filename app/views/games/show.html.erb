@@ -54,3 +54,6 @@
 <% if @game_state.in_play_phase? %>
   <p>Pick a card to play</p>
 <% end %>
+<% if @game_state.phase == :scoring %>
+  <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
+<% end %>

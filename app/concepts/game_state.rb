@@ -66,8 +66,6 @@ class GameState
     trick.values.compact.size == players.size
   end
 
-  private
-
   def phase
     if !deck.empty?
       return :dealing
@@ -78,6 +76,34 @@ class GameState
     else
       return :scoring
     end
+  end
+
+  def trick_winning_player
+    player_with_highest_trick_card_score
+  end
+
+  private
+
+  def player_with_highest_trick_card_score
+    player(seat_of_player_with_highest_trick_card_score)
+  end
+
+  def seat_of_player_with_highest_trick_card_score
+    trick_card_scores.max_by { |_, card_score| card_score }.first
+  end
+
+  def trick_card_scores
+    Hash[ trick.map { |player, card| [player, card_scores[card]] } ]
+  end
+
+  def card_scores
+    card_scores = {
+      "JOKER" => 13, "J♠" => 12, "J♣" => 11, "A♠" => 10, "K♠" => 9, "Q♠" => 8,
+      "10♠" => 7, "9♠" => 6, "8♠" => 5, "7♠" => 4, "6♠" => 3, "5♠" => 2
+    }
+    card_scores.default = 0
+
+    card_scores
   end
 
   def entire_deck

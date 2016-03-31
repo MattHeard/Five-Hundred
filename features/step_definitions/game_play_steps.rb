@@ -110,6 +110,7 @@ When(/^all players play a card$/) do
   click_link("🃑")
   click_link("🂴")
   click_link("🂡")
+  puts page.html
 end
 
 Then(/^no cards are links$/) do
@@ -118,6 +119,10 @@ end
 
 Then(/^the trick has (\d+) cards$/) do |arg1|
   expect(page).to have_selector("#trick > .card", count: 4)
+end
+
+Then(/^South won the trick$/) do
+  expect(page).to have_content("South won the trick!")
 end
 
 def bid

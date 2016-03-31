@@ -6,4 +6,8 @@ class Player
     @seat = seat
     @hand = []
   end
+
+  def name
+    seat.to_s.titlecase
+  end
 end

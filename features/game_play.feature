@@ -56,3 +56,7 @@ Feature: Playing a game
     When all players play a card
     Then no cards are links
     And the trick has 4 cards
+    And South won the trick
+    And North-South won the trick
+    And North-South has 10 points
+    And West-East has 0 points

@@ -185,5 +185,12 @@ RSpec.describe GameState do
         expect(game_state).not_to be_in_play_phase
       end
     end
+
+    describe "#trick_winning_player" do
+      it "is present" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state.trick_winning_player).to be_present
+      end
+    end
   end
 end
