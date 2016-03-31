@@ -57,6 +57,5 @@ Feature: Playing a game
     Then no cards are links
     And the trick has 4 cards
     And South won the trick
-    And North-South won the trick
-    And North-South has 10 points
-    And West-East has 0 points
+    And North-South has 1 trick
+    And West-East has 0 tricks
