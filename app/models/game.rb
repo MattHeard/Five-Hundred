@@ -1,4 +1,4 @@
 class Game < ActiveRecord::Base
-  # TODO dependencies
+  # TODO dependencies destroy
   has_many :events
 end
