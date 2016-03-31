@@ -47,7 +47,7 @@ class GameState
   end
 
   def in_play_phase?
-    deck.empty? && all_players_have_bid_or_passed?
+    deck.empty? && all_players_have_bid_or_passed? && !complete_trick?
   end
 
   def all_players_have_bid_or_passed?
@@ -59,7 +59,7 @@ class GameState
   end
 
   def complete_trick?
-    trick.values.any? && trick.values.all?
+    trick.values.compact.size == players.size
   end
 
   private

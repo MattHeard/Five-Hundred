@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe GameState do
-  subject(:game_state) { GameState.new }
+  subject(:game_state) { CreateGameState.new(game).call }
+
+  let(:game) { Game.create! }
 
   context "with no modifications" do
     describe "#deck" do
@@ -127,22 +129,60 @@ RSpec.describe GameState do
     end
   end
 
-  context "when all players have played a card" do
+  context "when two players have played a card" do
+    before do
+      DealAllCards.new(game).call
+      ChangeDealer.new(game).call
+      MakeBid.new(game, 6, "♠").call
+      3.times { PassBid.new(game).call }
+      %i{ north east }.each do |player|
+        hand = game_state.hand(player)
+        card = hand.first
+        PlayCard.new(game, player, card).call
+      end
+      game.reload
+    end
+
     describe "#complete_trick?" do
-      let(:game) { Game.create! }
+      it "is false" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state).not_to be_complete_trick
+      end
+    end
 
+    describe "#in_play_phase?" do
       it "is true" do
-        DealAllCards.new(game).call
-        ChangeDealer.new(game).call
         game_state = CreateGameState.new(game).call
-        %i{ north south east west}.each do |player|
-          hand = game_state.hand(player)
-          card = hand.first
-          PlayCard.new(game, player, card).call
-        end
-        game_state = CreateGameState.new(game).call
+        expect(game_state).to be_in_play_phase
+      end
+    end
+  end
 
+  context "when all players have played a card" do
+    before do
+      DealAllCards.new(game).call
+      ChangeDealer.new(game).call
+      MakeBid.new(game, 6, "♠").call
+      3.times { PassBid.new(game).call }
+      %i{ north south east west}.each do |player|
+        hand = game_state.hand(player)
+        card = hand.first
+        PlayCard.new(game, player, card).call
+      end
+      game.reload
+    end
+
+    describe "#complete_trick?" do
+      it "is true" do
+        game_state = CreateGameState.new(game).call
         expect(game_state).to be_complete_trick
+      end
+    end
+
+    describe "#in_play_phase?" do
+      it "is false" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state).not_to be_in_play_phase
       end
     end
   end

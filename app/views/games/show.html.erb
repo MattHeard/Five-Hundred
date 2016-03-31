@@ -50,6 +50,7 @@
     </select>
     <button type="submit">Submit</button>
   <% end %>
-<% else %>
+<% end %>
+<% if @game_state.in_play_phase? %>
   <p>Pick a card to play</p>
 <% end %>
