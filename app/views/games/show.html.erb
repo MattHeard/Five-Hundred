@@ -1,3 +1,15 @@
+<div class="scores">
+  <table class="trick">
+    <tr>
+      <th>North-South</th>
+      <th>West-East</th>
+    </tr>
+    <tr>
+      <td class="north-south"><%= @game_state.trick_scores[:north_south] %>
+      <td class="west-east"><%= @game_state.trick_scores[:west_east] %>
+    </tr>
+  </table>
+</div>
 <% Players.new.call.each do |player| %>
   <p>
   <%= player.to_s.upcase %>

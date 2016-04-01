@@ -110,7 +110,6 @@ When(/^all players play a card$/) do
   click_link("🃑")
   click_link("🂴")
   click_link("🂡")
-  puts page.html
 end
 
 Then(/^no cards are links$/) do
@@ -123,6 +122,14 @@ end
 
 Then(/^South won the trick$/) do
   expect(page).to have_content("South won the trick!")
+end
+
+Then(/^North\-South has (\d+) trick(?:s)?$/) do |trick_count|
+  expect(find(".scores > .trick .north-south").text).to eq trick_count
+end
+
+Then(/^West\-East has (\d+) trick(?:s)?$/) do |trick_count|
+  expect(find(".scores > .trick .west-east").text).to eq trick_count
 end
 
 def bid

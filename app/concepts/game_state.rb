@@ -82,6 +82,10 @@ class GameState
     player_with_highest_trick_card_score
   end
 
+  def trick_scores
+    { north_south: 1, west_east: 0 }
+  end
+
   private
 
   def player_with_highest_trick_card_score
