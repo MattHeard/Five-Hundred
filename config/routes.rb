@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
   patch 'games/:id/bid' => 'games#bid', as: :bid
   put 'games/:id/play_card' => 'games#play_card', as: :play_card
+  put 'games/:id/start_next_trick' => 'games#start_next_trick', as: :start_next_trick
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :games, only: [:index, :create, :show, :update]
