@@ -1,6 +1,6 @@
 class GameState
   attr_accessor :deck, :kitty, :dealer_seat, :last_bid,
-    :players, :trick, :current_player_seat
+    :players, :trick, :current_player_seat, :scoreboard
 
   # TODO Extract hand and bid into a Player object
   def initialize
@@ -9,6 +9,7 @@ class GameState
     @kitty = [ ]
     @last_bid = nil
     @trick = { }
+    @scoreboard = Scoreboard.new
   end
 
   def hands
@@ -80,10 +81,6 @@ class GameState
 
   def trick_winning_player
     player_with_highest_trick_card_score
-  end
-
-  def trick_scores
-    { north_south: 1, west_east: 0 }
   end
 
   private

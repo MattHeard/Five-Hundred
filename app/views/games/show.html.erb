@@ -5,8 +5,8 @@
       <th>West-East</th>
     </tr>
     <tr>
-      <td class="north-south"><%= @game_state.trick_scores[:north_south] %>
-      <td class="west-east"><%= @game_state.trick_scores[:west_east] %>
+      <td class="north-south"><%= @game_state.scoreboard.trick_scores[:north_south] %>
+      <td class="west-east"><%= @game_state.scoreboard.trick_scores[:west_east] %>
     </tr>
   </table>
 </div>
@@ -68,4 +68,5 @@
 <% end %>
 <% if @game_state.phase == :scoring %>
   <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
+  <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>
 <% end %>

@@ -7,6 +7,8 @@ Feature: Playing a game
     And I see the kitty
     And I see the current player token
     And I see the bid submission form
+    And North-South has 0 tricks
+    And West-East has 0 tricks
 
   Scenario: Only the current player's cards are visible
     Given I have started a game
@@ -59,3 +61,4 @@ Feature: Playing a game
     And South won the trick
     And North-South has 1 trick
     And West-East has 0 tricks
+    And there is a "Continue" link

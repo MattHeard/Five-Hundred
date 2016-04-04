@@ -132,6 +132,10 @@ Then(/^West\-East has (\d+) trick(?:s)?$/) do |trick_count|
   expect(find(".scores > .trick .west-east").text).to eq trick_count
 end
 
+Then(/^there is a "([^"]*)" link$/) do |link_text|
+  expect(page).to have_content(link_text)
+end
+
 def bid
   select("Bid", :from => "bid_or_pass")
   select("6", :from => "number_of_tricks")
