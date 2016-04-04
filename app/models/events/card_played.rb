@@ -5,7 +5,7 @@ class CardPlayed < Event
     @game_state = game_state
 
     game_state.hand(player).delete(card)
-    game_state.trick[player] = card
+    trick.play(player, card)
     game_state.current_player_seat = next_player_seat
 
     update_scores
@@ -46,6 +46,6 @@ class CardPlayed < Event
   end
 
   def trick
-    Trick.new(game_state.trick)
+    game_state.trick
   end
 end

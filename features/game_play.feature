@@ -62,3 +62,10 @@ Feature: Playing a game
     And North-South has 1 trick
     And West-East has 0 tricks
     And there is a "Continue" link
+
+  Scenario: Starting a second trick
+    Given I have started a game
+    And all players bid or pass
+    And all players play a card
+    When I click "Continue"
+    Then the trick has 0 cards

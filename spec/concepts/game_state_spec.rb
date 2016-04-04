@@ -48,7 +48,7 @@ RSpec.describe GameState do
 
     describe "#trick" do
       it "is empty or has nil values" do
-        expect(game_state.trick).to be_none
+        expect(game_state.trick.cards_count).to eq 0
       end
     end
 

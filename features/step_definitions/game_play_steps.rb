@@ -116,8 +116,8 @@ Then(/^no cards are links$/) do
   expect(page).not_to have_selector(".card > a")
 end
 
-Then(/^the trick has (\d+) cards$/) do |arg1|
-  expect(page).to have_selector("#trick > .card", count: 4)
+Then(/^the trick has (\d+) cards$/) do |number_of_cards|
+  expect(page).to have_selector("#trick > .card", count: number_of_cards)
 end
 
 Then(/^South won the trick$/) do
@@ -134,6 +134,10 @@ end
 
 Then(/^there is a "([^"]*)" link$/) do |link_text|
   expect(page).to have_content(link_text)
+end
+
+When(/^I click "([^"]*)"$/) do |link_text|
+  click_link(link_text)
 end
 
 def bid

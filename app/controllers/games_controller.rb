@@ -37,6 +37,14 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  def start_next_trick
+    strong_params = params.permit(:id)
+    game = Game.find(strong_params[:id])
+    StartNextTrick.new(game).call
+
+    redirect_to game
+  end
+
   private
 
   def bidder_has_passed?(params)

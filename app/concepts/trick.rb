@@ -4,16 +4,40 @@ class Trick
   end
 
   def complete?
-    played_cards.size == players.size
+    cards_count == players.size
   end
 
   def winning_team
     team(winning_player)
   end
 
+  def cards_count
+    played_cards.size
+  end
+
+  def player_has_played?(player)
+    played_cards[player].present?
+  end
+
+  def play(player, card)
+    played_cards[player] = card
+  end
+
+  def scores
+    Hash[ played_cards.map { |player, card| [player, card_scores[card]] } ]
+  end
+
+  def played_card(player)
+    played_cards[player]
+  end
+
+  def discard
+    self.played_cards = {}
+  end
+
   private
 
-  attr_reader :played_cards
+  attr_accessor :played_cards
 
   def team(player)
     if player == :north || player == :south

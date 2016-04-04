@@ -8,7 +8,7 @@ class GameState
     @players = new_players
     @kitty = [ ]
     @last_bid = nil
-    @trick = { }
+    @trick = Trick.new({})
     @scoreboard = Scoreboard.new
   end
 
@@ -60,11 +60,11 @@ class GameState
   end
 
   def card_played?(player)
-    trick[player].present?
+    trick.player_has_played?(player)
   end
 
   def complete_trick?
-    trick.values.compact.size == players.size
+    trick.cards_count == players.size
   end
 
   def phase
@@ -90,11 +90,7 @@ class GameState
   end
 
   def seat_of_player_with_highest_trick_card_score
-    trick_card_scores.max_by { |_, card_score| card_score }.first
-  end
-
-  def trick_card_scores
-    Hash[ trick.map { |player, card| [player, card_scores[card]] } ]
+    trick.scores.max_by { |_, card_score| card_score }.first
   end
 
   def card_scores

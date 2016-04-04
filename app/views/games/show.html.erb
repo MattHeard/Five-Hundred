@@ -40,7 +40,7 @@
   <ul id="trick">
   <% Players.new.call.each do |player| %>
     <% if @game_state.card_played?(player) %>
-      <li class="card" id="<%= @game_state.trick[player] %>"><%= "#{player.to_s.chars.first.upcase} #{unicode_card(@game_state.trick[player])}" %></li>
+      <li class="card" id="<%= @game_state.trick.played_card(player) %>"><%= "#{player.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(player))}" %></li>
     <% end %>
   <% end %>
   </ul>
