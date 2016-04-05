@@ -1,19 +1,19 @@
+require 'pp'
 require 'rails_helper'
 
 RSpec.describe CardPlayed do
   describe "#apply" do
-    subject(:event) do
-      CardPlayed.create!(player_seat: player, game: game, card: card)
-    end
-
-    let(:player) { :south }
-    let(:game) { Game.create! }
-    let(:game_state) { CreateGameState.new(game).call }
     let(:card) { game_state.hand(player).first }
+    subject(:event) { CardPlayed.create!(player_seat: player, game: game, card: card) }
+
+    let(:game_state) { CreateGameState.new(game).call }
+    let(:game) { Game.create! }
+    let(:player) { :south }
 
     it "removes a card from the player's hand" do
       DealAllCards.new(game).call
-      game_state = CreateGameState.new(game).call
+      ChangeDealer.new(game).call
+      game.reload
       event.apply(game_state)
       expect(game_state.hand(player)).to have_exactly(9).items
     end

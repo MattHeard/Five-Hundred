@@ -78,6 +78,105 @@ Then(/^South's hand is not visible$/) do
   expect(page).to have_content("SOUTH Ⓓ 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠 🂠")
 end
 
+When(/^West bids 6♠$/) do
+  bid
+end
+
+When(/^all players bid or pass$/) do
+  bid
+  pass_bid
+  pass_bid
+  pass_bid
+end
+
+Then(/^the current player's cards are links$/) do
+  expect(page).to have_selector(".current_player_hand > .card > a")
+end
+
+Then(/^the non\-current players' cards are not links$/) do
+  expect(page).not_to have_selector(".other_hand > .card > a")
+end
+
+When(/^the King of Spades is clicked$/) do
+  click_link("🂮")
+end
+
+Then(/^the King of Spades is in the trick$/) do
+  expect(page).to have_selector("#trick > #K♠")
+end
+
+When(/^all players play a card$/) do
+  click_link("🂮")
+  click_link("🃑")
+  click_link("🂴")
+  click_link("🂡")
+end
+
+Then(/^no cards are links$/) do
+  expect(page).not_to have_selector(".card > a")
+end
+
+Then(/^the trick has (\d+) cards$/) do |number_of_cards|
+  expect(page).to have_selector("#trick > .card", count: number_of_cards)
+end
+
+Then(/^South won the trick$/) do
+  expect(page).to have_content("South won the trick!")
+end
+
+Then(/^North\-South has (\d+) trick(?:s)?$/) do |trick_count|
+  expect(find(".scores > .trick .north-south").text).to eq trick_count
+end
+
+Then(/^West\-East has (\d+) trick(?:s)?$/) do |trick_count|
+  expect(find(".scores > .trick .west-east").text).to eq trick_count
+end
+
+Then(/^there is a "([^"]*)" link$/) do |link_text|
+  expect(page).to have_content(link_text)
+end
+
+When(/^I click "([^"]*)"$/) do |link_text|
+  click_link(link_text)
+end
+
+When(/^all cards are played$/) do
+  %w{ 
+    K♠ A♣ 4♥ A♠ Continue
+    10♥ 5♥ 5♦ Q♥ Continue
+    7♦ 5♠ J♠ 6♥ Continue
+    10♠ A♥ 8♣ Q♣ Continue
+    J♣ 6♠ 5♣ K♣ Continue
+    Q♦ 10♦ 10♣ 4♦ Continue
+    J♥ K♥ Q♠ 6♦ Continue
+    9♦ 8♦ 9♠ 8♥ Continue
+    8♠ 9♥ 6♣ 7♥ Continue
+    9♣ 7♣ JOKER K♦ Continue
+  }.each { |link_text| click_on(unicode_card(link_text) || link_text) }
+end
+
+Then(/^North\-South has (\d+) points$/) do |points_count|
+  north_south_point_score = find(".scores > .points .north-south").text
+  expect(north_south_point_score).to eq points_count
+end
+
+Then(/^West\-East has (\d+) points$/) do |points_count|
+  west_east_point_score = find(".scores > .points .west-east").text
+  expect(west_east_point_score).to eq points_count
+end
+
+def bid
+  select("Bid", :from => "bid_or_pass")
+  select("6", :from => "number_of_tricks")
+  select("♠", :from => "trump_suit")
+  click_button("Submit")
+end
+
+def pass_bid
+  select("Pass", :from => "bid_or_pass")
+  click_button("Submit")
+end
+
 def setup_game
   game = Game.create!
   deal_cards(game)
@@ -132,4 +231,24 @@ end
 
 def set_dealer(game, player_seat)
   DealerChanged.create!(player_seat: player_seat, game: game)
+end
+
+def unicode_card(name)
+  {
+    "BACK" => "🂠", "JOKER" => "🃟",
+
+    "A♠" => "🂡", "K♠" => "🂮", "Q♠" => "🂭", "J♠" => "🂫", "10♠" => "🂪",
+    "9♠" => "🂩", "8♠" => "🂨", "7♠" => "🂧", "6♠" => "🂦", "5♠" => "🂥",
+
+    "A♣" => "🃑", "K♣" => "🃞", "Q♣" => "🃝", "J♣" => "🃛", "10♣" => "🃚",
+    "9♣" => "🃙", "8♣" => "🃘", "7♣" => "🃗", "6♣" => "🃖", "5♣" => "🃕",
+
+    "A♥" => "🂱", "K♥" => "🂾", "Q♥" => "🂽", "J♥" => "🂻", "10♥" => "🂺",
+    "9♥" => "🂹", "8♥" => "🂸", "7♥" => "🂷", "6♥" => "🂶", "5♥" => "🂵",
+    "4♥" => "🂴",
+
+    "A♦" => "🃁", "K♦" => "🃎", "Q♦" => "🃍", "J♦" => "🃋", "10♦" => "🃊",
+    "9♦" => "🃉", "8♦" => "🃈", "7♦" => "🃇", "6♦" => "🃆", "5♦" => "🃅",
+    "4♦" => "🃄"
+  }[name]
 end

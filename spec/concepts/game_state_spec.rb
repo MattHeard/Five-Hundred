@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe GameState do
-  subject(:game_state) { GameState.new }
+  subject(:game_state) { CreateGameState.new(game).call }
+
+  let(:game) { Game.create! }
 
   context "with no modifications" do
     describe "#deck" do
@@ -46,7 +48,7 @@ RSpec.describe GameState do
 
     describe "#trick" do
       it "is empty or has nil values" do
-        expect(game_state.trick).to be_none
+        expect(game_state.trick.cards_count).to eq 0
       end
     end
 
@@ -109,21 +111,92 @@ RSpec.describe GameState do
     end
   end
 
-  context "when all players have played a card" do
-    describe "#complete_trick?" do
+  context "when all players have bid or passed" do
+    describe "#in_play_phase?" do
+      subject(:game_state) { CreateGameState.new(game).call }
+
       let(:game) { Game.create! }
 
       it "is true" do
         DealAllCards.new(game).call
-        game_state = CreateGameState.new(game).call
-        %i{ north south east west}.each do |player|
-          hand = game_state.hand(player)
-          card = hand.first
-          PlayCard.new(game, player, card).call
-        end
-        game_state = CreateGameState.new(game).call
+        ChangeDealer.new(game).call
+        MakeBid.new(game, 6, "♠").call
+        3.times { PassBid.new(game).call }
+        game.reload
 
+        expect(game_state).to be_in_play_phase
+      end
+    end
+  end
+
+  context "when two players have played a card" do
+    before do
+      DealAllCards.new(game).call
+      ChangeDealer.new(game).call
+      MakeBid.new(game, 6, "♠").call
+      3.times { PassBid.new(game).call }
+      %i{ north east }.each do |player|
+        hand = game_state.hand(player)
+        card = hand.first
+        PlayCard.new(game, player, card).call
+      end
+      game.reload
+    end
+
+    describe "#complete_trick?" do
+      it "is false" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state).not_to be_complete_trick
+      end
+    end
+
+    describe "#in_play_phase?" do
+      it "is true" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state).to be_in_play_phase
+      end
+    end
+  end
+
+  context "when all players have played a card" do
+    before do
+      DealAllCards.new(game).call
+      ChangeDealer.new(game).call
+      MakeBid.new(game, 6, "♠").call
+      3.times { PassBid.new(game).call }
+      %i{ north south east west}.each do |player|
+        hand = game_state.hand(player)
+        card = hand.first
+        PlayCard.new(game, player, card).call
+      end
+      game.reload
+    end
+
+    describe "#complete_trick?" do
+      it "is true" do
+        game_state = CreateGameState.new(game).call
         expect(game_state).to be_complete_trick
+      end
+    end
+
+    describe "#in_play_phase?" do
+      it "is false" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state).not_to be_in_play_phase
+      end
+    end
+
+    describe "#trick_winning_player" do
+      it "is present" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state.trick_winning_player).to be_present
+      end
+    end
+
+    describe "#scoreboard" do
+      it "is present" do
+        game_state = CreateGameState.new(game).call
+        expect(game_state.scoreboard).to be_present
       end
     end
   end
