@@ -5,6 +5,7 @@ class MakeBid
     @game, @number_of_tricks, @trump_suit = game, number_of_tricks.to_i, trump_suit
   end
 
+  # TODO Move game state queries into locked block
   def call
     return false if game_state.bidder_has_previously_passed?
     return false unless bid_heigher_than_previous_heighest_bid?

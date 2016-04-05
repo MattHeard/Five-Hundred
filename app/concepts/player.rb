@@ -10,4 +10,8 @@ class Player
   def name
     seat.to_s.titlecase
   end
+
+  def discard_hand
+    @hand = []
+  end
 end

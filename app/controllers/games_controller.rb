@@ -15,6 +15,7 @@ class GamesController < ApplicationController
     @game_state = CreateGameState.new(@game).call
   end
 
+  # TODO Refactor logic out of controller
   def bid
     bid_params = params.permit(:id, :bid_or_pass, :number_of_tricks, :trump_suit)
     game = Game.find(bid_params[:id])
@@ -27,6 +28,7 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  # TODO Refactor into RESTful resource
   def play_card
     strong_params = params.permit(:id, :card, :player)
     game = Game.find(strong_params[:id])
@@ -37,10 +39,19 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  # TODO Refactor into RESTful resource
   def start_next_trick
     strong_params = params.permit(:id)
     game = Game.find(strong_params[:id])
     StartNextTrick.new(game).call
+
+    redirect_to game
+  end
+
+  def start_next_round
+    strong_params = params.permit(:id)
+    game = Game.find(strong_params[:id])
+    StartNextRound.new(game).call
 
     redirect_to game
   end

@@ -6,14 +6,14 @@ class GameState
   def initialize
     @deck = entire_deck
     @players = new_players
-    @kitty = [ ]
+    @kitty = []
     @last_bid = nil
     @trick = Trick.new({})
     @scoreboard = Scoreboard.new
   end
 
   def hands
-    hands = { }
+    hands = {}
     players.each { |player| hands[player.seat] = player.hand }
 
     hands
@@ -52,7 +52,7 @@ class GameState
   end
 
   def in_scoring_phase?
-    phase == :scoring
+    phase == :trick_scoring
   end
 
   def all_players_have_bid_or_passed?
@@ -74,9 +74,15 @@ class GameState
       return :bidding
     elsif !complete_trick?
       return :play
+    elsif !complete_round?
+      return :trick_scoring
     else
-      return :scoring
+      return :round_scoring
     end
+  end
+
+  def complete_round?
+    players.map(&:hand).flatten.none?
   end
 
   def trick_winning_player

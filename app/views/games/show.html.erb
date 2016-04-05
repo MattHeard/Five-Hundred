@@ -66,7 +66,10 @@
 <% if @game_state.in_play_phase? %>
   <p>Pick a card to play</p>
 <% end %>
-<% if @game_state.phase == :scoring %>
+<!-- <%= @game_state.phase %>-->
+<% if @game_state.phase == :trick_scoring %>
   <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
   <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>
+<% elsif @game_state.phase == :round_scoring %>
+  <%= link_to "Continue", { controller: "games", action: :start_next_round }, method: :put%>
 <% end %>

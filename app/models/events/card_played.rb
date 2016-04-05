@@ -29,10 +29,12 @@ class CardPlayed < Event
     update_trick_scores if trick.complete?
   end
 
+  # TODO Inline
   def update_trick_scores
     increase_winning_team_trick_score
   end
 
+  # TODO Inline
   def increase_winning_team_trick_score
     increase_trick_score(trick.winning_team)
   end

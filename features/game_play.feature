@@ -69,3 +69,11 @@ Feature: Playing a game
     And all players play a card
     When I click "Continue"
     Then the trick has 0 cards
+
+  Scenario: Completing a round
+    Given I have started a game
+    And all players bid or pass
+    When all cards are played
+    Then North-South has 1 trick
+    And West-East has 9 tricks
+    And there is a "Continue" link
