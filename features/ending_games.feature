@@ -1,0 +1,1 @@
+Feature: Ending games
