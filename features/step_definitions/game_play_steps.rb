@@ -165,6 +165,12 @@ Then(/^West\-East has (\d+) points$/) do |points_count|
   expect(west_east_point_score).to eq points_count
 end
 
+Given(/^I have completed a round$/) do
+  step "I have started a game"
+  step "all players bid or pass"
+  step "all cards are played"
+end
+
 def bid
   select("Bid", :from => "bid_or_pass")
   select("6", :from => "number_of_tricks")

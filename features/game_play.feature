@@ -77,3 +77,7 @@ Feature: Playing a game
     And West-East has 0 tricks
     And North-South has 10 points
     And West-East has 90 points
+
+  Scenario: Starting a second round
+    When I have completed a round
+    Then the trick has 0 cards

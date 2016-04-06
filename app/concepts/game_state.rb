@@ -93,6 +93,10 @@ class GameState
     self.deck = entire_deck
   end
 
+  def reset_bids
+    players.each { |player| player.bid = nil }
+  end
+
   private
 
   def player_with_highest_trick_card_score
