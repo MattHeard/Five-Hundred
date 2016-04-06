@@ -71,7 +71,7 @@ Feature: Playing cards
     Given North won the first trick
     And North plays 5♥
     When East plays 4♥
-    Then South can only play Q♥, 6♥, 8♥, or 7 or ♥
+    Then South can only play Q♥, 6♥, 8♥, or 7♥
 
   Scenario: North, East, and South play ♥ in second trick
     Given North won the first trick
