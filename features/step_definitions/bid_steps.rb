@@ -1,5 +1,5 @@
-Then(/^there are (\d+) bids$/) do |bids_count|
-  pending # Write code here that turns the phrase above into concrete actions
+Then(/^there are no bids$/) do
+  expect(page).to have_content("The highest bid is nothing.")
 end
 
 When(/^([^" ]*) passes their chance to bid$/) do |player|

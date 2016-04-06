@@ -6,6 +6,6 @@ Feature: Starting games
     And there are 4 full hands of cards
     But only 1 hand of cards is visible
     And there is a full kitty
-    And there are 0 bids
+    And there are no bids
     And there is no contract
     And there is no trick
