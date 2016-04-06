@@ -1,6 +1,6 @@
 Feature: Bidding
   Background:
-    Given the game has reached the bidding phase
+    Given the game is in the bidding phase
 
   Scenario: Every player passes
     When North passes their chance to bid
