@@ -1,7 +1,9 @@
 Given(/^a player is on the index page$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  index_page_url = "/"
+  visit(index_page_url)
 end
 
 When(/^the new game link is clicked$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  new_game_link_text = "Start a new game"
+  click_on(new_game_link_text)
 end

@@ -1,3 +1,7 @@
+# TODO DRY
 Then(/^there is an empty scoreboard$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(find(".scores .trick .north-south").text).to eq "0"
+  expect(find(".scores .trick .west-east").text).to eq "0"
+  expect(find(".scores .points .north-south").text).to eq "0"
+  expect(find(".scores .points .west-east").text).to eq "0"
 end

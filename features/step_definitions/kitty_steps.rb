@@ -1,3 +1,4 @@
 Then(/^there is a full kitty$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  full_kitty_size = 3
+  expect(page).to have_selector("#kitty .card", :count => full_kitty_size)
 end
