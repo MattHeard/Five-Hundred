@@ -6,10 +6,8 @@ class StartNextRound
   end
 
   def call
-    CollectAllCards.new(game).call
-    DealAllCards.new(game).call
-    ResetBids.new(game).call
-    StartNextTrick.new(game).call
+    [ CollectAllCards, DealAllCards, ResetBids, ChangeDealer, StartNextTrick ]
+      .each { |service| service.new(game).call }
   end
 
   private
