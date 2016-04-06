@@ -46,7 +46,7 @@ class CardPlayed < Event
 
   def convert_tricks_to_points
     trick_scores.each do |team, tricks_count|
-      points[team] = tricks_count * POINTS_PER_TRICK;
+      points[team] += tricks_count * POINTS_PER_TRICK;
     end
     scoreboard.reset_trick_scores
   end
