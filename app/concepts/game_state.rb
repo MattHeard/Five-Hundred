@@ -1,8 +1,8 @@
+# TODO Make some methods private
 class GameState
   attr_accessor :deck, :kitty, :dealer_seat, :last_bid,
     :players, :trick, :current_player_seat, :scoreboard
 
-  # TODO Extract hand and bid into a Player object
   def initialize
     reset_deck
     @players = new_players
@@ -55,8 +55,16 @@ class GameState
     phase == :trick_scoring
   end
 
+  def all_players_have_passed?
+    players.map(&:bid).compact.count { |bid| bid.passed? } == players_count
+  end
+
   def all_players_have_bid_or_passed?
     players.all?(&:bid)
+  end
+
+  def players_count
+    players.size
   end
 
   def card_played?(player)
@@ -70,7 +78,7 @@ class GameState
   def phase
     if !deck.empty?
       return :dealing
-    elsif !all_players_have_bid_or_passed?
+    elsif still_bidding?
       return :bidding
     elsif !complete_trick?
       return :play
@@ -79,6 +87,10 @@ class GameState
     else
       return :round_scoring
     end
+  end
+
+  def still_bidding?
+    all_players_have_passed? || !all_players_have_bid_or_passed?
   end
 
   def trick_winning_player

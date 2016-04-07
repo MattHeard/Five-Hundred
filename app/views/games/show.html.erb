@@ -68,6 +68,9 @@
     </select>
     <button type="submit">Submit</button>
   <% end %>
+  <% if @game_state.all_players_have_passed? %>
+    <p>Every player passed. The cards must be redealt.</p>
+  <% end %>
 <% end %>
 <% if @game_state.in_play_phase? %>
   <p>Pick a card to play</p>
