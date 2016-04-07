@@ -39,7 +39,7 @@ CARD_RECIPIENTS = %i{
 def game
   game = Game.create!
   deal_cards(game)
-  set_dealer(game, :south)
+  set_dealer(game, :west)
 
   game
 end

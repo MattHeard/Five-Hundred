@@ -3,7 +3,7 @@ Then(/^there are no bids$/) do
 end
 
 When(/^([^" ]*) passes their chance to bid$/) do |player|
-  pending # Write code here that turns the phrase above into concrete actions
+  select("Pass", :from => "bid_or_pass")
 end
 
 Then(/^the cards must be thrown in$/) do
