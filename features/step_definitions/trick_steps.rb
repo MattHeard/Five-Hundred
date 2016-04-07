@@ -1,5 +1,5 @@
 Then(/^there is no trick$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(page).not_to have_selector("#trick")
 end
 
 Given(/^([^" ]*) won the first trick$/) do |player|
