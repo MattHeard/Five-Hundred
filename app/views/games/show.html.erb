@@ -26,7 +26,7 @@
     <% @game_state.hand(player).each do |card| %>
       <li id="<%= card %>"
         class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
-      <% if @game_state.in_play_phase? && player == @game_state.current_player_seat %>
+      <% if @game_state.phase == :play && player == @game_state.current_player_seat %>
         <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: player, card: card }, method: :put%>
       <% else %>
         <%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%>
@@ -41,7 +41,9 @@
     <li class="card"><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
-<% if @game_state.in_play_phase? || @game_state.in_scoring_phase? %>
+<% if %i{ play scoring }.include?(@game_state.phase) %>
+  <p>The contract is for <%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %>.</p>
+  <p>The contracting team is <%= team(@game_state.contract.bidder.team) %>.</p>
   <p>The trick:<p>
   <ul id="trick">
   <% Players.new.call.each do |player| %>
@@ -51,20 +53,22 @@
   <% end %>
   </ul>
 <% end %>
-<% if @game_state.in_bidding_phase? %>
+<% if @game_state.phase == :bidding %>
   <p>The highest bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>
     <select id="bid_or_pass" name="bid_or_pass">
       <option>Bid</option>
       <option>Pass</option>
     </select>
-    <select id="number_of_tricks" name="number_of_tricks">
-      <option>6</option>
-      <option>7</option>
-      <option>8</option>
+    <select id="tricks_count" name="tricks_count">
+      <% (6..10).each do |tricks_count| %>
+        <option><%= tricks_count %></option>
+      <% end %>
     </select>
     <select id="trump_suit" name="trump_suit">
-      <option>♠</option>
+      <% %w{ ♠ ♣ ♦ ♥ }.each do |trump_suit| %>
+        <option><%= trump_suit %></option>
+      <% end %>
     </select>
     <button type="submit">Submit</button>
   <% end %>
@@ -72,10 +76,9 @@
     <p>Every player passed. The cards must be redealt.</p>
   <% end %>
 <% end %>
-<% if @game_state.in_play_phase? %>
+<% if @game_state.phase == :play %>
   <p>Pick a card to play</p>
 <% end %>
-<!-- <%= @game_state.phase %>-->
 <% if @game_state.phase == :trick_scoring %>
   <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
   <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>

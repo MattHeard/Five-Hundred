@@ -1,3 +1,4 @@
+# TODO Rename to NextSeat
 class NextPlayer
   def initialize(current_player)
     @current_player = current_player

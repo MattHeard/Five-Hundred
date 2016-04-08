@@ -12,5 +12,8 @@ Then(/^the cards must be thrown in$/) do
 end
 
 When(/^([^" ]*) bids (\d+)([^" ])$/) do |player, tricks_count, trump_suit|
-  pending # Write code here that turns the phrase above into concrete actions
+  select("Bid", :from => "bid_or_pass")
+  select(tricks_count, :from => "tricks_count")
+  select(trump_suit, :from => "trump_suit")
+  click_button("Submit")
 end

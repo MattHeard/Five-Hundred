@@ -20,7 +20,7 @@ RSpec.describe BidPassed do
     end
 
     it "does not add any bids" do
-      expect(game_state.bid_count).to eq 0
+      expect(game_state.highest_bid).to be_nil
     end
   end
 end

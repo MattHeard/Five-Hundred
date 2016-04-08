@@ -42,7 +42,7 @@ RSpec.describe GameState do
 
     describe "#in_bidding_phase?" do
       it "is false" do
-        expect(game_state).not_to be_in_bidding_phase
+        expect(game_state.phase).not_to eq :bidding
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe GameState do
 
     describe "#in_bidding_phase?" do
       it "is true" do
-        expect(game_state).to be_in_bidding_phase
+        expect(game_state.phase).to eq :bidding
       end
     end
   end
@@ -124,7 +124,7 @@ RSpec.describe GameState do
         3.times { PassBid.new(game).call }
         game.reload
 
-        expect(game_state).to be_in_play_phase
+        expect(game_state.phase).to eq :play
       end
     end
   end
@@ -153,7 +153,7 @@ RSpec.describe GameState do
     describe "#in_play_phase?" do
       it "is true" do
         game_state = CreateGameState.new(game).call
-        expect(game_state).to be_in_play_phase
+        expect(game_state.phase).to eq :play
       end
     end
   end
@@ -182,7 +182,7 @@ RSpec.describe GameState do
     describe "#in_play_phase?" do
       it "is false" do
         game_state = CreateGameState.new(game).call
-        expect(game_state).not_to be_in_play_phase
+        expect(game_state.phase).not_to eq :play
       end
     end
 

@@ -1,3 +1,5 @@
+require 'pp'
+
 class MakeBid
   attr_reader :game, :number_of_tricks, :trump_suit
 
@@ -8,12 +10,13 @@ class MakeBid
   # TODO Move game state queries into locked block
   def call
     return false if game_state.bidder_has_previously_passed?
-    return false unless bid_heigher_than_previous_heighest_bid?
+    return false unless bid_higher_than_previous_heighest_bid?
     game.with_lock { create_event }
 
     true
   end
 
+  # TODO Remove use of `player_seat`, this attribute is ignored
   def create_event
     BidMade.create!(player_seat: game_state.current_player_seat,
                     number_of_tricks: number_of_tricks,
@@ -23,10 +26,12 @@ class MakeBid
 
   private
 
-  def bid_heigher_than_previous_heighest_bid?
-    game_state.bid_count == 0 ||
-      game_state.highest_bid.nil? ||
-      number_of_tricks > game_state.highest_bid.number_of_tricks
+  def bid_higher_than_previous_heighest_bid?
+    bid > game_state.highest_bid
+  end
+
+  def bid
+    Bid.new(number_of_tricks: number_of_tricks, trump_suit: trump_suit)
   end
 
   def game_state

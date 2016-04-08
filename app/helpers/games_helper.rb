@@ -22,4 +22,8 @@ module GamesHelper
   def pretty_bid(bid)
     "#{bid.number_of_tricks} of #{bid.trump_suit}"
   end
+
+  def team(team)
+    { north_south: "North-South", west_east: "West-East" }[team]
+  end
 end

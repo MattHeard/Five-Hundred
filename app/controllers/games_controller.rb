@@ -1,3 +1,5 @@
+require 'pp'
+
 class GamesController < ApplicationController
   def index
   end
@@ -17,12 +19,12 @@ class GamesController < ApplicationController
 
   # TODO Refactor logic out of controller
   def bid
-    bid_params = params.permit(:id, :bid_or_pass, :number_of_tricks, :trump_suit)
+    bid_params = params.permit(:id, :bid_or_pass, :tricks_count, :trump_suit)
     game = Game.find(bid_params[:id])
     if bidder_has_passed?(bid_params)
       PassBid.new(game).call
     elsif bidder_has_made_bid?(bid_params)
-      MakeBid.new(game, bid_params[:number_of_tricks], bid_params[:trump_suit]).call
+      MakeBid.new(game, bid_params[:tricks_count], bid_params[:trump_suit]).call
     end
 
     redirect_to game

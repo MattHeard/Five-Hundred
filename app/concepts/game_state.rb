@@ -1,13 +1,12 @@
 # TODO Make some methods private
 class GameState
-  attr_accessor :deck, :kitty, :dealer_seat, :last_bid,
+  attr_accessor :deck, :kitty, :dealer_seat, :highest_bid,
     :players, :trick, :current_player_seat, :scoreboard
 
   def initialize
     reset_deck
     @players = new_players
     @kitty = []
-    @last_bid = nil
     @trick = Trick.new({})
     @scoreboard = Scoreboard.new
   end
@@ -23,12 +22,8 @@ class GameState
     players.select { |player| player.seat == seat }.first.hand
   end
 
-  def highest_bid
-    last_bid
-  end
-
   def bidder_has_previously_passed?
-    bidder&.bid&.passed?
+    bidder&.passed?
   end
 
   def bidder
@@ -36,31 +31,15 @@ class GameState
   end
 
   def player(seat)
-    players.select { |player| player.seat == seat }.first
-  end
-
-  def bid_count
-    players.map(&:bid).compact.count { |bid| !bid.passed? }
-  end
-
-  def in_bidding_phase?
-    phase == :bidding
-  end
-
-  def in_play_phase?
-    phase == :play
-  end
-
-  def in_scoring_phase?
-    phase == :trick_scoring
+    players.find { |player| player.seat == seat }
   end
 
   def all_players_have_passed?
-    players.map(&:bid).compact.count { |bid| bid.passed? } == players_count
+    players.count(&:passed?) == players_count
   end
 
   def all_players_have_bid_or_passed?
-    players.all?(&:bid)
+    players.select { |player| player == highest_bid&.bidder || player.passed? }.size == players.size
   end
 
   def players_count
@@ -105,8 +84,8 @@ class GameState
     self.deck = entire_deck
   end
 
-  def reset_bids
-    players.each { |player| player.bid = nil }
+  def contract
+    highest_bid if phase != :bidding
   end
 
   private
