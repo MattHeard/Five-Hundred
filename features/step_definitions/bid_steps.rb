@@ -17,3 +17,7 @@ When(/^([^" ]*) bids (\d+)([^" ])$/) do |player, tricks_count, trump_suit|
   select(trump_suit, :from => "trump_suit")
   click_button("Submit")
 end
+
+Then(/^the highest bid is for ([^" ]*)$/) do |bid|
+  expect(page).to have_content("The highest bid is #{bid}.")
+end

@@ -13,13 +13,17 @@ class Bid
   end
 
   def >(other)
-    other.nil? || more_tricks?(other) || higher_suit?(other)
+    other.nil? || more_tricks?(other) || (equal_tricks?(other) && higher_suit?(other))
   end
 
   private
 
   def more_tricks?(other)
     number_of_tricks > other.number_of_tricks
+  end
+
+  def equal_tricks?(other)
+    number_of_tricks == other.number_of_tricks
   end
 
   def higher_suit?(other)

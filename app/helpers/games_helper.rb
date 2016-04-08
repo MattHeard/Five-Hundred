@@ -20,7 +20,7 @@ module GamesHelper
   end
 
   def pretty_bid(bid)
-    "#{bid.number_of_tricks} of #{bid.trump_suit}"
+    "#{bid.number_of_tricks}#{bid.trump_suit}"
   end
 
   def team(team)

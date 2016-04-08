@@ -100,3 +100,8 @@ Feature: Bidding
     And South passes their chance to bid
     Then the contract is for 7♣
     And the contracting team is West-East
+
+  Scenario: Lower bids cannot beat higher bids
+    When North bids 9♠
+    And East bids 6♣
+    Then the highest bid is for 9♠
