@@ -1,3 +1,4 @@
+# TODO Refactor scenarios to highlight differences
 Feature: Bidding
   Background:
     Given the game is in the bidding phase

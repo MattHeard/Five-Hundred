@@ -5,7 +5,7 @@ class GameState
 
   def initialize
     reset_deck
-    @players = new_players
+    @players = new_player_seats
     @kitty = []
     @trick = Trick.new({})
     @scoreboard = Scoreboard.new
@@ -116,7 +116,7 @@ class GameState
     Players.new.call
   end
 
-  def new_players
+  def new_player_seats
     seats.map { |seat| Player.new(seat) }
   end
 end
