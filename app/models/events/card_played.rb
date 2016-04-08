@@ -6,8 +6,8 @@ class CardPlayed < Event
   def apply(game_state)
     @game_state = game_state
 
-    game_state.hand(player).delete(card)
-    trick.play(player, card)
+    hand.delete(card)
+    trick.play(seat, card)
     game_state.current_player_seat = next_player_seat
 
     update_scores
@@ -19,11 +19,15 @@ class CardPlayed < Event
 
   attr_reader :game_state
 
+  def hand
+    game_state.player(seat).hand
+  end
+
   def next_player_seat
     NextPlayer.new(game_state.current_player_seat).call
   end
 
-  def player
+  def seat
     player_seat.to_sym
   end
 

@@ -16,20 +16,20 @@
     <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %>
   </tr>
 </table>
-<% Players.new.call.each do |player| %>
+<% Players.new.call.each do |seat| %>
   <p>
-  <%= player.to_s.upcase %>
-  <%= player == @game_state.dealer_seat ? "Ⓓ" : "" %>
-  <%= player == @game_state.current_player_seat ? "✪" : "" %>
+  <%= seat.to_s.upcase %>
+  <%= seat == @game_state.dealer_seat ? "Ⓓ" : "" %>
+  <%= seat == @game_state.current_player_seat ? "✪" : "" %>
   </p>
-  <ul class="hand<%= player == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
-    <% @game_state.hand(player).each do |card| %>
+  <ul class="hand<%= seat == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
+    <% @game_state.player(seat).hand.each do |card| %>
       <li id="<%= card %>"
-        class="card<%= player == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
-      <% if @game_state.phase == :play && player == @game_state.current_player_seat %>
-        <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: player, card: card }, method: :put%>
+        class="card<%= seat == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
+      <% if @game_state.phase == :play && seat == @game_state.current_player_seat %>
+        <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: seat, card: card }, method: :put%>
       <% else %>
-        <%= unicode_card(player == @game_state.current_player_seat ? card : "BACK")%>
+        <%= unicode_card(seat == @game_state.current_player_seat ? card : "BACK")%>
       <% end %>
       </li>
     <% end %>
@@ -46,9 +46,9 @@
   <p>The contracting team is <%= team(@game_state.contract.bidder.team) %>.</p>
   <p>The trick:<p>
   <ul id="trick">
-  <% Players.new.call.each do |player| %>
-    <% if @game_state.card_played?(player) %>
-      <li class="card" id="<%= @game_state.trick.played_card(player) %>"><%= "#{player.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(player))}" %></li>
+  <% Players.new.call.each do |seat| %>
+    <% if @game_state.card_played?(seat) %>
+      <li class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= "#{seat.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(seat))}" %></li>
     <% end %>
   <% end %>
   </ul>

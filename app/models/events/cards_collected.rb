@@ -3,7 +3,7 @@ class CardsCollected < Event
     @game_state = game_state
 
     game_state.deck = entire_deck
-    players.each { |player| player.hand = [] }
+    discard_hands 
 
     game_state
   end
@@ -16,7 +16,11 @@ class CardsCollected < Event
     EntireDeck.new.call
   end
 
-  def players
-    game_state.players
+  def discard_hands
+    game_state.players.each { |player| discard_hand(player) }
+  end
+
+  def discard_hand(player)
+    player.hand = []
   end
 end

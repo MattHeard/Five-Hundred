@@ -5,21 +5,10 @@ class GameState
 
   def initialize
     reset_deck
-    @players = new_player_seats
+    @players = new_players
     @kitty = []
     @trick = Trick.new({})
     @scoreboard = Scoreboard.new
-  end
-
-  def hands
-    hands = {}
-    players.each { |player| hands[player.seat] = player.hand }
-
-    hands
-  end
-
-  def hand(seat)
-    players.select { |player| player.seat == seat }.first.hand
   end
 
   def bidder_has_previously_passed?
@@ -116,7 +105,7 @@ class GameState
     Players.new.call
   end
 
-  def new_player_seats
+  def new_players
     seats.map { |seat| Player.new(seat) }
   end
 end

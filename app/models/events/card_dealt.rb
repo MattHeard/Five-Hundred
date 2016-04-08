@@ -17,10 +17,14 @@ class CardDealt < Event
   end
 
   def destination
-    player == :kitty ? game_state.kitty : game_state.hand(player)
+    seat == :kitty ? game_state.kitty : hand 
   end
 
-  def player
+  def hand
+    game_state.player(seat).hand
+  end
+
+  def seat
     player_seat.to_sym
   end
 end

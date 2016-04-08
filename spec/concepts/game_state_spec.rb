@@ -34,12 +34,6 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#hands" do
-      it "are all empty" do
-        expect(game_state.hands.values.flatten).to be_empty
-      end
-    end
-
     describe "#in_bidding_phase?" do
       it "is false" do
         expect(game_state.phase).not_to eq :bidding
@@ -135,10 +129,10 @@ RSpec.describe GameState do
       ChangeDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       3.times { PassBid.new(game).call }
-      %i{ north east }.each do |player|
-        hand = game_state.hand(player)
+      %i{ north east }.each do |seat|
+        hand = game_state.player(seat).hand
         card = hand.first
-        PlayCard.new(game, player, card).call
+        PlayCard.new(game, seat, card).call
       end
       game.reload
     end
@@ -164,10 +158,10 @@ RSpec.describe GameState do
       ChangeDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       3.times { PassBid.new(game).call }
-      %i{ north south east west}.each do |player|
-        hand = game_state.hand(player)
+      %i{ north south east west}.each do |seat|
+        hand = game_state.player(seat).hand
         card = hand.first
-        PlayCard.new(game, player, card).call
+        PlayCard.new(game, seat, card).call
       end
       game.reload
     end
