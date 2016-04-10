@@ -20,7 +20,7 @@ class GameState
   end
 
   def all_players_have_passed?
-    players.count(&:passed?) == players_count
+    players.all?(&:passed?)
   end
 
   def all_players_have_bid_or_passed?
