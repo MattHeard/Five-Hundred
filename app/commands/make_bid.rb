@@ -26,7 +26,6 @@ class MakeBid
 
   def event_args
     {
-      player_seat: game_state.current_player_seat,
       number_of_tricks: number_of_tricks,
       trump_suit: trump_suit
     }
