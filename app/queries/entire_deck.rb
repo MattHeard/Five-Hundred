@@ -1,3 +1,4 @@
+# TODO Remove
 class EntireDeck
   def call
     %w{

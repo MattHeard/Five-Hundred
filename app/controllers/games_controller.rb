@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   def index
   end
 
+  # TODO DRY into loop over array of classes
   def create
     game = Game.create!
     DealAllCards.new(game).call
@@ -48,6 +49,7 @@ class GamesController < ApplicationController
     redirect_to game
   end
 
+  # TODO Refactor into RESTful resource
   def start_next_round
     strong_params = params.permit(:id)
     game = Game.find(strong_params[:id])

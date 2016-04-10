@@ -1,11 +1,10 @@
-require 'pp'
-
 class CardPlayed < Event
   POINTS_PER_TRICK = 10
 
   def apply(game_state)
     @game_state = game_state
 
+    # TODO Extract these three lines into play_card method
     hand.delete(card)
     trick.play(seat, card)
     game_state.current_player_seat = next_player_seat
@@ -48,13 +47,16 @@ class CardPlayed < Event
     game_state.trick
   end
 
+  # TODO Clarify naming of "trick scores" and "tricks count"
   def convert_tricks_to_points
     trick_scores.each do |team, tricks_count|
       points[team] += tricks_count * POINTS_PER_TRICK;
     end
+
     scoreboard.reset_trick_scores
   end
 
+  # TODO Inline
   def points
     scoreboard.points
   end

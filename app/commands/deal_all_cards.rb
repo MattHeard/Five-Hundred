@@ -36,6 +36,7 @@ class DealAllCards
     Seats.new.call
   end
 
+  # TODO Isolate dependency on DealCard by extracting into deal_card method
   def deal_batch_to_player(batch_size, player)
     batch_size.times { DealCard.new(game, player).call }
   end

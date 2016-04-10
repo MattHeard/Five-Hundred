@@ -1,9 +1,8 @@
 class BidMade < Event
+  # TODO Rotate player seat with GameState method
   def apply(game_state)
     @game_state = game_state
-
     game_state.highest_bid = bid
-
     game_state.current_player_seat = next_player_seat(bidder_seat)
 
     game_state
@@ -13,6 +12,7 @@ class BidMade < Event
 
   attr_reader :game_state
 
+  # TODO Rename to next_seat
   def next_player_seat(seat)
     NextSeat.new(seat).call
   end
@@ -29,6 +29,7 @@ class BidMade < Event
     }
   end
 
+  # TODO Extract loop body into bidder_seat?(seat) method
   def bidder
     game_state.players.find { |player| player.seat == bidder_seat }
   end

@@ -1,3 +1,4 @@
+# TODO Rename variables to clarify use of seat rather than player
 class NextSeat
   def initialize(current_player)
     @current_player = current_player

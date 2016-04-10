@@ -1,6 +1,7 @@
 class Scoreboard
   DEFAULT_SCORES = { north_south: 0, west_east: 0 }
 
+  # TODO Combine into a single line
   attr_accessor :trick_scores
   attr_accessor :points
 

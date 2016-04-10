@@ -3,6 +3,7 @@ class RedealAllCards
     @game = game
   end
 
+  # TODO DRY into looping over array of classes
   def call
     CollectAllCards.new(game).call
     DealAllCards.new(game).call

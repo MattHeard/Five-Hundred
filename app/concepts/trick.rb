@@ -7,6 +7,7 @@ class Trick
     cards_count == players.size
   end
 
+  # TODO Call player.team
   def winning_team
     team(winning_player)
   end
@@ -51,6 +52,8 @@ class Trick
     played_cards.max_by { |_, card| card_scores[card] }.first
   end
 
+  # TODO Extract magic literal into constant
+  # TODO Use tap to apply default value to constant
   def card_scores
     card_scores = {
       "JOKER" => 13, "J♠" => 12, "J♣" => 11, "A♠" => 10, "K♠" => 9, "Q♠" => 8,
@@ -61,6 +64,7 @@ class Trick
     card_scores
   end
 
+  # TODO Rename to seats
   def players
     Seats.new.call
   end

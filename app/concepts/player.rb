@@ -15,6 +15,7 @@ class Player
     @hand = []
   end
 
+  # Extract magic literal into global constant
   def team
     { north: :north_south, south: :north_south,
       west: :west_east, east: :west_east

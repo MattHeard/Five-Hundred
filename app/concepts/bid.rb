@@ -30,6 +30,7 @@ class Bid
     trump_rank(trump_suit) > trump_rank(other.trump_suit)
   end
 
+  # TODO Extract magic literal into global constant
   def trump_rank(suit)
     %w{ ♠ ♣ ♦ ♥ }.index(suit)
   end

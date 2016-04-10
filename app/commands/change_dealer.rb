@@ -24,6 +24,7 @@ class ChangeDealer
     NextSeat.new(current_dealer_seat).call
   end
 
+  # TODO Isolate dependency by moving Seats.new.call to seats method
   def random_seat
     Seats.new.call.sample
   end

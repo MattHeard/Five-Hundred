@@ -1,4 +1,5 @@
 class DealerChanged < Event
+  # TODO Use player object instead of seat
   def apply(game_state)
     game_state.dealer_seat = dealer_seat
     game_state.current_player_seat = seat_clockwise_from_dealer
