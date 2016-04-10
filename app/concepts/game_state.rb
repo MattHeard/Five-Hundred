@@ -102,7 +102,7 @@ class GameState
   end
 
   def seats
-    Players.new.call
+    Seats.new.call
   end
 
   def new_players

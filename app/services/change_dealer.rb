@@ -18,7 +18,7 @@ class ChangeDealer
   def next_dealer_seat
     current_dealer_seat = CreateGameState.new(game).call.dealer_seat
     if current_dealer_seat.nil?
-      Players.new.call.sample
+      Seats.new.call.sample
     else
       NextPlayer.new(current_dealer_seat).call
     end

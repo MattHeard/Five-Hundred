@@ -17,6 +17,6 @@ class NextPlayer
   end
 
   def players
-    Players.new.call
+    Seats.new.call
   end
 end

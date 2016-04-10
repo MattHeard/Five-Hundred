@@ -1,5 +1,4 @@
-# TODO Rename to Seats
-class Players
+class Seats
   def call
     %i{north east south west}
   end

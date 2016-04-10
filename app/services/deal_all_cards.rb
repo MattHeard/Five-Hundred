@@ -33,7 +33,7 @@ class DealAllCards
   end
 
   def players
-    Players.new.call
+    Seats.new.call
   end
 
   def deal_batch_to_player(batch_size, player)

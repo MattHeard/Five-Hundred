@@ -16,7 +16,7 @@
     <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %>
   </tr>
 </table>
-<% Players.new.call.each do |seat| %>
+<% Seats.new.call.each do |seat| %>
   <p>
   <%= seat.to_s.upcase %>
   <%= seat == @game_state.dealer_seat ? "Ⓓ" : "" %>
@@ -46,7 +46,7 @@
   <p>The contracting team is <%= team(@game_state.contract.bidder.team) %>.</p>
   <p>The trick:<p>
   <ul id="trick">
-  <% Players.new.call.each do |seat| %>
+  <% Seats.new.call.each do |seat| %>
     <% if @game_state.card_played?(seat) %>
       <li class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= "#{seat.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(seat))}" %></li>
     <% end %>

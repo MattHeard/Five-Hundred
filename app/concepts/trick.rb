@@ -62,6 +62,6 @@ class Trick
   end
 
   def players
-    Players.new.call
+    Seats.new.call
   end
 end
