@@ -9,7 +9,7 @@ class DealerChanged < Event
   private
 
   def seat_clockwise_from_dealer
-    NextPlayer.new(dealer_seat).call
+    NextSeat.new(dealer_seat).call
   end
 
   def dealer_seat

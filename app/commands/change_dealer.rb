@@ -20,7 +20,7 @@ class ChangeDealer
     if current_dealer_seat.nil?
       Seats.new.call.sample
     else
-      NextPlayer.new(current_dealer_seat).call
+      NextSeat.new(current_dealer_seat).call
     end
   end
 end

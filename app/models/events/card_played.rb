@@ -24,7 +24,7 @@ class CardPlayed < Event
   end
 
   def next_player_seat
-    NextPlayer.new(game_state.current_player_seat).call
+    NextSeat.new(game_state.current_player_seat).call
   end
 
   def seat

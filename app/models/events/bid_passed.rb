@@ -19,6 +19,6 @@ class BidPassed < Event
   end
 
   def next_player_seat(player)
-    NextPlayer.new(player).call
+    NextSeat.new(player).call
   end
 end

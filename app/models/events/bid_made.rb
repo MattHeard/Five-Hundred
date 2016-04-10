@@ -14,7 +14,7 @@ class BidMade < Event
   attr_reader :game_state
 
   def next_player_seat(seat)
-    NextPlayer.new(seat).call
+    NextSeat.new(seat).call
   end
 
   def bid
