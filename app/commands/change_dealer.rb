@@ -1,6 +1,4 @@
 class ChangeDealer
-  attr_reader :game
-
   def initialize(game)
     @game = game
   end
@@ -10,6 +8,8 @@ class ChangeDealer
   end
 
   private
+
+  attr_reader :game
 
   def create_event
     DealerChanged.create!(player_seat: next_dealer_seat, game: game)

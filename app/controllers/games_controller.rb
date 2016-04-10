@@ -1,5 +1,3 @@
-require 'pp'
-
 class GamesController < ApplicationController
   def index
   end

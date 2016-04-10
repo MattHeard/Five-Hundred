@@ -9,9 +9,9 @@ class CollectAllCards
 
   private
 
+  attr_reader :game
+
   def create_event
     AllCardsCollected.create!(game: game)
   end
-
-  attr_reader :game
 end

@@ -1,6 +1,4 @@
 class PassBid
-  attr_reader :game
-
   def initialize(game)
     @game = game
   end
@@ -16,4 +14,8 @@ class PassBid
   def game_state
     CreateGameState.new(game).call
   end
+
+  private
+
+  attr_reader :game
 end

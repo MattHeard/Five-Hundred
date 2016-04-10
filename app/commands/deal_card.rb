@@ -1,6 +1,4 @@
 class DealCard
-  attr_reader :game, :player
-
   def initialize(game, player)
     @game, @player = game, player
   end
@@ -12,6 +10,8 @@ class DealCard
   end
 
   private
+
+  attr_reader :game, :player
 
   def deal_card
     game.with_lock { create_event }

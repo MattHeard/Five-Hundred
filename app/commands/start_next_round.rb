@@ -1,5 +1,3 @@
-require 'pp'
-
 class StartNextRound
   def initialize(game)
     @game = game

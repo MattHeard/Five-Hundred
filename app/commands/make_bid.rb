@@ -1,8 +1,4 @@
-require 'pp'
-
 class MakeBid
-  attr_reader :game, :number_of_tricks, :trump_suit
-
   def initialize(game, number_of_tricks, trump_suit)
     @game, @number_of_tricks, @trump_suit = game, number_of_tricks.to_i, trump_suit
   end
@@ -25,6 +21,8 @@ class MakeBid
   end
 
   private
+
+  attr_reader :game, :number_of_tricks, :trump_suit
 
   def bid_higher_than_previous_heighest_bid?
     bid > game_state.highest_bid

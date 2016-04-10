@@ -1,8 +1,6 @@
 class DealAllCards
   BATCH_SIZES = [3, 4, 3]
 
-  attr_reader :game
-
   def initialize(game)
     @game = game
   end
@@ -14,6 +12,8 @@ class DealAllCards
   end
 
   private
+
+  attr_reader :game
 
   def deal_cards
     BATCH_SIZES.each { |batch_size| deal_one_batch_round(batch_size) }

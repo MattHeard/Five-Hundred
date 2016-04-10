@@ -9,9 +9,9 @@ class PlayCard
 
   private
 
+  attr_accessor :game, :player, :card
+
   def create_event
     CardPlayed.create!(player_seat: player, game: game, card: card)
   end
-
-  attr_accessor :game, :player, :card
 end
