@@ -6,7 +6,7 @@ class MakeBid
 
   def call
     game.with_lock do
-      return false if bidder_has_previously_passed? 
+      return false if game_state.bidder_has_previously_passed?
       return false unless bid_higher_than_previous_heighest_bid?
 
       game.events << new_event
@@ -19,20 +19,8 @@ class MakeBid
 
   attr_reader :game, :number_of_tricks, :trump_suit
 
-  # TODO Remove use of `player_seat`, this attribute is ignored
   def new_event 
-    BidMade.new(event_args)
-  end
-
-  def event_args
-    {
-      number_of_tricks: number_of_tricks,
-      trump_suit: trump_suit
-    }
-  end
-
-  def bidder_has_previously_passed?
-    game_state.bidder_has_previously_passed?
+    BidMade.new(number_of_tricks: number_of_tricks, trump_suit: trump_suit)
   end
 
   def bid_higher_than_previous_heighest_bid?
