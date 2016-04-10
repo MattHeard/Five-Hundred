@@ -7,6 +7,10 @@ class PassBid
     game.with_lock { game.events << new_event }
   end
 
+  private
+
+  attr_reader :game
+
   def new_event
     BidPassed.new(player_seat: game_state.current_player_seat)
   end
@@ -14,8 +18,4 @@ class PassBid
   def game_state
     CreateGameState.new(game).call
   end
-
-  private
-
-  attr_reader :game
 end
