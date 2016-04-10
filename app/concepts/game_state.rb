@@ -11,7 +11,7 @@ class GameState
     @scoreboard = Scoreboard.new
   end
 
-  def bidder
+  def current_player
     player(current_player_seat)
   end
 
@@ -83,6 +83,7 @@ class GameState
     trick.scores.max_by { |_, card_score| card_score }.first
   end
 
+  # TODO Extract magic literal into constant
   def card_scores
     card_scores = {
       "JOKER" => 13, "J♠" => 12, "J♣" => 11, "A♠" => 10, "K♠" => 9, "Q♠" => 8,

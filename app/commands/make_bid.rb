@@ -6,7 +6,7 @@ class MakeBid
 
   def call
     game.with_lock do
-      return false if game_state.bidder&.passed?
+      return false if bidder.passed?
       return false unless bid_higher_than_previous_heighest_bid?
 
       game.events << new_event
@@ -18,6 +18,10 @@ class MakeBid
   private
 
   attr_reader :game, :number_of_tricks, :trump_suit
+
+  def bidder
+    game_state.current_player
+  end
 
   def new_event 
     BidMade.new(number_of_tricks: number_of_tricks, trump_suit: trump_suit)

@@ -15,7 +15,7 @@ class BidPassed < Event
   attr_reader :game_state
 
   def bidder
-    game_state.bidder
+    game_state.current_player
   end
 
   def next_player_seat(player)
