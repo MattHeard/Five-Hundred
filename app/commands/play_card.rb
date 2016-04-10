@@ -12,6 +12,6 @@ class PlayCard
   attr_accessor :game, :player, :card
 
   def new_event
-    CardPlayed.create!(player_seat: player, card: card)
+    CardPlayed.new(player_seat: player, card: card)
   end
 end
