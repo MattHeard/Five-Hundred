@@ -4,14 +4,14 @@ class PlayCard
   end
 
   def call
-    game.with_lock { create_event }
+    game.with_lock { game.events << new_event }
   end
 
   private
 
   attr_accessor :game, :player, :card
 
-  def create_event
-    CardPlayed.create!(player_seat: player, game: game, card: card)
+  def new_event
+    CardPlayed.create!(player_seat: player, card: card)
   end
 end

@@ -14,11 +14,11 @@ class DealCard
   attr_reader :game, :player
 
   def deal_card
-    game.with_lock { create_event }
+    game.with_lock { game.events << new_event }
   end
 
-  def create_event
-    CardDealt.create!(card: card, player_seat: player, game: game)
+  def new_event
+    CardDealt.new(card: card, player_seat: player)
   end
 
   def card

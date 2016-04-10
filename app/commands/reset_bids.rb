@@ -4,7 +4,11 @@ class ResetBids
   end
 
   def call
-    game.with_lock { BidsReset.create(game: game) }
+    game.with_lock { game.events << new_event }
+  end
+
+  def new_event
+    BidsReset.new
   end
 
   private

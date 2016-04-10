@@ -4,11 +4,11 @@ class PassBid
   end
 
   def call
-    game.with_lock { create_event }
+    game.with_lock { game.events << new_event }
   end
 
-  def create_event
-    BidPassed.create!(player_seat: game_state.current_player_seat, game: game)
+  def new_event
+    BidPassed.new(player_seat: game_state.current_player_seat)
   end
 
   def game_state
