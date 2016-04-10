@@ -4,7 +4,7 @@ class RedealAllCards
   end
 
   def call
-    CollectCards.new(game).call
+    CollectAllCards.new(game).call
     DealAllCards.new(game).call
   end
 
