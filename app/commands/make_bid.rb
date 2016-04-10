@@ -6,7 +6,7 @@ class MakeBid
 
   def call
     game.with_lock do
-      return false if game_state.bidder_has_previously_passed?
+      return false if game_state.bidder&.passed?
       return false unless bid_higher_than_previous_heighest_bid?
 
       game.events << new_event

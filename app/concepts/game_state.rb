@@ -11,10 +11,6 @@ class GameState
     @scoreboard = Scoreboard.new
   end
 
-  def bidder_has_previously_passed?
-    bidder&.passed?
-  end
-
   def bidder
     player(current_player_seat)
   end
