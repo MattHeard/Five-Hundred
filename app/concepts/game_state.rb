@@ -24,7 +24,7 @@ class GameState
   end
 
   def all_players_have_bid_or_passed?
-    players.all? { |player| player == highest_bid&.bidder || player.passed? }
+    players.all? { |player| passed_or_bid_last?(player) }
   end
 
   def players_count
@@ -74,6 +74,10 @@ class GameState
   end
 
   private
+
+  def passed_or_bid_last?(player)
+    player == highest_bid&.bidder || player.passed?
+  end
 
   def player_with_highest_trick_card_score
     player(seat_of_player_with_highest_trick_card_score)
