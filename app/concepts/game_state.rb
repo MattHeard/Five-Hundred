@@ -8,7 +8,7 @@ class GameState
     @players = new_players
     @kitty = []
     @trick = Trick.new({})
-    @scoreboard = Scoreboard.new
+    @scoreboard = new_scoreboard
   end
 
   def current_player
@@ -54,6 +54,10 @@ class GameState
   end
 
   private
+
+  def new_scoreboard
+    Scoreboard.new
+  end
 
   def still_bidding?
     all_players_have_passed? || !all_players_have_bid_or_passed?
