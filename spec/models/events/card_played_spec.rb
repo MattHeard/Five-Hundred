@@ -12,7 +12,7 @@ RSpec.describe CardPlayed do
 
     it "removes a card from the player's hand" do
       DealAllCards.new(game).call
-      ChangeDealer.new(game).call
+      PickRandomDealer.new(game).call
       game.reload
       event.apply(game_state)
       expect(game_state.player(seat).hand).to have_exactly(9).items

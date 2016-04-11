@@ -6,7 +6,7 @@ RSpec.describe MakeBid do
   let(:game) { Game.create! }
   subject(:service) { MakeBid.new(game, number_of_tricks, trump_suit) }
 
-  before { ChangeDealer.new(game).call }
+  before { PickRandomDealer.new(game).call }
 
   describe "#call" do
     context "with no previous bids" do

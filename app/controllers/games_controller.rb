@@ -6,7 +6,7 @@ class GamesController < ApplicationController
   def create
     game = Game.create!
     DealAllCards.new(game).call
-    ChangeDealer.new(game).call
+    PickRandomDealer.new(game).call
 
     redirect_to game
   end

@@ -51,7 +51,7 @@ RSpec.describe GameState do
     let(:game) { Game.create! }
 
     before do
-      [ DealAllCards, ChangeDealer ].each { |service| service.new(game).call }
+      [ DealAllCards, PickRandomDealer ].each { |service| service.new(game).call }
 
       game.reload
     end
@@ -69,7 +69,7 @@ RSpec.describe GameState do
     let(:game) do
       game = Game.create!
       DealAllCards.new(game).call
-      ChangeDealer.new(game).call
+      PickRandomDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       MakeBid.new(game, 7, "♠").call
       game.reload
@@ -101,7 +101,7 @@ RSpec.describe GameState do
 
       it "is true" do
         DealAllCards.new(game).call
-        ChangeDealer.new(game).call
+        PickRandomDealer.new(game).call
         MakeBid.new(game, 6, "♠").call
         3.times { PassBid.new(game).call }
         game.reload
@@ -114,7 +114,7 @@ RSpec.describe GameState do
   context "when two players have played a card" do
     before do
       DealAllCards.new(game).call
-      ChangeDealer.new(game).call
+      PickRandomDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       3.times { PassBid.new(game).call }
       %i{ north east }.each do |seat|
@@ -136,7 +136,7 @@ RSpec.describe GameState do
   context "when all players have played a card" do
     before do
       DealAllCards.new(game).call
-      ChangeDealer.new(game).call
+      PickRandomDealer.new(game).call
       MakeBid.new(game, 6, "♠").call
       3.times { PassBid.new(game).call }
       %i{ north south east west}.each do |seat|

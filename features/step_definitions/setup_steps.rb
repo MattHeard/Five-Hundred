@@ -52,7 +52,7 @@ def deal_cards(game)
 end
 
 def set_dealer(game, player_seat)
-  DealerChanged.create!(player_seat: player_seat, game: game)
+  RandomDealerPicked.create!(player_seat: player_seat, game: game)
 end
 
 Given(/^the game is in the bidding phase$/) do

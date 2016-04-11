@@ -5,7 +5,7 @@ class StartNextRound
 
   # TODO rename `service` to `command`
   def call
-    [ CollectAllCards, DealAllCards, ResetBids, ChangeDealer, StartNextTrick ]
+    [ CollectAllCards, DealAllCards, ResetBids, RotateDealer, StartNextTrick ]
       .each { |service| service.new(game).call }
   end
 
