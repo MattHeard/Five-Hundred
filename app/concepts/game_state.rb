@@ -63,17 +63,6 @@ class GameState
     player == highest_bid&.bidder || player.passed?
   end
 
-  # TODO Extract magic literal into constant
-  def card_scores
-    card_scores = {
-      "JOKER" => 13, "J♠" => 12, "J♣" => 11, "A♠" => 10, "K♠" => 9, "Q♠" => 8,
-      "10♠" => 7, "9♠" => 6, "8♠" => 5, "7♠" => 4, "6♠" => 3, "5♠" => 2
-    }
-    card_scores.default = 0
-
-    card_scores
-  end
-
   def entire_deck
     EntireDeck.new.call
   end
