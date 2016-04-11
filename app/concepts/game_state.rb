@@ -29,15 +29,15 @@ class GameState
 
   def phase
     if !deck.empty?
-      return :dealing
+      :dealing
     elsif still_bidding?
-      return :bidding
+      :bidding
     elsif !trick.complete?
-      return :play
+      :play
     elsif !complete_round?
-      return :trick_scoring
+      :trick_scoring
     else
-      return :round_scoring
+      :round_scoring
     end
   end
 
