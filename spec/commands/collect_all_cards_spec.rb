@@ -1,5 +1,19 @@
 require 'rails_helper'
 
+# Messages:
+# 2a.   initialize            - incoming command  - do not unit test
+#   NOTE: initialize will not be guarded, so a unit test will not be meaningful
+# 6a.   call                  - incoming query    - do     unit test
+# 6a.   call                  - incoming command  - do     unit test
+# 7a.   game                  - internal          - do not unit test
+# 7b.   game.with_lock        - outgoing command  - do     unit test
+# 7c.   game.events           - outgoing query    - do not unit test
+# 7d.   events.<<             - outgoing command  - do     unit test
+# 7e.   new_event             - internal          - do not unit test
+# 12a.  game                  - internal          - do not unit test
+# 14a.  new_event             - internal          - do not unit test
+# 15a.  AllCardsCollected     - outgoing query    - do not unit test
+# 15b.  AllCardsCollected.new - outgoing query    - do not unit test
 RSpec.describe CollectAllCards do
   describe "#call" do
     subject(:service) { CollectAllCards.new(game) }
@@ -21,6 +35,10 @@ RSpec.describe CollectAllCards do
     it "adds an AllCardsCollected event" do
       service.call
       expect(game.events.last).to be_instance_of AllCardsCollected
+    end
+
+    it "is truthy" do
+      expect(service.call).to be_truthy
     end
   end
 end

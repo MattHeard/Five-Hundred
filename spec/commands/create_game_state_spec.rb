@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # Messages:
-# 2a.   initialize    - incoming command  - do     unit test
+# 2a.   initialize    - incoming command  - do not unit test
 #   NOTE: initialize will not be guarded, so a unit test will not be meaningful
 # 6a.   call          - incoming query    - do     unit test
 # 7a.   game          - internal          - do not unit test
@@ -13,11 +13,15 @@ require 'rails_helper'
 # 15a.  GameState     - outgoing query    - do not unit test
 # 15b.  GameState.new - outgoing query    - do not unit test
 RSpec.describe CreateGameState do
+
+  # TODO Find out what kinds of game event lists I should unit test
   describe "#call" do
-    it "returns a GameState" do
-      game = Game.create!
-      service = CreateGameState.new(game)
-      expect(service.call).to be_an_instance_of GameState
+    context "for a game with no events" do
+      it "returns a GameState" do
+        game = Game.create!
+        service = CreateGameState.new(game)
+        expect(service.call).to be_an_instance_of GameState
+      end
     end
   end
 end
