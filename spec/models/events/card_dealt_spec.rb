@@ -6,7 +6,7 @@ RSpec.describe CardDealt do
   let(:card) { "JOKER" }
   let(:game) { Game.create! }
   let(:game_state) { GameState.new }
-  let(:deck) { Deck.new(game_state).call }
+  let(:deck) { game_state.deck }
 
   before { event.apply(game_state) }
 

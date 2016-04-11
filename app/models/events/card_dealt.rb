@@ -2,7 +2,7 @@ class CardDealt < Event
   def apply(game_state)
     @game_state = game_state
 
-    deck.delete(card)
+    game_state.deck.delete(card)
     destination << card
 
     game_state
@@ -11,10 +11,6 @@ class CardDealt < Event
   private
 
   attr_reader :game_state
-
-  def deck
-    Deck.new(game_state).call
-  end
 
   def destination
     seat == :kitty ? game_state.kitty : hand 
