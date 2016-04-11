@@ -39,9 +39,9 @@
 <% end %>
   <div class="list-group-item">
 <p>The kitty:</p>
-<ul id="kitty">
+<ul class="btn-group" id="kitty">
   <% @game_state.kitty.each do |_| %>
-    <li class="card"><%= unicode_card("BACK") %></li>
+    <li class="btn card"><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
   </div>
