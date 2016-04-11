@@ -63,10 +63,6 @@ class GameState
     player == highest_bid&.bidder || player.passed?
   end
 
-  def seat_of_player_with_highest_trick_card_score
-    trick.scores.max_by { |_, card_score| card_score }.first
-  end
-
   # TODO Extract magic literal into constant
   def card_scores
     card_scores = {
