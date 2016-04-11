@@ -20,8 +20,8 @@
   <div class="list-group-item">
   <p>
   <%= seat.to_s.upcase %>
-  <%= seat == @game_state.dealer_seat ? "Ⓓ" : "" %>
-  <%= seat == @game_state.current_player_seat ? "✪" : "" %>
+  <% if seat == @game_state.dealer_seat %><span class="glyphicon glyphicon-star" aria-hidden="true"></span><% end %>
+  <% if seat == @game_state.current_player_seat %><span class="glyphicon glyphicon-user" aria-hidden="true"></span><% end %>
   </p>
   <ul class="btn-group hand<%= seat == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
     <% @game_state.player(seat).hand.each do |card| %>
