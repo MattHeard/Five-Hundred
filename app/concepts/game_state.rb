@@ -41,10 +41,6 @@ class GameState
     end
   end
 
-  def still_bidding?
-    all_players_have_passed? || !all_players_have_bid_or_passed?
-  end
-
   def trick_winning_player
     player_with_highest_trick_card_score
   end
@@ -62,6 +58,10 @@ class GameState
   end
 
   private
+
+  def still_bidding?
+    all_players_have_passed? || !all_players_have_bid_or_passed?
+  end
 
   def passed_or_bid_last?(player)
     player == highest_bid&.bidder || player.passed?
