@@ -1,3 +1,4 @@
+# TODO Inject dependency on DealCard
 class DealAllCards
   BATCH_SIZES = [3, 4, 3]
 
@@ -24,6 +25,7 @@ class DealAllCards
     deal_card_to_kitty
   end
 
+  # TODO Extract to deal_card(destination)
   def deal_card_to_kitty
     DealCard.new(game, :kitty).call
   end
@@ -36,7 +38,7 @@ class DealAllCards
     Seats.new.call
   end
 
-  # TODO Isolate dependency on DealCard by extracting into deal_card method
+  # TODO Extract to deal_card(destination)
   def deal_batch_to_player(batch_size, player)
     batch_size.times { DealCard.new(game, player).call }
   end
