@@ -45,12 +45,6 @@ RSpec.describe GameState do
         expect(game_state.trick.cards_count).to eq 0
       end
     end
-
-    describe "#complete_trick?" do
-      it "is false" do
-        expect(game_state).not_to be_complete_trick
-      end
-    end
   end
 
   context "when the dealer has been set" do
@@ -131,13 +125,6 @@ RSpec.describe GameState do
       game.reload
     end
 
-    describe "#complete_trick?" do
-      it "is false" do
-        game_state = CreateGameState.new(game).call
-        expect(game_state).not_to be_complete_trick
-      end
-    end
-
     describe "#in_play_phase?" do
       it "is true" do
         game_state = CreateGameState.new(game).call
@@ -158,13 +145,6 @@ RSpec.describe GameState do
         PlayCard.new(game, seat, card).call
       end
       game.reload
-    end
-
-    describe "#complete_trick?" do
-      it "is true" do
-        game_state = CreateGameState.new(game).call
-        expect(game_state).to be_complete_trick
-      end
     end
 
     describe "#in_play_phase?" do

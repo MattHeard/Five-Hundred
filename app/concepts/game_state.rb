@@ -27,16 +27,12 @@ class GameState
     players.all? { |player| passed_or_bid_last?(player) }
   end
 
-  def complete_trick?
-    trick.cards_count == players.size
-  end
-
   def phase
     if !deck.empty?
       return :dealing
     elsif still_bidding?
       return :bidding
-    elsif !complete_trick?
+    elsif !trick.complete?
       return :play
     elsif !complete_round?
       return :trick_scoring
