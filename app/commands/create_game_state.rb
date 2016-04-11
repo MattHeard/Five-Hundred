@@ -3,13 +3,15 @@ class CreateGameState
     @game = game
   end
 
-  # TODO Isolate dependency on GameState by extracting GameState.new into
-  # new_state method
   def call
-    game.events.inject(GameState.new) { |state, event| event.apply(state) }
+    game.events.inject(new_state) { |state, event| event.apply(state) }
   end
 
   private
 
   attr_reader :game
+
+  def new_state
+    GameState.new
+  end
 end
