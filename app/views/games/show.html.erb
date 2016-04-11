@@ -1,4 +1,3 @@
-<%# TODO Close <td> tags in table%>
 <table class="scores">
   <tr>
     <th></th>
@@ -7,13 +6,13 @@
   </tr>
   <tr class="trick">
     <td>Tricks</td>
-    <td class="north-south"><%= @game_state.scoreboard.trick_scores[:north_south] %>
-    <td class="west-east"><%= @game_state.scoreboard.trick_scores[:west_east] %>
+    <td class="north-south"><%= @game_state.scoreboard.trick_scores[:north_south] %></td>
+    <td class="west-east"><%= @game_state.scoreboard.trick_scores[:west_east] %></td>
   </tr>
   <tr class="points">
     <td>Points</td>
-    <td class="north-south"><%= @game_state.scoreboard.points[:north_south] %>
-    <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %>
+    <td class="north-south"><%= @game_state.scoreboard.points[:north_south] %></td>
+    <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %></td>
   </tr>
 </table>
 <% Seats.new.call.each do |seat| %>
