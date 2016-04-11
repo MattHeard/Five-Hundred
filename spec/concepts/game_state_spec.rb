@@ -46,12 +46,6 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#card_played?" do
-      it "is false" do
-        expect(game_state.card_played?(:south)).to be false
-      end
-    end
-
     describe "#complete_trick?" do
       it "is false" do
         expect(game_state).not_to be_complete_trick

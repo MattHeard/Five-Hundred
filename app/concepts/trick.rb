@@ -16,6 +16,7 @@ class Trick
     played_cards.size
   end
 
+  # TODO Rename to refer to seats
   def player_has_played?(player)
     played_cards[player].present?
   end

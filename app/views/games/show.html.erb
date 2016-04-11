@@ -47,7 +47,7 @@
   <p>The trick:<p>
   <ul id="trick">
   <% Seats.new.call.each do |seat| %>
-    <% if @game_state.card_played?(seat) %>
+    <% if @game_state.trick.player_has_played?(seat) %>
       <li class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= "#{seat.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(seat))}" %></li>
     <% end %>
   <% end %>
