@@ -1,42 +1,45 @@
 require 'rails_helper'
 
-# Messages:
-# 2a.   initialize            - incoming command  - do not unit test
-#   NOTE: initialize will not be guarded, so a unit test will not be meaningful
-# 6a.   call                  - incoming query    - do     unit test
-# 6a.   call                  - incoming command  - do     unit test
-# 7a.   game                  - internal          - do not unit test
-# 7b.   game.with_lock        - outgoing command  - do     unit test
-# 7c.   game.events           - outgoing query    - do not unit test
-# 7d.   events.<<             - outgoing command  - do     unit test
-# 7e.   new_event             - internal          - do not unit test
-# 12a.  game                  - internal          - do not unit test
-# 14a.  new_event             - internal          - do not unit test
-# 15a.  AllCardsCollected     - outgoing query    - do not unit test
-# 15b.  AllCardsCollected.new - outgoing query    - do not unit test
+# LINE | MESSAGE        | ORIGIN   | TYPE    | TEST
+# =====|================|==========|=========|===============
+# 6    | call           | incoming | query   | assert result
+# 7    | game.with_lock | outgoing | command | expect to send
+# 8    | events.<<      | outgoing | command | expect to send
+
 RSpec.describe CollectAllCards do
+  EVENTS_CLASS_NAME = "Event::ActiveRecord_Associations_CollectionProxy"
+
   describe "#call" do
     subject(:service) { CollectAllCards.new(game) }
 
-    let(:game) { Game.new }
+    let(:events) do
+      events = instance_double(EVENTS_CLASS_NAME)
+      allow(events).to receive(:<<)
 
-    # TODO Mock locking
-    it "sends #with_lock to Game"
-
-    it "sends #<< to Game.events"
-
-    it "adds one event to the game" do
-      events_count_before = game.events.size
-      service.call
-      events_count_after = game.events.size
-      expect(events_count_after).to eq (events_count_before + 1)
+      events
     end
 
-    it "adds an AllCardsCollected event" do
-      service.call
-      expect(game.events.last).to be_instance_of AllCardsCollected
+    let(:game) do
+      game = instance_double("Game")
+      allow(game).to receive(:with_lock).and_yield
+      allow(game).to receive(:events) { events }
+
+      game
     end
 
+    # outgoing command - expect to send
+    it "sends #with_lock to Game" do
+      expect(game).to receive(:with_lock)
+      service.call
+    end
+
+    # outgoing command - expect to send
+    it "sends #<< to Event::ActiveRecord_Associations_CollectionProxy" do
+      expect(events).to receive(:<<)
+      service.call
+    end
+
+    # incoming query - assert result
     it "is truthy" do
       expect(service.call).to be_truthy
     end

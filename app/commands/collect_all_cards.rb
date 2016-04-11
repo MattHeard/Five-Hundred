@@ -5,6 +5,8 @@ class CollectAllCards
 
   def call
     game.with_lock { game.events << new_event }
+
+    true
   end
 
   private
