@@ -27,10 +27,6 @@ class GameState
     players.all? { |player| passed_or_bid_last?(player) }
   end
 
-  def players_count
-    players.size
-  end
-
   def card_played?(player)
     trick.player_has_played?(player)
   end
