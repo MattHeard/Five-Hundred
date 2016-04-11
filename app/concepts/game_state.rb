@@ -1,4 +1,3 @@
-# TODO Make some methods private
 class GameState
   attr_accessor :deck, :kitty, :dealer_seat, :highest_bid,
     :players, :trick, :current_player_seat, :scoreboard
