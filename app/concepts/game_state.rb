@@ -75,6 +75,10 @@ class GameState
   end
 
   def new_players
-    seats.map { |seat| Player.new(seat) }
+    seats.map { |seat| new_player(seat) }
+  end
+
+  def new_player(seat)
+    Player.new(seat)
   end
 end
