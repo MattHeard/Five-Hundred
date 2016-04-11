@@ -24,7 +24,7 @@ class GameState
   end
 
   def all_players_have_bid_or_passed?
-    players.select { |player| player == highest_bid&.bidder || player.passed? }.size == players.size
+    players.all? { |player| player == highest_bid&.bidder || player.passed? }
   end
 
   def players_count
