@@ -1,4 +1,4 @@
-<table class="scores">
+<table class="table table-striped scores">
   <tr>
     <th></th>
     <th>North-South</th>
@@ -15,7 +15,9 @@
     <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %></td>
   </tr>
 </table>
+<div class="list-group">
 <% Seats.new.call.each do |seat| %>
+  <div class="list-group-item">
   <p>
   <%= seat.to_s.upcase %>
   <%= seat == @game_state.dealer_seat ? "Ⓓ" : "" %>
@@ -33,13 +35,17 @@
       </li>
     <% end %>
   </ul>
+  </div>
 <% end %>
+  <div class="list-group-item">
 <p>The kitty:</p>
 <ul id="kitty">
   <% @game_state.kitty.each do |_| %>
     <li class="card"><%= unicode_card("BACK") %></li>
   <% end %>
 </ul>
+  </div>
+</div>
 <% if %i{ play scoring }.include?(@game_state.phase) %>
   <p>The contract is for <%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %>.</p>
   <p>The contracting team is <%= team(@game_state.contract.bidder.team) %>.</p>
