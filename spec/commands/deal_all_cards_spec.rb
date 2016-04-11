@@ -1,35 +1,61 @@
 require 'rails_helper'
 
+def entire_deck
+  EntireDeck.new.call
+end
+
 RSpec.describe DealAllCards do
   DECK_SIZE = 43
 
   describe "#call" do
     subject(:service) { DealAllCards.new(game) }
 
-    let(:game) { Game.create! }
+    let(:game_state) do
+      game_state = instance_double("GameState")
+      allow(game_state).to receive(:deck) { deck }
 
-    context "with a full deck" do
-      before do
+      game_state
+    end
+
+    let(:events) do
+      events = double
+      allow(events).to receive(:inject) { game_state }
+
+      events
+    end
+
+    let(:game) do
+      game = instance_double("Game")
+      allow(game).to receive(:events) { events }
+      allow(game).to receive(:with_lock)
+
+      game
+    end
+
+    let(:deal_card_service) { instance_double("DealCard") }
+
+    context "when the deck is full" do
+      let(:deck) { entire_deck }
+
+      # incoming query - assert result
+      it "is truthy" do
+        expect(service.call).to be_truthy
+      end
+
+      # outgoing command - expect to send
+      it "calls DealCard#call once per card in the deck" do
+        allow(DealCard).to receive(:new) { deal_card_service }
+        expect(deal_card_service).to receive(:call).exactly(DECK_SIZE).times
         service.call
-        game.reload
-      end
-
-      it "adds a CardDealt event to the game" do
-        expect(game.events.first).to be_instance_of CardDealt
-      end
-
-      it "adds one event to the game for each card in the deck" do
-        expect(game.events).to have_exactly(DECK_SIZE).items
       end
     end
 
-    context "without a full deck" do
-      let(:player) { :south }
+    context "when the deck is not full" do
+      let(:deck) { [] }
 
-      before { DealCard.new(game, player).call }
-
-      it "fails" do
-        expect(service.call).to be false
+      # incoming query - assert result
+      it "is falsey" do
+        expect(service.call).to be_falsey
       end
     end
   end
