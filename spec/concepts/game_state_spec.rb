@@ -154,13 +154,6 @@ RSpec.describe GameState do
       end
     end
 
-    describe "#trick_winning_player" do
-      it "is present" do
-        game_state = CreateGameState.new(game).call
-        expect(game_state.trick_winning_player).to be_present
-      end
-    end
-
     describe "#scoreboard" do
       it "is present" do
         game_state = CreateGameState.new(game).call

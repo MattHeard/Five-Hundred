@@ -41,10 +41,6 @@ class GameState
     end
   end
 
-  def trick_winning_player
-    player_with_highest_trick_card_score
-  end
-
   def complete_round?
     players.map(&:hand).flatten.none?
   end
