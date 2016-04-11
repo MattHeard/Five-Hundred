@@ -6,6 +6,11 @@ RSpec.describe CollectAllCards do
 
     let(:game) { Game.new }
 
+    # TODO Mock locking
+    it "sends #with_lock to Game"
+
+    it "sends #<< to Game.events"
+
     it "adds one event to the game" do
       events_count_before = game.events.size
       service.call
