@@ -18,3 +18,19 @@
 .card {
   font-size: 10vw;
 }
+
+.red {
+  color: red;
+}
+
+.black {
+  color: black;
+}
+
+.card a {
+  color: inherit;
+}
+
+.card a:hover {
+  color: #337ab7;
+}

@@ -1,3 +1,4 @@
+<!-- <%= @game_state.deck %> -->
 <table class="table table-striped scores">
   <tr>
     <th></th>
@@ -15,6 +16,12 @@
     <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %></td>
   </tr>
 </table>
+<% if %i{ play trick_scoring round_scoring }.include?(@game_state.phase) %>
+  <div class="alert alert-info">
+    <p>The contract is for <b><%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %></b>.</p>
+    <p>The contracting team is <b><%= team(@game_state.contract.bidder.team) %></b>.</p>
+  </div>
+<% end %>
 <% if @game_state.phase == :play %>
   <div class="alert alert-warning">
     <p>Pick a card to play</p>
@@ -31,7 +38,7 @@
   <ul class="btn-group hand<%= seat == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
     <% @game_state.player(seat).hand.each do |card| %>
       <li id="<%= card %>"
-        class="btn card<%= seat == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
+      class="btn <%= colour(card) %> card<%= seat == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
       <% if @game_state.phase == :play && seat == @game_state.current_player_seat %>
         <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: seat, card: card }, method: :put%>
       <% else %>
@@ -51,11 +58,7 @@
 </ul>
   </div>
 </div>
-<% if %i{ play scoring }.include?(@game_state.phase) %>
-  <div class="alert alert-info">
-    <p>The contract is for <b><%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %></b>.</p>
-    <p>The contracting team is <b><%= team(@game_state.contract.bidder.team) %></b>.</p>
-  </div>
+<% if %i{ play trick_scoring round_scoring }.include?(@game_state.phase) %>
   <div class="alert">
     <p>The trick:<p>
     <table class="table" id="trick">
@@ -99,14 +102,16 @@
     <p>Every player passed. The cards must be redealt.</p>
   <% end %>
 <% end %>
-<% if @game_state.phase == :trick_scoring %>
+<% if %i{ trick_scoring round_scoring }.include?(@game_state.phase) %>
   <div class="alert alert-success">
     <p><%= @game_state.player(@game_state.trick.winning_player).name %> won the trick!</p>
   </div>
+<% end %>
+<% if %i{ trick_scoring }.include?(@game_state.phase) %>
   <div class="btn btn-default">
     <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>
   </div>
-<% elsif @game_state.phase == :round_scoring %>
+<% elsif %i{ round_scoring }.include?(@game_state.phase) %>
   <div class="btn btn-default">
     <%= link_to "Continue", { controller: "games", action: :start_next_round }, method: :put%>
   </div>

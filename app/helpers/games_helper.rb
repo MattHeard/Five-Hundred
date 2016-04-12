@@ -19,6 +19,12 @@ module GamesHelper
     }[name]
   end
 
+  def colour(card)
+    return :black if %w{ JOKER BACK }.include?(card)
+    suit = card.chars.last
+    { "♠" => :black, "♣" => :black, "♥" => :red, "♦" => :red }[suit]
+  end
+
   def pretty_bid(bid)
     "#{bid.number_of_tricks}#{bid.trump_suit}"
   end
