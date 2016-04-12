@@ -80,8 +80,8 @@
   <p>The highest bid is <b><%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %></b>.</p>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>
     <select id="bid_or_pass" name="bid_or_pass">
-      <option>Bid</option>
       <option>Pass</option>
+      <option>Bid</option>
     </select>
     <select id="tricks_count" name="tricks_count">
       <% (6..10).each do |tricks_count| %>
