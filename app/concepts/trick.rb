@@ -37,6 +37,11 @@ class Trick
     self.played_cards = {}
   end
 
+  # TODO Rename to refer to seats
+  def winning_player
+    played_cards.max_by { |_, card| card_scores[card] }.first
+  end
+
   private
 
   attr_accessor :played_cards
@@ -47,10 +52,6 @@ class Trick
     else
       :west_east
     end
-  end
-
-  def winning_player
-    played_cards.max_by { |_, card| card_scores[card] }.first
   end
 
   # TODO Extract magic literal into constant

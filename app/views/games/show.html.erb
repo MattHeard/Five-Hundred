@@ -100,8 +100,14 @@
   <% end %>
 <% end %>
 <% if @game_state.phase == :trick_scoring %>
-  <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
-  <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>
+  <div class="alert alert-success">
+    <p><%= @game_state.player(@game_state.trick.winning_player).name %> won the trick!</p>
+  </div>
+  <div class="btn btn-default">
+    <%= link_to "Continue", { controller: "games", action: :start_next_trick }, method: :put%>
+  </div>
 <% elsif @game_state.phase == :round_scoring %>
-  <%= link_to "Continue", { controller: "games", action: :start_next_round }, method: :put%>
+  <div class="btn btn-default">
+    <%= link_to "Continue", { controller: "games", action: :start_next_round }, method: :put%>
+  </div>
 <% end %>
