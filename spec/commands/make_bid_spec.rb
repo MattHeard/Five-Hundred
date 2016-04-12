@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+# LINE | MESSAGE        | ORIGIN   | TYPE    | TEST
+# =====|================|==========|=========|===============
+# 7    | call           | incoming | query   | assert result
+# 8    | game.with_lock | outgoing | command | expect to send
+# 12   | events.<<      | outgoing | command | expect to send
+
 RSpec.describe MakeBid do
   let(:number_of_tricks) { 6 }
   let(:trump_suit) { "♠" }

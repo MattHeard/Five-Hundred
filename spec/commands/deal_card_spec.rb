@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+# LINE | MESSAGE        | ORIGIN   | TYPE    | TEST
+# =====|================|==========|=========|===============
+# 6    | call           | incoming | query   | assert result
+# 17   | game.with_lock | outgoing | command | expect to send
+# 17   | events.<<      | outgoing | command | expect to send
+
 RSpec.describe DealCard do
   describe "#call" do
     subject(:service) { DealCard.new(game, player) }
