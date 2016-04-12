@@ -1,5 +1,11 @@
 require 'rails_helper'
 
+# LINE | MESSAGE       | ORIGIN   | TYPE    | TEST
+# =====|===============|==========|=========|===============
+# 9    | call          | incoming | query   | assert result
+# 30   | DealCard.call | outgoing | command | expect to send
+# 43   | DealCard.call | outgoing | command | expect to send
+
 def entire_deck
   EntireDeck.new.call
 end

@@ -1,17 +1,9 @@
 require 'rails_helper'
 
-# Messages:
-# 2a.   initialize    - incoming command  - do not unit test
-#   NOTE: initialize will not be guarded, so a unit test will not be meaningful
-# 6a.   call          - incoming query    - do     unit test
-# 7a.   game          - internal          - do not unit test
-# 7b.   game.events   - outgoing query    - do not unit test
-# 7c.   events.inject - outgoing query    - do not unit test
-# 7d.   event.apply   - outgoing query    - do not unit test
-# 12a.  game          - internal          - do not unit test
-# 14a.  new_state     - internal          - do not unit test
-# 15a.  GameState     - outgoing query    - do not unit test
-# 15b.  GameState.new - outgoing query    - do not unit test
+# LINE | MESSAGE | ORIGIN   | TYPE  | TEST
+# =====|=========|==========|=======|===============
+# 6    | call    | incoming | query | assert result
+
 RSpec.describe CreateGameState do
 
   # TODO Find out what kinds of game event lists I should unit test
