@@ -64,7 +64,9 @@
       <tr>
     <% Seats.new.call.each do |seat| %>
       <% if @game_state.trick.player_has_played?(seat) %>
-        <td class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= unicode_card(@game_state.trick.played_card(seat)) %></td>
+        <td class="card <%= colour(@game_state.trick.played_card(seat)) %>" id="<%= @game_state.trick.played_card(seat) %>">
+          <%= unicode_card(@game_state.trick.played_card(seat)) %>
+        </td>
       <% end %>
     <% end %>
       </tr>
