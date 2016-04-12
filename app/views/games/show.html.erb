@@ -38,7 +38,7 @@
   <ul class="btn-group hand<%= seat == @game_state.current_player_seat ? " current_player_hand" : " other_hand" %>">
     <% @game_state.player(seat).hand.each do |card| %>
       <li id="<%= card %>"
-      class="btn <%= colour(card) %> card<%= seat == @game_state.current_player_seat ? " not_hidden" : " hidden" %>">
+      class="btn <%= colour(seat == @game_state.current_player_seat ? card : "BACK") %> card<%= seat == @game_state.current_player_seat ? " card_not_hidden" : " card_hidden" %>">
       <% if @game_state.phase == :play && seat == @game_state.current_player_seat %>
         <%= link_to unicode_card(card), { controller: "games", action: :play_card, player: seat, card: card }, method: :put%>
       <% else %>
