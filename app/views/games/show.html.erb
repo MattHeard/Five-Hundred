@@ -15,6 +15,11 @@
     <td class="west-east"><%= @game_state.scoreboard.points[:west_east] %></td>
   </tr>
 </table>
+<% if @game_state.phase == :play %>
+  <div class="alert alert-warning">
+    <p>Pick a card to play</p>
+  </div>
+<% end %>
 <div class="list-group">
 <% Seats.new.call.each do |seat| %>
   <div class="list-group-item">
@@ -39,7 +44,7 @@
 <% end %>
   <div class="list-group-item">
 <p>The kitty:</p>
-<ul class="btn-group" id="kitty">
+<ul class="btn-group hidden" id="kitty">
   <% @game_state.kitty.each do |_| %>
     <li class="btn card"><%= unicode_card("BACK") %></li>
   <% end %>
@@ -47,19 +52,32 @@
   </div>
 </div>
 <% if %i{ play scoring }.include?(@game_state.phase) %>
-  <p>The contract is for <%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %>.</p>
-  <p>The contracting team is <%= team(@game_state.contract.bidder.team) %>.</p>
-  <p>The trick:<p>
-  <ul id="trick">
-  <% Seats.new.call.each do |seat| %>
-    <% if @game_state.trick.player_has_played?(seat) %>
-      <li class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= "#{seat.to_s.chars.first.upcase} #{unicode_card(@game_state.trick.played_card(seat))}" %></li>
+  <div class="alert alert-info">
+    <p>The contract is for <b><%= "#{@game_state.contract.number_of_tricks}#{@game_state.contract.trump_suit}" %></b>.</p>
+    <p>The contracting team is <b><%= team(@game_state.contract.bidder.team) %></b>.</p>
+  </div>
+  <div class="alert">
+    <p>The trick:<p>
+    <table class="table" id="trick">
+      <tr>
+    <% Seats.new.call.each do |seat| %>
+      <% if @game_state.trick.player_has_played?(seat) %>
+        <td><%= seat.to_s.titlecase %></td>
+      <% end %>
     <% end %>
-  <% end %>
-  </ul>
+      </tr>
+      <tr>
+    <% Seats.new.call.each do |seat| %>
+      <% if @game_state.trick.player_has_played?(seat) %>
+        <td class="card" id="<%= @game_state.trick.played_card(seat) %>"><%= unicode_card(@game_state.trick.played_card(seat)) %></td>
+      <% end %>
+    <% end %>
+      </tr>
+    </table>
+  </div>
 <% end %>
 <% if @game_state.phase == :bidding %>
-  <p>The highest bid is <%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %>.</p>
+  <p>The highest bid is <b><%= @game_state.highest_bid.nil? ? "nothing" : pretty_bid(@game_state.highest_bid) %></b>.</p>
   <%= form_for @game, url: { action: :bid }, html: { id: "bid_submission_form" } do %>
     <select id="bid_or_pass" name="bid_or_pass">
       <option>Bid</option>
@@ -75,14 +93,11 @@
         <option><%= trump_suit %></option>
       <% end %>
     </select>
-    <button type="submit">Submit</button>
+    <button class="btn btn-default" type="submit">Submit</button>
   <% end %>
   <% if @game_state.all_players_have_passed? %>
     <p>Every player passed. The cards must be redealt.</p>
   <% end %>
-<% end %>
-<% if @game_state.phase == :play %>
-  <p>Pick a card to play</p>
 <% end %>
 <% if @game_state.phase == :trick_scoring %>
   <p><%= @game_state.trick_winning_player.name %> won the trick!</p>
