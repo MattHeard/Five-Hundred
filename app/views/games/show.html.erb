@@ -49,14 +49,6 @@
   </ul>
   </div>
 <% end %>
-  <div class="list-group-item">
-<p>The kitty:</p>
-<ul class="btn-group hidden" id="kitty">
-  <% @game_state.kitty.each do |_| %>
-    <li class="btn card"><%= unicode_card("BACK") %></li>
-  <% end %>
-</ul>
-  </div>
 </div>
 <% if %i{ play trick_scoring round_scoring }.include?(@game_state.phase) %>
   <div class="alert">
